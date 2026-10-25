@@ -35,7 +35,7 @@ Playwright uses `/usr/bin/chromium` or `CHROMIUM_PATH`. Reports/screenshots are 
 
 ## Wispbyte deployment
 
-[Download the current ready-to-run ZIP](https://github.com/dissimilate322/site-3/raw/refs/heads/codex/wispbyte-download/otherlife-wispbyte-reference-motion.zip).
+[Download the current ready-to-run ZIP](https://github.com/dissimilate322/site-3/raw/refs/heads/codex/wispbyte-download/otherlife-wispbyte-ivory-burgundy.zip).
 
 ```sh
 npm run package:wispbyte -- /path/to/otherlife-wispbyte-full.zip
@@ -52,3 +52,9 @@ Content lives in `src/data/content.json`, typed by `content.ts`; project gallery
 Forms are **previews**: `POST /api/contact` validates without sending or storing enquiries or applications. Apply opens the local contact panel prefilled with the role name. Testimonials support arrows/dots and visibility-aware autoplay. All films autoplay muted and loop while visible. Play/Pause film buttons are removed. Hidden tabs and offscreen films pause; every visible film starts automatically, including when reduced motion is selected. Home includes word-by-word blur reveals, client-card flips, a following case cursor, and independent two-viewport project tracks. A Three.js renderer reproduces the reference’s 50 × 50 surface mesh, staggered corner bends, optics compensation, radial shutter blur, centred hold and white gaps. Wheel, keyboard and touch input use the reference’s frame-time-based inertial scroll curve. Local navigation opens/closes a rounded perspective portal over the splitting grey wordmark; the incoming page stays live and stationary inside the mask. The Home footer loops back to the opening scene when scrolling continues. WebGL failure falls back to accessible native video panels. Animations are enabled by default even when the OS reports reduced motion, as requested for this reference recreation. The menu’s **Reduce motion** switch explicitly disables perspective/reveal effects and uses immediate navigation; its setting persists locally across reloads. JavaScript and CSS use the same `data-motion` setting. Videos keep playing automatically in either mode. GSAP timelines, observers and listeners are cleaned up on unmount.
 
 See [REFERENCE.md](REFERENCE.md) for verification details and the remaining differences from the original WebGL experience.
+
+## Home colour palette
+
+The Home page follows the supplied ivory-stone / burgundy-laptop palette: warm ivory `#f7f3ef`, cream `#fff7ed`, deep burgundy `#57172c`, wine `#7c203a` and blush `#e7bdc7`. It covers Home typography, controls, menus/forms, client cards, loading portal and scrollbar. The hero/closing films use live porcelain-and-wine grading; the featured project films use a wine duotone. SVG colour filters also cover posters, native fallbacks and frozen transition frames, keeping the existing HD video files, autoplay and WebGL motion. Other routes retain their reference colours.
+
+[Desktop preview](https://raw.githubusercontent.com/dissimilate322/site-3/codex/wispbyte-download/home-ivory-burgundy-preview.jpg).
