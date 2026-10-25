@@ -53,7 +53,7 @@
 
 .year {
   margin: 0;
-  color: #5a5a5a;
+  color: var(--home-ink);
   font-size: 16px;
   font-weight: 400;
   line-height: 180%;
@@ -61,7 +61,7 @@
 
 .description {
   margin: 0 0 4px;
-  color: #5a5a5a;
+  color: var(--home-ink);
   font-size: 18px;
   font-weight: 400;
   line-height: 180%;
@@ -70,7 +70,7 @@
 
 .services {
   margin: 0;
-  color: #a2a2a2;
+  color: var(--home-ink);
   font-size: 16px;
   font-weight: 400;
   line-height: 180%;
@@ -101,11 +101,11 @@
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
   padding: 40px 20px;
-  border-bottom: 1px solid #767676;
+  border-bottom: 1px solid var(--home-line);
 }
 
 .row:first-child .rowContent {
-  border-top: 1px solid #767676;
+  border-top: 1px solid var(--home-line);
 }
 
 .rowTitle,
@@ -138,13 +138,13 @@
 
 .card:focus-visible,
 .row:focus-visible {
-  outline: 2px solid #172806;
+  outline: 2px solid var(--home-ink);
   outline-offset: 5px;
 }
 
 .row:hover {
-  background-color: #33ff66;
-  color: #172806;
+  background-color: var(--home-accent);
+  color: var(--home-on-accent);
 }
 
 @media (hover: hover) and (pointer: fine) {

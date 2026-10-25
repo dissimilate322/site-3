@@ -33,7 +33,7 @@ The measured heading, divider and first four grid-item rectangles matched source
 | 390 × 844 | 181 / 48 px | 317.203 px | 1 × 344 px |
 | 375 × 812 | 181 / 48 px | 317.203 px | 1 × 329 px |
 
-Work uses 16:9 images, 8px corners, desktop/mobile row gaps of 80/60px and 200px bottom padding. Grid text uses Aeonik; list rows and large menu labels use system sans. Hover scale is 1.1 over 300ms and List row hover is green. Repeated view switching, focus trapping and Escape are tested.
+Work uses 16:9 images, 8px corners, desktop/mobile row gaps of 80/60px and 200px bottom padding. Grid text uses Aeonik; list rows and large menu labels use system sans. Hover scale is 1.1 over 300ms and List row hover is violet. Repeated view switching, focus trapping and Escape are tested.
 
 ## Motion, interactions and remaining differences
 
@@ -59,18 +59,20 @@ Build a Wispbyte archive with npm run package:wispbyte. Use Node.js 24, startup 
 
 The motion regression suite (`npm run test:motion`) checks the first film and automatic playback, all four project holds, case/menu/back/logo transitions, released body/focus locks, explicit reduced-motion selection and persistence, WebGL outline agreement with the recording, visible near-white pixels in all three project gaps, a monotonic inertial wheel trajectory, absent film controls and automatic playback of every case film at desktop and mobile sizes.
 
-The animation failure was reproduced by emulating `prefers-reduced-motion: reduce`: it bypassed the original scroll timelines, page transitions and CSS sticky tracks. The deployed host served its JS chunks successfully and animated with no OS reduction. Full motion is now the requested default, independently of that OS signal. An explicit Reduce motion menu control persists the visitor’s choice and drives both CSS and GSAP. Regression checks cover full-motion scroll/transitions with the OS flag set, deliberate reduction, persistence, and re-enabling animation. The HTML build marker is `meruem-dark-wordmark-20261026`.
+The animation failure was reproduced by emulating `prefers-reduced-motion: reduce`: it bypassed the original scroll timelines, page transitions and CSS sticky tracks. The deployed host served its JS chunks successfully and animated with no OS reduction. Full motion is now the requested default, independently of that OS signal. An explicit Reduce motion menu control persists the visitor’s choice and drives both CSS and GSAP. Regression checks cover full-motion scroll/transitions with the OS flag set, deliberate reduction, persistence, and re-enabling animation. The HTML build marker is `meruem-site-palette-20261026`.
 
 Quality spot check: on the first three seconds of the Onramper loop, compared at 1920 × 1080 against the original, SSIM improved from 0.967921 for the previous 720p encode (upscaled for comparison) to 0.992148 for the new 1080p encode. Both opening-film orientations retain the original 60 fps. Video URLs carry the HQ revision so an older cached encode is not reused.
 
-## Requested Home palette
+## Requested site palette
 
-The latest Home palette uses the five exact requested colours: near-white `#fafafa` for the background, light grey `#eeeef0` for client-card surfaces and dividers, graphite `#242427` for headings and text, violet `#8750f7` for buttons and active elements, and light violet `#b594fa` for graphic highlights. White labels keep violet buttons readable. It covers the header, contact/menu panels, text, buttons, scroll gaps, portal and custom scrollbar. The routes outside Home retain their existing interface palette; all routes use the meruem name.
+The latest site palette uses the five exact requested colours: near-white `#fafafa` for the background, light grey `#eeeef0` for client-card surfaces and dividers, graphite `#242427` for headings and text, violet `#8750f7` for buttons and active elements, and light violet `#b594fa` for graphic highlights. White labels keep violet buttons readable. It covers the header, contact/menu panels, text, buttons, scroll gaps, portal and custom scrollbar. The palette is applied to all routes; all routes use the meruem name.
 
 Video grading remains removed at the owner’s request. Hero/closing films, featured project surfaces, posters and native fallback display the original media colours. The original neutral black video scrim and matching hero/closing-film backdrops stay in place. Client logos and hover media also remain unfiltered; only the card surfaces/dividers follow the new light-grey palette. HD assets, autoplay and animation timing have not changed.
 
 The site-facing name is meruem across the header, mobile menu wordmark, split loader, favicon, visible text, alt/ARIA labels, metadata and package/startup labels. The outlined wordmarks use the existing Tobias font. The MoonPay affiliation subtitle has been removed from the site logo; MoonPay remains where it names a reference client. Reference source URLs and the existing motion-setting storage key remain intact.
 
-The final wordmark correction removes Home backing/shadows and colour filters, uses black SVG glyphs in the split loader, and keeps header wordmarks black on every route. Form field rules use #85858b for visible separation on light-grey panels; focused Home fields remain violet. A light mobile-menu header band preserves black-wordmark contrast.
+The final wordmark correction removes Home backing/shadows and colour filters, uses black SVG glyphs in the split loader, and keeps header wordmarks black on every route. Form field rules use #85858b for visible separation on light-grey panels; focused fields remain violet. A light mobile-menu header band preserves black-wordmark contrast.
 
 Menu exit now cancels its entrance timeline and moves/fades the whole panel from its current position in one 450ms transform/opacity tween. Removing the separate link-exit stagger avoids the pause and competing hover motion when closing, including during entry.
+
+The final CTA style uses a near-white fill, one-pixel graphite border and 10px corners, with violet fill and white text on hover. This covers header/contact, editorial/job CTAs and project case buttons. The five-colour interface palette now applies to Work, Company, Careers, the job page and every case study, including menus, forms, dots, list hover, dividers, loaders and scrollbars. Media retain their original colours.

@@ -27,13 +27,13 @@
   font-display: swap;
 }
 * { box-sizing: border-box; }
-html { background: #fff; overscroll-behavior: none; }
+html { background: var(--home-paper); overscroll-behavior: none; }
 html[data-smooth-scroll='ready'] { scrollbar-width:none; scroll-behavior:auto; }
 html[data-smooth-scroll='ready']::-webkit-scrollbar { display:none; }
 body {
   margin: 0;
-  background: #fff;
-  color: #000;
+  background: var(--home-paper);
+  color: var(--home-ink);
   font-family: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
   font-size: 16px;
   line-height: 1.5;
@@ -45,12 +45,12 @@ button { cursor: pointer; }
 button:disabled { cursor: default; }
 a { color: inherit; text-decoration: none; }
 button:focus-visible, a:focus-visible, input:focus-visible {
-  outline: 2px solid #172806;
+  outline: 2px solid var(--home-accent);
   outline-offset: 5px;
 }
-::selection { background: #33ff66; color: #172806; }
+::selection { background: var(--home-highlight); color: var(--home-ink); }
 
-/* Requested Home palette: near-white, light grey, graphite and violet. */
+/* Requested site-wide palette: near-white, light grey, graphite and violet. */
 :root {
  --home-paper:#fafafa;
  --home-surface:#eeeef0;
@@ -59,4 +59,23 @@ button:focus-visible, a:focus-visible, input:focus-visible {
  --home-accent:#8750f7;
  --home-highlight:#b594fa;
  --home-on-accent:#fff;
+}
+
+:root {
+ --nav-surface:var(--home-surface);
+ --nav-ink:var(--home-ink);
+ --nav-panel:var(--home-ink);
+ --nav-link:var(--home-paper);
+ --nav-muted:var(--home-highlight);
+ --nav-accent:var(--home-accent);
+ --nav-button-ink:var(--home-on-accent);
+ --nav-hover-bg:var(--home-accent);
+ --nav-hover-ink:var(--home-on-accent);
+ --nav-rule:var(--home-line);
+ --nav-active-rule:var(--home-accent);
+ --nav-focus:var(--home-highlight);
+ --nav-text:var(--home-ink);
+ --nav-placeholder:var(--home-ink);
+ --nav-field-rule:#85858b;
+ --nav-social:var(--home-highlight);
 }

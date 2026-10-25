@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" data-motion="full" data-site-version="meruem-dark-wordmark-20261026">
+    <html lang="en" data-motion="full" data-site-version="meruem-site-palette-20261026">
       <head>
         <link rel="preload" href="/assets/ff9ccf87d4ee1f04-s.p.ttf" as="font" type="font/ttf" crossOrigin="anonymous" />
         <link rel="preload" href="/assets/f6b0aeaf3ea04f3b-s.p.ttf" as="font" type="font/ttf" crossOrigin="anonymous" />
