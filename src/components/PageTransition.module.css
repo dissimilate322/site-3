@@ -7,5 +7,4 @@
 .snapshot { min-height:100%; background:#fff; }
 
 .overlay[data-color-theme='violet'] { background:var(--home-paper); }
-.overlay[data-color-theme='violet'] .wordmark img { filter:url(#home-highlight-ink); }
 .overlay[data-color-theme='violet'] .count { color:var(--home-ink); }
