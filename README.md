@@ -54,9 +54,9 @@ Forms are **previews**: `POST /api/contact` validates without sending or storing
 
 See [REFERENCE.md](REFERENCE.md) for verification details and the remaining differences from the original WebGL experience.
 
-## Home colour palette
+## Site colour palette
 
-The Home interface uses the requested near-white `#fafafa` background, light grey `#eeeef0` cards/dividers, graphite `#242427` text, violet `#8750f7` buttons/active elements and light violet `#b594fa` graphics/highlights. Button labels use white for contrast. This covers typography, controls, menus/forms, loading portal and scrollbar. Client logos and hover media retain their original colours on the new light-grey card surfaces. All films and posters remain ungraded, with no filter on the video elements, project canvas or native fallback. HD files, playback and animation are unchanged. The site name remains meruem. Other routes retain their existing interface palette.
+The interface on every route uses the requested near-white `#fafafa` background, light grey `#eeeef0` cards/dividers, graphite `#242427` text, violet `#8750f7` buttons/active elements and light violet `#b594fa` graphics/highlights. Hovered button labels use white for contrast. This covers typography, controls, menus/forms, loading portal and scrollbar. Client logos and hover media retain their original colours on the new light-grey card surfaces. All films and posters remain ungraded, with no filter on the video elements, project canvas or native fallback. HD files, playback and animation are unchanged. The site name remains meruem. All routes share the palette. CTA buttons use a light fill and thin graphite border, turning violet on hover.
 
 [Desktop preview](https://raw.githubusercontent.com/dissimilate322/site-3/codex/wispbyte-download/meruem-preview.jpg).
 

@@ -116,17 +116,18 @@
 :global(html[data-motion='reduced']) .field input,
 :global(html[data-motion='reduced']) .formBottom button { transition:none; }
 
-:global([data-home-theme]) .menuPanel :is(a,button):focus-visible { outline-color:var(--home-highlight); }
-:global([data-home-theme]) .menuPanel .controls :is(a,button):focus-visible { outline-color:var(--home-accent); }
-:global([data-home-theme]) .menuPanel .motionToggle[aria-pressed='true'] { color:var(--home-paper); }
-:global([data-home-theme]) .mobileContact:hover { color:var(--home-paper); border-color:var(--home-highlight); }
+.menuPanel :is(a,button):focus-visible { outline-color:var(--home-highlight); }
+.menuPanel .controls :is(a,button):focus-visible { outline-color:var(--home-accent); }
+.menuPanel .motionToggle[aria-pressed='true'] { color:var(--home-paper); }
+.mobileContact:hover { color:var(--home-paper); border-color:var(--home-highlight); }
 
-:global([data-home-theme]) .field input:focus { border-color:var(--home-accent); }
-:global([data-home-theme]) .formBottom button { background:var(--home-accent); border-color:var(--home-accent); color:var(--home-on-accent); }
-:global([data-home-theme]) .formBottom button:hover { background:var(--home-ink); border-color:var(--home-ink); }
-:global([data-home-theme]) .navHover small { color:var(--home-on-accent); }
+.field input:focus { border-color:var(--home-accent); }
+.navHover small { color:var(--home-on-accent); }
 
 /* The unframed black wordmark stays legible in the mobile menu header. */
 @media (max-width:767px) {
  .menuPanel { background:linear-gradient(to bottom,#fafafa 0 110px,var(--nav-panel,#172806) 110px); }
 }
+
+.contactButton,.mobileContact,.formBottom button { border:1px solid var(--home-ink); background:var(--home-paper); color:var(--home-ink); }
+.contactButton:hover,.mobileContact:hover,.formBottom button:hover { border-color:var(--home-accent); background:var(--home-accent); color:var(--home-on-accent); }
