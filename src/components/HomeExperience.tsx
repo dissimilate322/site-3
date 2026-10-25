@@ -54,16 +54,16 @@ export default function HomeExperience({children}:{children:ReactNode}) {
   return()=>{window.removeEventListener('load',refresh);media.revert();context.revert()};
  },[reduced]);
  return <div ref={root} className={styles.experience}>
-  <section className={styles.hero} aria-label="Otherlife studio film" data-home-film>
-   <div className={styles.landscape}><Media priority asset={{src:'/media/hero-landscape.mp4',kind:'video',width:1920,height:1080,alt:'Otherlife studio film: a phone among floating rocks'}} poster={{src:'/media/hero-landscape.jpg',kind:'image',width:1920,height:1080,alt:''}} className={styles.film}/></div>
-   <div className={styles.portrait}><Media priority asset={{src:'/media/hero-portrait.mp4',kind:'video',width:1080,height:1920,alt:'Otherlife studio film: a phone among floating rocks'}} poster={{src:'/media/hero-portrait.jpg',kind:'image',width:720,height:1280,alt:''}} className={styles.film}/></div>
+  <section className={styles.hero} aria-label="meruem studio film" data-home-film>
+   <div className={styles.landscape}><Media priority asset={{src:'/media/hero-landscape.mp4',kind:'video',width:1920,height:1080,alt:'meruem studio film: a phone among floating rocks'}} poster={{src:'/media/hero-landscape.jpg',kind:'image',width:1920,height:1080,alt:''}} className={styles.film}/></div>
+   <div className={styles.portrait}><Media priority asset={{src:'/media/hero-portrait.mp4',kind:'video',width:1080,height:1920,alt:'meruem studio film: a phone among floating rocks'}} poster={{src:'/media/hero-portrait.jpg',kind:'image',width:720,height:1280,alt:''}} className={styles.film}/></div>
   </section>
   {children}
   <ProjectSurface root={root}/>
   <span ref={cursor} className={styles.cursor} aria-hidden="true">View case</span>
-  <section className={`${styles.hero} ${styles.footerFilm}`} data-closing-film aria-label="Otherlife closing film">
-   <div className={styles.landscape}><Media asset={{src:'/media/hero-landscape.mp4',kind:'video',width:1920,height:1080,alt:'Otherlife closing film'}} poster={{src:'/media/hero-landscape.jpg',kind:'image',width:1920,height:1080,alt:''}} className={styles.film}/></div>
-   <div className={styles.portrait}><Media asset={{src:'/media/hero-portrait.mp4',kind:'video',width:1080,height:1920,alt:'Otherlife closing film'}} poster={{src:'/media/hero-portrait.jpg',kind:'image',width:720,height:1280,alt:''}} className={styles.film}/></div>
+  <section className={`${styles.hero} ${styles.footerFilm}`} data-closing-film aria-label="meruem closing film">
+   <div className={styles.landscape}><Media asset={{src:'/media/hero-landscape.mp4',kind:'video',width:1920,height:1080,alt:'meruem closing film'}} poster={{src:'/media/hero-landscape.jpg',kind:'image',width:1920,height:1080,alt:''}} className={styles.film}/></div>
+   <div className={styles.portrait}><Media asset={{src:'/media/hero-portrait.mp4',kind:'video',width:1080,height:1920,alt:'meruem closing film'}} poster={{src:'/media/hero-portrait.jpg',kind:'image',width:720,height:1280,alt:''}} className={styles.film}/></div>
   </section>
  </div>;
 }

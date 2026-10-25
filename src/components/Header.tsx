@@ -174,10 +174,9 @@ export default function Header() {
   }, [panel, reduced]);
 
   return <header ref={root} className={styles.header}>
-    <a href="/" className={styles.logo} aria-label="Otherlife home">
-      {/* Original wordmark is a locally stored SVG, including the MoonPay signature. */}
+    <a href="/" className={styles.logo} aria-label="meruem home">
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src="/assets/otherlife-logo.svg" width="974" height="325" alt="Otherlife — a MoonPay Company" />
+      <img src="/assets/meruem-logo.svg" width="974" height="325" alt="meruem" />
     </a>
     {!panel && <div className={styles.controls}>
       <button ref={menuButton} className={styles.menuButton} aria-label="Menu" aria-expanded={false} aria-controls="navigation-panel" onClick={() => setPanel("menu")}><Hamburger open={false}/></button>
@@ -197,7 +196,7 @@ export default function Header() {
           <button className={styles.menuButton} aria-label="Close menu" aria-expanded={true} onClick={() => closePanel()}><Hamburger open/></button>
           <button className={styles.contactButton} onClick={() => openContact()}>Contact Us</button>
         </div>
-        <div className={styles.mobileLogo} aria-hidden="true"><img src="/assets/otherlife-logo.svg" width="100" height="34" alt=""/></div>
+        <div className={styles.mobileLogo} aria-hidden="true"><img src="/assets/meruem-logo.svg" width="100" height="34" alt=""/></div>
         <nav className={styles.navigation} aria-label="Main navigation">
           {navigation.map(({ label, href }, index) => <a href={href} key={label} aria-current={pathname === href || (href === "/work" && pathname.startsWith("/work/")) ? "page" : undefined} onClick={pathname === href ? (event) => { event.preventDefault(); closePanel(); } : undefined}>
             <span className={styles.navText} data-menu-link><span><small>0{index + 1}</small>{label}</span></span>

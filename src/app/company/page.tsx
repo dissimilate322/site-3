@@ -6,7 +6,7 @@ import Testimonials from '@/components/Testimonials';
 import MoreWork from '@/components/MoreWork';
 import {content} from '@/data/content';
 import styles from '@/components/SitePages.module.css';
-export const metadata:Metadata={title:'Company | Otherlife'};
+export const metadata:Metadata={title:'Company | meruem'};
 export default function Company(){const c=content.company;return <><Header/><main><Reveal>
  <section className={`${styles.container} ${styles.editorialHero}`}><h1 className={styles.label} data-reveal>{c.heroLabel}</h1><div className={styles.heroBody}><p className={styles.editorialTitle} data-reveal>{c.heroTitle}</p><p className={styles.bodyCopy} data-reveal>{c.heroDescription}</p><div className={styles.team}>{c.team.map(t=><article key={t.name} data-reveal><Media asset={t.image}/><h2>{t.name}</h2><p>{t.position}</p></article>)}</div></div></section>
  <div className={styles.fullBleed} data-shrink><Media asset={c.topImage}/></div>

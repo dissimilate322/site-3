@@ -1,4 +1,4 @@
-# Otherlife — local multipage site
+# meruem — local multipage site
 
 Next.js / React / TypeScript implementation with all site navigation kept local.
 
@@ -11,7 +11,7 @@ Next.js / React / TypeScript implementation with all site navigation kept local.
 - `/careers/senior-designer`: local vacancy details and a preview application flow.
 - Six `/work/[slug]` pages: full reference content blocks, project imagery/video, outcomes, quotes, process steps, press citations and related work.
 
-All project text, people, jobs and media are reference content from Otherlife, not newly invented owner information. Social URLs remain unset until owner URLs are supplied. No navigation, job application or case-study link redirects to Otherlife or MoonPay.
+Project text, people, jobs and media originate from the Otherlife reference; the site-facing agency name is adapted to meruem. The original source URLs remain in the provenance manifest. Social URLs remain unset until owner URLs are supplied. No navigation, job application or case-study link redirects to Otherlife or MoonPay.
 
 ## Development
 
@@ -35,10 +35,10 @@ Playwright uses `/usr/bin/chromium` or `CHROMIUM_PATH`. Reports/screenshots are 
 
 ## Wispbyte deployment
 
-[Download the current ready-to-run ZIP](https://github.com/dissimilate322/site-3/raw/refs/heads/codex/wispbyte-download/otherlife-wispbyte-ivory-burgundy.zip).
+[Download the current ready-to-run ZIP](https://github.com/dissimilate322/site-3/raw/refs/heads/codex/wispbyte-download/meruem-wispbyte.zip).
 
 ```sh
-npm run package:wispbyte -- /path/to/otherlife-wispbyte-full.zip
+npm run package:wispbyte -- /path/to/meruem-wispbyte.zip
 ```
 
 Packaging requires Python 3. It builds the Next.js standalone output and includes runtime dependencies, public assets and static chunks. Extract the ZIP into an empty server root. Use Node.js 24 with startup file **index.js**, or command `node index.js`. Set `PORT` to the allocated host port if `PORT`/`SERVER_PORT` is not injected. No build/install is needed on the host. For an update, stop the old server and replace its entire `.next`, `public` and `node_modules` directories plus root application files before restarting.
@@ -55,6 +55,6 @@ See [REFERENCE.md](REFERENCE.md) for verification details and the remaining diff
 
 ## Home colour palette
 
-The Home page follows the supplied ivory-stone / burgundy-laptop palette: warm ivory `#f7f3ef`, cream `#fff7ed`, deep burgundy `#57172c`, wine `#7c203a` and blush `#e7bdc7`. It covers Home typography, controls, menus/forms, client cards, loading portal and scrollbar. The hero/closing films use live porcelain-and-wine grading; the featured project films use a wine duotone. SVG colour filters also cover posters, native fallbacks and frozen transition frames, keeping the existing HD video files, autoplay and WebGL motion. Other routes retain their reference colours.
+The Home interface uses the requested muted red `#7a3e3e`, neutral grey `#a1a19f`, off-white `#f4f3ee` and dark red `#4b2828` for readable small text. It covers typography, controls, menus/forms, loading portal and scrollbar. Client cards retain their original white backgrounds, black borders and unfiltered logo/hover assets. All films and video posters display their original colours, with no grading on the video elements, project canvas or native fallback. Playback, HD files and animation remain as before. The site name is meruem in the wordmark, loading portal, favicon, visible content, accessible labels and page metadata.
 
-[Desktop preview](https://raw.githubusercontent.com/dissimilate322/site-3/codex/wispbyte-download/home-ivory-burgundy-preview.jpg).
+[Desktop preview](https://raw.githubusercontent.com/dissimilate322/site-3/codex/wispbyte-download/meruem-preview.jpg).

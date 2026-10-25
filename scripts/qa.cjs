@@ -125,7 +125,7 @@ async function noOverflow(page, label) {
     record('Desktop image hover scales to 1.1 and resets');
     await page.goto(baseURL,{waitUntil:'networkidle'});
     await page.waitForFunction(()=>document.querySelector('[data-page-transition]').dataset.state==='idle');
-    assert((await page.locator('h1').innerText()).includes('Otherlife is a creative agency'));
+    assert((await page.locator('h1').innerText()).includes('meruem is a creative agency'));
     record('Root entry renders the separate Home page');
     const malformed=await context.request.post(`${baseURL}/api/contact`,{data:'broken-json',headers:{'Content-Type':'application/json'}});
     assert.equal(malformed.status(),400);

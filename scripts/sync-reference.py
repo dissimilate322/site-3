@@ -57,7 +57,7 @@ for p in sorted(CACHE.glob('work-*.json')):
   else:raise ValueError(t)
  case['blocks']=blocks;cases.append(case)
 content={'home':home,'company':company,'careers':careers,'cases':cases}
-(ROOT/'src/data/content.json').write_text(json.dumps(content,ensure_ascii=False,indent=2))
+(ROOT/'src/data/content.json').write_text(json.dumps(content,ensure_ascii=False,indent=2).replace('Otherlife','meruem'))
 for orientation in ['landscape','portrait']:
  for ext in ['mp4','jpg']:
   name='hero-'+orientation+'.'+ext
