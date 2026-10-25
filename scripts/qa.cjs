@@ -11,7 +11,7 @@ fs.mkdirSync(output, { recursive: true });
 const results = { baseURL, startedAt: new Date().toISOString(), checks: [], errors: [], viewports: [] };
 function record(name, detail = {}) { results.checks.push({ name, passed: true, ...detail }); console.log('PASS', name); }
 const viewports = [[1920,1080],[1440,900],[1024,768],[768,1024],[390,844],[375,812]];
-async function settle(page) { await page.waitForTimeout(1500); await page.evaluate(() => document.fonts.ready); }
+async function settle(page) { await page.waitForFunction(()=>document.querySelector('[data-page-transition]')?.dataset.state==='idle'); await page.waitForTimeout(1500); await page.evaluate(() => document.fonts.ready); }
 async function loadAllImages(page) {
   await page.evaluate(async () => {
     const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
@@ -124,6 +124,7 @@ async function noOverflow(page, label) {
     assert.equal(await image.evaluate(e=>getComputedStyle(e).transform),'none');
     record('Desktop image hover scales to 1.1 and resets');
     await page.goto(baseURL,{waitUntil:'networkidle'});
+    await page.waitForFunction(()=>document.querySelector('[data-page-transition]').dataset.state==='idle');
     assert((await page.locator('h1').innerText()).includes('Otherlife is a creative agency'));
     record('Root entry renders the separate Home page');
     const malformed=await context.request.post(`${baseURL}/api/contact`,{data:'broken-json',headers:{'Content-Type':'application/json'}});
@@ -136,6 +137,7 @@ async function noOverflow(page, label) {
     await page.goto(`${baseURL}/work`,{waitUntil:'networkidle'});await settle(page);
     await page.locator('#projects a').first().click();
     await page.waitForURL(`${baseURL}/work/artist-accelerator`);
+    await page.waitForFunction(()=>document.querySelector('[data-page-transition]').dataset.state==='idle');
     assert.equal(await page.locator('h1').innerText(),'Artist Accelerator');
     assert.equal(await page.locator('a[href^="https://"]').count(),0);
     record('Project card opens its local project overview without external links');

@@ -1,17 +1,20 @@
 import type {Metadata} from 'next';
+import {Fragment} from 'react';
 import Link from 'next/link';
 import Header from '@/components/Header';
 import Reveal from '@/components/Reveal';
 import Media from '@/components/Media';
+import HomeExperience from '@/components/HomeExperience';
 import {content} from '@/data/content';
 import styles from '@/components/SitePages.module.css';
 export const metadata:Metadata={title:'Otherlife | Unconventional Solutions'};
-export default function Home(){const h=content.home;return <><Header/><main><Reveal>
- <div className={styles.featuredProjects}>{h.projects.map((p,i)=><section key={p.slug} className={styles.featuredProject} aria-label={p.title}>
-  <Media asset={p.video||p.image} poster={p.image} autoplay={!!p.video} priority={i===0} className={styles.featuredVisual}/>
-  <div className={styles.heroScrim}/><div className={styles.featuredContent} data-reveal><div className={styles.projectIdentity}>{p.logo?<Media asset={p.logo}/>:<h2>{p.title}</h2>}</div><div className={styles.featuredDescription}><span>Overview</span><p>{p.description}</p></div><div className={styles.featuredDescription}><span>Services</span><p>{p.services}</p></div><Link className={styles.caseButton} href={'/work/'+p.slug}>View case study <span aria-hidden="true">↗</span></Link></div>
+function Words({text}:{text:string}){return text.split(' ').map((word,i)=><Fragment key={i}><span data-word>{word}</span>{' '}</Fragment>)}
+export default function Home(){const h=content.home;return <><Header/><main><Reveal><HomeExperience>
+ <section className={`${styles.container} ${styles.homeAbout}`}><h1 data-word-reveal><span className={styles.aboutLine}><Words text="Otherlife is a creative agency"/></span><span className={styles.aboutLine}><Words text="elevating"/> <em><Words text="digital experiences"/></em></span><span className={styles.aboutLine}><Words text="using creativity and technology."/></span></h1><Link href="/company" className={styles.outlineButton} data-reveal>Find out how <span aria-hidden="true">↗</span></Link></section>
+ <div className={styles.featuredProjects} data-project-stage>{h.projects.map(p=><section key={p.slug} className={styles.featuredProject} aria-label={p.title} data-featured-project>
+  <Media asset={p.video||p.image} poster={p.image} autoplay={!!p.video} className={styles.featuredVisual}/>
+  <Link href={'/work/'+p.slug} aria-label={'View '+p.title+' case study'} className={styles.projectHitArea} data-project-hitarea/>
+  <div className={styles.heroScrim}/><div className={styles.featuredContent} data-project-content><div className={styles.projectIdentity}>{p.logo?<Media asset={p.logo}/>:<h2>{p.title}</h2>}</div><div className={styles.featuredDescription}><span>Overview</span><p>{p.description}</p></div><div className={styles.featuredDescription}><span>Services</span><p>{p.services}</p></div><Link className={styles.caseButton} href={'/work/'+p.slug}>View case study</Link></div>
  </section>)}</div>
- <section className={`${styles.container} ${styles.homeAbout}`}><h1 data-reveal>Otherlife is a creative agency<br className={styles.desktopBreak}/> elevating <em>digital experiences</em><br className={styles.desktopBreak}/> using creativity and technology.</h1><Link href="/company" className={styles.outlineButton}>Find out how <span aria-hidden="true">↗</span></Link></section>
- <section className={styles.showreel} aria-label="Studio showreel"><Media asset={h.showreel}/></section>
- <section className={`${styles.container} ${styles.clients}`}><h2 data-reveal>We design <em>unconventional solutions.</em></h2><div className={styles.clientGrid}>{h.clients.map((c,i)=>{const body=<><Media asset={c.image} className={styles.clientLogo}/>{c.hover&&<Media asset={c.hover} className={styles.clientHover}/>} {c.background&&<Media asset={c.background} className={styles.clientBackground}/>}</>;return c.href?<Link href={c.href} key={i} aria-label={c.name} className={styles.clientCard}>{body}</Link>:<div key={i} className={styles.clientCard} aria-label={c.name}>{body}</div>})}</div><Link href="/work" className={styles.outlineButton}>See all work <span aria-hidden="true">↗</span></Link></section>
- </Reveal></main></>}
+ <section className={`${styles.container} ${styles.clients}`}><h2 data-word-reveal><Words text="We design"/> <em><Words text="unconventional solutions."/></em></h2><div className={styles.clientGrid} data-client-grid>{h.clients.map((c,i)=>{const body=<><Media asset={c.image} className={styles.clientLogo}/>{c.hover&&<Media asset={c.hover} className={styles.clientHover}/>} {c.background&&<Media asset={c.background} className={styles.clientBackground}/>}</>;return c.href?<Link href={c.href} key={i} aria-label={c.name} className={styles.clientCard} data-client-card>{body}</Link>:<div key={i} className={styles.clientCard} aria-label={c.name} data-client-card>{body}</div>})}</div><Link href="/work" className={styles.outlineButton} data-reveal>See all work <span aria-hidden="true">↗</span></Link></section>
+ </HomeExperience></Reveal></main></>}

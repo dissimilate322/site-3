@@ -59,6 +59,10 @@ for p in sorted(CACHE.glob('work-*.json')):
  case['blocks']=blocks;cases.append(case)
 content={'home':home,'company':company,'careers':careers,'cases':cases}
 (ROOT/'src/data/content.json').write_text(json.dumps(content,ensure_ascii=False,indent=2))
+for orientation in ['landscape','portrait']:
+ for ext in ['mp4','jpg']:
+  name='hero-'+orientation+'.'+ext
+  assets['https://www.otherlife.xyz/assets/videos/'+name]={'file':name,'kind':'video' if ext=='mp4' else 'image','maxWidth':1920 if orientation=='landscape' else 720,'crf':'23' if orientation=='landscape' else '24'}
 print('Assets:',len(assets),'videos:',sum(a['kind']=='video' for a in assets.values()),flush=True)
 def download(item):
  url,info=item;dest=DEST/info['file']
@@ -66,7 +70,7 @@ def download(item):
  temp=Path('/tmp/otherlife-download-'+info['file'])
  subprocess.run(['curl','-fLs','--retry','2','--max-time','180',url,'-o',str(temp)],check=True)
  if info['kind']=='video':
-  subprocess.run(['ffmpeg','-v','error','-y','-threads','1','-i',str(temp),'-vf',"scale='min(1280,iw)':-2",'-r','30','-c:v','libx264','-threads','1','-preset','fast','-crf','28','-c:a','aac','-b:a','96k','-movflags','+faststart',str(dest)],check=True)
+  subprocess.run(['ffmpeg','-v','error','-y','-threads','1','-i',str(temp),'-vf',"scale='min("+str(info.get('maxWidth',1280))+",iw)':-2",'-r','30','-c:v','libx264','-threads','1','-preset','fast','-crf',info.get('crf','28'),'-c:a','aac','-b:a','96k','-movflags','+faststart',str(dest)],check=True)
  elif dest.suffix=='.webp':
   with Image.open(temp) as im:
    im.thumbnail((1920,1920));im.save(dest,'WEBP',quality=90,method=4)

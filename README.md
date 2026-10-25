@@ -4,7 +4,7 @@ Next.js / React / TypeScript implementation with all site navigation kept local.
 
 ## Pages
 
-- `/`: separate Home page with four featured projects, videos, studio showreel, agency section and eight client tiles.
+- `/`: separate Home page with a full-screen phone/rocks film, agency introduction, four pinned project planes, eight client tiles and a closing film.
 - `/work`: original six-project portfolio with List/Grid modes.
 - `/company`: agency introduction, two founders, five service groups, office imagery, testimonial carousel, eight award entries and related work.
 - `/careers`: hiring introduction, office gallery, perks and current reference vacancy.
@@ -28,6 +28,7 @@ npm run build
 npm start
 npm run test:ui -- http://localhost:3000
 npm run test:pages -- http://localhost:3000
+npm run test:motion -- http://localhost:3000
 ```
 
 Playwright uses `/usr/bin/chromium` or `CHROMIUM_PATH`. Reports/screenshots are stored in ignored `artifacts/qa` and `artifacts/pages` directories.
@@ -44,8 +45,8 @@ Packaging requires Python 3. It builds the Next.js standalone output and include
 
 Content lives in `src/data/content.json`, typed by `content.ts`; project gallery data is in `projects.ts`. Navigation and optional owner social URLs are in `site.ts`. The media provenance manifest is `src/data/media-sources.json`.
 
-122 additional media assets are local in `public/media`, alongside the original Work-page assets. Images are resized to a maximum of 1920px and encoded as WebP; video is encoded to H.264 MP4, up to 1280px wide. Source-refresh utility `scripts/sync-reference.py` requires curl, Python/Pillow and ffmpeg; it is not needed at runtime.
+126 additional media assets are local in `public/media`, alongside the original Work-page assets. Images are resized to a maximum of 1920px and encoded as WebP; video is encoded to H.264 MP4, up to 1280px wide (1920px for the desktop opening film). Source-refresh utility `scripts/sync-reference.py` requires curl, Python/Pillow and ffmpeg; it is not needed at runtime.
 
-Forms are **previews**: `POST /api/contact` validates without sending or storing enquiries or applications. Apply opens the local contact panel prefilled with the role name. Testimonials support arrows/dots and visibility-aware autoplay. Video supports local playback; reduced motion prevents automatic playback. GSAP reveal/scroll timelines, observers and listeners are cleaned up on unmount.
+Forms are **previews**: `POST /api/contact` validates without sending or storing enquiries or applications. Apply opens the local contact panel prefilled with the role name. Testimonials support arrows/dots and visibility-aware autoplay. All films autoplay muted and loop while visible. Pause/Play remains available, hidden tabs and offscreen films pause, and reduced motion prevents automatic playback. Home includes word-by-word blur reveals, client-card flips, a following case cursor, and scroll-driven perspective changes between pinned projects. Local navigation shrinks/turns the outgoing page over a grey wordmark, then expands the incoming page. Reduced motion uses the normal document flow and immediate navigation. GSAP timelines, observers and listeners are cleaned up on unmount.
 
 See [REFERENCE.md](REFERENCE.md) for verification details and the remaining differences from the original WebGL experience.
