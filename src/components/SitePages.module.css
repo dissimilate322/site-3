@@ -249,35 +249,32 @@
 .homePage {
  background:var(--home-paper);
  color:var(--home-ink);
- --nav-surface:var(--home-paper);
+ --nav-surface:var(--home-surface);
  --nav-ink:var(--home-ink);
- --nav-panel:var(--home-wine-dark);
- --nav-link:var(--home-cream);
- --nav-muted:var(--home-blush);
- --nav-accent:var(--home-wine);
- --nav-button-ink:var(--home-cream);
- --nav-hover-bg:var(--home-blush);
- --nav-hover-ink:var(--home-ink);
- --nav-rule:#d4d2cd33;
- --nav-active-rule:#d4d2cdbb;
- --nav-focus:var(--home-blush);
+ --nav-panel:var(--home-ink);
+ --nav-link:var(--home-paper);
+ --nav-muted:var(--home-highlight);
+ --nav-accent:var(--home-accent);
+ --nav-button-ink:var(--home-on-accent);
+ --nav-hover-bg:var(--home-accent);
+ --nav-hover-ink:var(--home-on-accent);
+ --nav-rule:var(--home-line);
+ --nav-active-rule:var(--home-accent);
+ --nav-focus:var(--home-highlight);
  --nav-text:var(--home-ink);
  --nav-placeholder:var(--home-ink);
- --nav-field-rule:var(--home-wine);
- --nav-social:var(--home-blush);
+ --nav-field-rule:var(--home-line);
+ --nav-social:var(--home-highlight);
 }
-.homePage::selection,.homePage ::selection { background:var(--home-blush); color:var(--home-wine-dark); }
-.homePage :is(a,button,input):focus-visible { outline-color:var(--home-wine); }
+.homePage::selection,.homePage ::selection { background:var(--home-highlight); color:var(--home-ink); }
+.homePage :is(a,button,input):focus-visible { outline-color:var(--home-accent); }
 .homePage .homeAbout h1,.homePage .clients h2 { color:var(--home-ink); }
-.homePage .homeAbout em,.homePage .clients em { color:var(--home-wine); }
 .homePage .featuredProjects { background:var(--home-paper); }
-.homePage .featuredProject { background:var(--home-wine-dark); color:var(--home-cream); }
-.homePage .featuredContent .projectIdentity img { filter:url(#home-cream-ink); }
-.homePage .featuredDescription > span { border-color:#f4f3ee80; }
-.homePage .caseButton { border-color:var(--home-cream); color:var(--home-cream); }
-.homePage .caseButton:hover { background:var(--home-cream); color:var(--home-ink); }
-.homePage .outlineButton { border-color:var(--home-ink); color:var(--home-ink); }
-.homePage .outlineButton:hover { background:var(--home-ink); color:var(--home-cream); }
-.homePage .clientCard { border-color:#000; background:#fff; }
-/* Route announcements focus this noninteractive heading without drawing a frame. */
+.homePage .featuredProject { background:var(--home-ink); color:var(--home-paper); }
+.homePage .featuredContent .projectIdentity img { filter:url(#home-paper-ink); }
+.homePage .featuredDescription > span { border-color:var(--home-line); }
+.homePage .caseButton,.homePage .outlineButton { border-color:var(--home-accent); background:var(--home-accent); color:var(--home-on-accent); }
+.homePage .caseButton:hover,.homePage .outlineButton:hover { border-color:var(--home-ink); background:var(--home-ink); color:var(--home-on-accent); }
+.homePage .clientCard { border-color:var(--home-line); background:var(--home-surface); }
+/* Route announcements focus the heading without drawing a frame. */
 .homePage h1[tabindex='-1']:focus { outline:none; }

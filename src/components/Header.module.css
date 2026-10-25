@@ -117,9 +117,14 @@
 :global(html[data-motion='reduced']) .formBottom button { transition:none; }
 
 :global([data-home-theme]) .logo { mix-blend-mode:normal; background:color-mix(in srgb,var(--home-surface) 88%,transparent); box-shadow:0 0 0 10px color-mix(in srgb,var(--home-surface) 88%,transparent); border-radius:4px; backdrop-filter:blur(10px); }
-:global([data-home-theme]) .logo img { filter:url(#home-burgundy-ink); }
-:global([data-home-theme]) .mobileLogo img { filter:url(#home-cream-ink); }
-:global([data-home-theme]) .menuPanel :is(a,button):focus-visible { outline-color:var(--home-blush); }
-:global([data-home-theme]) .menuPanel .controls :is(a,button):focus-visible { outline-color:var(--home-wine); }
-:global([data-home-theme]) .menuPanel .motionToggle[aria-pressed='true'] { color:var(--home-cream); }
-:global([data-home-theme]) .mobileContact:hover { color:var(--home-cream); border-color:var(--home-blush); }
+:global([data-home-theme]) .logo img { filter:url(#home-brand-ink); }
+:global([data-home-theme]) .mobileLogo img { filter:url(#home-paper-ink); }
+:global([data-home-theme]) .menuPanel :is(a,button):focus-visible { outline-color:var(--home-highlight); }
+:global([data-home-theme]) .menuPanel .controls :is(a,button):focus-visible { outline-color:var(--home-accent); }
+:global([data-home-theme]) .menuPanel .motionToggle[aria-pressed='true'] { color:var(--home-paper); }
+:global([data-home-theme]) .mobileContact:hover { color:var(--home-paper); border-color:var(--home-highlight); }
+
+:global([data-home-theme]) .field input:focus { border-color:var(--home-accent); }
+:global([data-home-theme]) .formBottom button { background:var(--home-accent); border-color:var(--home-accent); color:var(--home-on-accent); }
+:global([data-home-theme]) .formBottom button:hover { background:var(--home-ink); border-color:var(--home-ink); }
+:global([data-home-theme]) .navHover small { color:var(--home-on-accent); }
