@@ -22,31 +22,28 @@ export default function HomeExperience({children}:{children:ReactNode}) {
     root.current!.querySelectorAll<HTMLElement>('[data-word-reveal]').forEach(title=>{
      gsap.from(title.querySelectorAll('[data-word]'),{opacity:0,filter:'blur(6px)',stagger:.08,duration:.6,ease:'power2.out',scrollTrigger:{trigger:title,start:'top 85%',once:true}});
     });
-    const stage=root.current!.querySelector<HTMLElement>('[data-project-stage]')!;
-    const panels=Array.from(stage.querySelectorAll<HTMLElement>('[data-featured-project]'));
-    const contents=panels.map(p=>p.querySelector<HTMLElement>('[data-project-content]'));
-    gsap.set(stage,{height:'100svh',perspective:1800});
-    gsap.set(panels,{position:'absolute',inset:0,transformOrigin:'50% 50%',force3D:true});
-    gsap.set(panels.slice(1),{autoAlpha:0,yPercent:100,scale:.8,rotationY:-22,rotationZ:5});
-    panels.slice(1).forEach(p=>{p.inert=true});
-    const entrance=gsap.fromTo(panels[0],{scale:.84,rotationY:-18,rotationZ:4},{scale:1,rotationY:0,rotationZ:0,ease:'none',scrollTrigger:{trigger:stage,start:'top bottom',end:'top top',scrub:true}});
-    const timeline=gsap.timeline({scrollTrigger:{trigger:stage,start:'top top',end:()=>'+='+innerHeight*(panels.length-1)*1.35,pin:true,scrub:.35,invalidateOnRefresh:true,onUpdate:self=>{
-     // Only the plane at the front accepts clicks and keyboard focus.
-     const index=Math.min(panels.length-1,Math.floor(self.progress*panels.length));
-     panels.forEach((panel,i)=>{panel.inert=i!==index;panel.style.pointerEvents=i===index?'auto':'none'});
-    }}});
-    timeline.to({},{duration:.55});
-    for(let i=1;i<panels.length;i++){
-     const at=timeline.duration();
-     timeline.to(contents[i-1],{opacity:0,y:-10,duration:.18},at)
-      .to(panels[i-1],{scale:.78,rotationY:22,rotationZ:-5,yPercent:-100,autoAlpha:0,duration:1,ease:'power1.inOut'},at)
-      .to(panels[i],{autoAlpha:1,yPercent:0,scale:1,rotationY:0,rotationZ:0,duration:1,ease:'power1.inOut'},at)
-      .fromTo(contents[i],{opacity:0,y:10},{opacity:1,y:0,duration:.25},at+.75)
-      .to({},{duration:.55});
-    }
+    // The reference gives every project a two-viewport track. Its plane enters
+    // during one viewport of scrolling, stays centred for one, then exits while
+    // the next plane enters. Independent tracks preserve the white space.
+    root.current!.querySelectorAll<HTMLElement>('[data-project-track]').forEach(track=>{
+     const panel=track.querySelector<HTMLElement>('[data-featured-project]')!;
+     const content=panel.querySelector<HTMLElement>('[data-project-content]')!;
+     const scrim=panel.querySelector<HTMLElement>('[data-project-scrim]')!;
+     const timeline=gsap.timeline({defaults:{ease:'none'},scrollTrigger:{trigger:track,start:'top bottom',end:'bottom top',scrub:.12,invalidateOnRefresh:true}});
+     timeline.fromTo(panel,{scale:.82,rotationY:-10,rotationX:2,rotationZ:1.4,borderRadius:8,transformPerspective:1800,transformOrigin:'50% 50%',y:()=>innerHeight*.25},{scale:.85,rotationY:-4,rotationX:1,rotationZ:.3,duration:.55},0)
+      .to(panel,{y:0,duration:1},0)
+      .to(panel,{scale:1,rotationY:0,rotationX:0,rotationZ:0,borderRadius:0,duration:.45,ease:'power1.out'},.55)
+      .to({},{duration:1},1)
+      .to(panel,{scale:.85,rotationY:4,rotationX:-1,rotationZ:-.3,borderRadius:8,duration:.5},2)
+      .to(panel,{scale:.82,rotationY:10,rotationX:-2,rotationZ:-1.4,duration:.5},2.5)
+      .to(panel,{y:()=>-innerHeight*.25,duration:1},2)
+      .fromTo(content,{opacity:0,y:10},{opacity:1,y:0,duration:.12},.88)
+      .to(content,{opacity:0,y:-10,duration:.12},2)
+      .fromTo(scrim,{opacity:0},{opacity:1,duration:.12},.88)
+      .to(scrim,{opacity:0,duration:.12},2);
+    });
     const clientCards=root.current!.querySelectorAll<HTMLElement>('[data-client-card]');
     gsap.from(clientCards,{opacity:0,rotationZ:20,rotationX:-95,transformPerspective:1000,transformOrigin:'50% 50%',duration:1.75,stagger:.1,ease:'power2.out',scrollTrigger:{trigger:'[data-client-grid]',start:'top 90%',toggleActions:'play none none reverse'}});
-    return()=>{entrance.kill();panels.forEach(panel=>{panel.inert=false;panel.style.pointerEvents=''})};
    });
    media.add('(prefers-reduced-motion: no-preference) and (hover: hover) and (pointer: fine)',()=>{
     const x=gsap.quickTo(cursor.current,'x',{duration:.22,ease:'power2.out'});

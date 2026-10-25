@@ -12,7 +12,13 @@ function snapshot(source:HTMLElement,host:HTMLElement){
  const clones=[copy,...copy.querySelectorAll<HTMLElement>('*')];
  original.forEach((node,i)=>{
   const clone=clones[i];clone.removeAttribute('id');clone.removeAttribute('inert');
-  if(getComputedStyle(node).position==='fixed'){
+  const position=getComputedStyle(node).position;
+  if(position==='sticky'){
+   // Freeze a sticky project at its layout position, then retain its current
+   // perspective transform. offsetTop includes the sticky scroll displacement.
+   const parent=node.offsetParent as HTMLElement|null;const parentRect=parent?.getBoundingClientRect();
+   Object.assign(clone.style,{position:'fixed',top:(parentRect?.top??0)+node.offsetTop+scrollY+'px',left:(parentRect?.left??0)+node.offsetLeft+'px',right:'auto',bottom:'auto',width:node.offsetWidth+'px',height:node.offsetHeight+'px'});
+  }else if(position==='fixed'){
    // The translated snapshot becomes the fixed containing block. Keeping fixed
    // positioning avoids counting a ScrollTrigger pin spacer's offset twice.
    const r=node.getBoundingClientRect();Object.assign(clone.style,{position:'fixed',top:r.top+scrollY+'px',left:r.left+'px',right:'auto',bottom:'auto',width:r.width+'px',height:r.height+'px'});
@@ -27,7 +33,7 @@ function snapshot(source:HTMLElement,host:HTMLElement){
    }else clone.removeAttribute('autoplay');
   }
  });
- copy.querySelectorAll('[role="dialog"],button[aria-label="Pause video"],button[aria-label="Play video"]').forEach(e=>e.remove());
+ copy.querySelectorAll('[role="dialog"]').forEach(e=>e.remove());
  copy.style.visibility='visible';copy.style.transform=`translateY(${-scrollY}px)`;
  copy.className=styles.snapshot;copy.inert=true;host.replaceChildren(copy);
 }
