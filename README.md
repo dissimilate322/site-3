@@ -61,3 +61,5 @@ The interface on every route uses the requested near-white `#fafafa` background,
 [Desktop preview](https://raw.githubusercontent.com/dissimilate322/site-3/codex/wispbyte-download/meruem-preview.jpg).
 
 The meruem wordmark stays plain black and unframed across all headers and loading transitions. Form inputs have visible grey underlines, with violet focus on Home. The mobile menu has a light header band so its black wordmark remains readable.
+
+Menu dismissal follows the reference: labels leave downwards, rules collapse from the right, and an opaque panel slides out while header controls stay fixed. Desktop/mobile phase offsets are 0.48/0.55 seconds. The modal releases once the panel clears the viewport; early dismissal, resize and motion-mode interruption are regression-tested.

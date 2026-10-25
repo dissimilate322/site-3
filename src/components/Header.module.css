@@ -131,3 +131,15 @@
 
 .contactButton,.mobileContact,.formBottom button { border:1px solid var(--home-ink); background:var(--home-paper); color:var(--home-ink); }
 .contactButton:hover,.mobileContact:hover,.formBottom button:hover { border-color:var(--home-accent); background:var(--home-accent); color:var(--home-on-accent); }
+
+/* Independent rule strips can collapse from the right while text leaves its clip. */
+.navigation > a { border-color:transparent!important; }
+.menuLine { position:absolute; top:0; left:0; width:100%; height:1px; background:var(--nav-rule); transform-origin:right center; pointer-events:none; z-index:2; }
+.bottomLine { top:auto; bottom:0; }
+.navigation > a[aria-current='page'] .bottomLine { background:var(--nav-active-rule); }
+.navMotion { position:relative; display:block; height:99px; }
+@media(max-width:767px) {
+ .navMotion { height:auto; }
+ .bottomLine { display:none; }
+ .navigation > a:last-child .bottomLine { display:block; background:var(--nav-rule); }
+}

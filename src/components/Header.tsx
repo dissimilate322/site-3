@@ -76,11 +76,12 @@ export default function Header() {
   const { reduced, toggleMotion } = useSiteMotion();
   const pathname = usePathname();
   const [panel, setPanel] = useState<Panel>(null);
+  const [menuClosing, setMenuClosing] = useState(false);
   const [subject, setSubject] = useState("");
   function openContact(value = "") { if (closing.current) return; setSubject(value); setPanel("contact"); }
   useEffect(() => {
     const open = (event: Event) => openContact((event as CustomEvent<string>).detail || "");
-    const navigate = () => setPanel(null);
+    const navigate = () => { exitAnimation.current?.kill(); closing.current = false; setMenuClosing(false); setPanel(null); };
     window.addEventListener("site:contact", open);
     window.addEventListener("site:navigate", navigate);
     return () => {window.removeEventListener("site:contact", open);window.removeEventListener("site:navigate", navigate)};
@@ -114,9 +115,36 @@ export default function Header() {
         .to(element.querySelector("[data-contact-inner]"), { width: window.innerWidth < 768 ? 48 : 207, duration: 0.35 });
       if (!next) timeline.to(element, { opacity: 0, duration: 0.15 });
     } else {
-      // Move the whole panel from its current position. This also interrupts an
-      // unfinished entrance without resetting the links or hover transforms.
-      timeline.to(element, { x: window.innerWidth - element.getBoundingClientRect().left + Number(gsap.getProperty(element, "x")), opacity: 0, duration: 0.45, ease: "power2.inOut", overwrite: "auto" });
+      // Otherlife's published menu timeline: text and rules first, then an
+      // opaque panel. Desktop selectors include the hidden mobile nodes;
+      // retain their offsets without mounting a second inaccessible menu.
+      setMenuClosing(true);
+      const mobile = window.innerWidth < 768;
+      const links = element.querySelectorAll("[data-menu-link]");
+      const lines = Array.from(element.querySelectorAll<HTMLElement>("[data-menu-line]")).filter(e => e.getClientRects().length);
+      timeline.to(links, { yPercent: 100, duration: 0.5, stagger: mobile ? 0.03 : 0.04, ease: "power1.out" }, mobile ? 0 : 0.16)
+        .to(lines, { scaleX: 0, duration: 0.5, stagger: mobile ? 0.13 : 0.04, ease: "power1.out" }, mobile ? 0 : 0.2);
+      if (mobile) {
+        timeline.to(element.querySelector("[data-menu-logo]"), { opacity: 0, duration: 0.5, ease: "power1.out" }, 0)
+          .to(element.querySelector("[data-menu-contact]"), { opacity: 0, duration: 0.5, ease: "power1.out" }, 0.55);
+      }
+      let finished = false;
+      const finish = () => {
+        if (finished) return;
+        finished = true;
+        timeline.kill();
+        closing.current = false;
+        setMenuClosing(false);
+        setPanel(next);
+      };
+      timeline.to(element, { x: mobile ? window.innerWidth * 2 : window.innerWidth * 2 - 10, duration: mobile ? 1 : 2.5, ease: "power1.out" }, mobile ? 0.55 : 0.48);
+      timeline.eventCallback("onUpdate", () => {
+        element.dataset.menuExitTime = timeline.time().toFixed(4);
+        // The original keeps tweening outside the viewport; release the modal
+        // as soon as it is invisible so rapid reopen/focus never waits offscreen.
+        if (element.getBoundingClientRect().left >= window.innerWidth) finish();
+      });
+      timeline.eventCallback("onComplete", finish);
     }
   }
 
@@ -133,12 +161,13 @@ export default function Header() {
     const handleKey = (event: KeyboardEvent) => {
       if (event.key === "Escape") closePanel();
       if (event.key !== "Tab") return;
-      const focusable = Array.from(dialog.current?.querySelectorAll<HTMLElement>('a[href],button:not([disabled]),input:not([disabled])') ?? [])
-        .filter((element) => element.getClientRects().length > 0);
+      const focusable = [...Array.from(panel === "menu" ? root.current?.querySelectorAll<HTMLElement>("[data-menu-controls] button") ?? [] : []), ...Array.from(dialog.current?.querySelectorAll<HTMLElement>('a[href],button:not([disabled]),input:not([disabled])') ?? [])]
+        .filter((element) => element.getClientRects().length > 0 && !element.matches(":disabled"));
       if (!focusable?.length) return;
       const first = focusable[0], last = focusable[focusable.length - 1];
-      if (event.shiftKey && (document.activeElement === first || document.activeElement === dialog.current)) { event.preventDefault(); last.focus(); }
-      else if (!event.shiftKey && (document.activeElement === last || document.activeElement === dialog.current)) { event.preventDefault(); first.focus(); }
+      const outside = !focusable.includes(document.activeElement as HTMLElement);
+      if (event.shiftKey && (document.activeElement === first || outside)) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && (document.activeElement === last || outside)) { event.preventDefault(); first.focus(); }
     };
     document.addEventListener("keydown", handleKey);
     return () => {
@@ -153,6 +182,7 @@ export default function Header() {
   useLayoutEffect(() => {
     exitAnimation.current?.kill();
     closing.current = false;
+    setMenuClosing(false);
     const media = gsap.matchMedia();
     const ctx = gsap.context(() => {
       if (!reduced) {
@@ -185,32 +215,29 @@ export default function Header() {
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img src="/assets/meruem-logo.svg" width="974" height="325" alt="meruem" />
     </a>
-    {!panel && <div className={styles.controls}>
-      <button ref={menuButton} className={styles.menuButton} aria-label="Menu" aria-expanded={false} aria-controls="navigation-panel" onClick={() => setPanel("menu")}><Hamburger open={false}/></button>
-      <button className={styles.contactButton} onClick={() => openContact()}>Contact Us</button>
+    {panel !== "contact" && <div className={styles.controls} id="site-menu-controls" data-menu-controls>
+      <button ref={menuButton} className={styles.menuButton} aria-label={panel ? "Close menu" : "Menu"} aria-expanded={!!panel && !menuClosing} aria-controls="navigation-panel" disabled={menuClosing} onClick={() => panel ? closePanel() : setPanel("menu")}><Hamburger open={!!panel && !menuClosing}/></button>
+      <button className={styles.contactButton} disabled={menuClosing} onClick={() => openContact()}>Contact Us</button>
     </div>}
     {panel && <div
       ref={dialog}
       id="navigation-panel"
       role="dialog"
       aria-modal="true"
+      aria-owns={panel === "menu" ? "site-menu-controls" : undefined}
       aria-label={panel === "contact" ? "Contact us" : "Navigation"}
       tabIndex={-1}
       className={`${styles.panel} ${panel === "contact" ? styles.contactPanel : styles.menuPanel}`}
     >
       {panel === "menu" ? <>
-        <div className={`${styles.controls} ${styles.openControls}`}>
-          <button className={styles.menuButton} aria-label="Close menu" aria-expanded={true} onClick={() => closePanel()}><Hamburger open/></button>
-          <button className={styles.contactButton} onClick={() => openContact()}>Contact Us</button>
-        </div>
-        <div className={styles.mobileLogo} aria-hidden="true"><img src="/assets/meruem-logo.svg" width="100" height="34" alt=""/></div>
+        <div className={styles.mobileLogo} data-menu-logo aria-hidden="true"><img src="/assets/meruem-logo.svg" width="100" height="34" alt=""/></div>
         <nav className={styles.navigation} aria-label="Main navigation">
           {navigation.map(({ label, href }, index) => <a href={href} key={label} aria-current={pathname === href || (href === "/work" && pathname.startsWith("/work/")) ? "page" : undefined} onClick={pathname === href ? (event) => { event.preventDefault(); closePanel(); } : undefined}>
-            <span className={styles.navText} data-menu-link><span><small>0{index + 1}</small>{label}</span></span>
-            <span className={styles.navHover} aria-hidden="true"><span><small>0{index + 1}</small>{label}</span></span>
+            <span className={styles.menuLine} data-menu-line="top" aria-hidden="true"/><span className={styles.navMotion} data-menu-link><span className={styles.navText}><span><small>0{index + 1}</small>{label}</span></span>
+            <span className={styles.navHover} aria-hidden="true"><span><small>0{index + 1}</small>{label}</span></span></span><span className={`${styles.menuLine} ${styles.bottomLine}`} data-menu-line="bottom" aria-hidden="true"/>
           </a>)}
         </nav>
-        <button className={styles.mobileContact} onClick={() => openContact()}>Contact Us</button>
+        <button className={styles.mobileContact} data-menu-contact onClick={() => openContact()}>Contact Us</button>
         <div className={styles.menuBottom}><p>Unconventional Solutions</p><button className={styles.motionToggle} aria-pressed={reduced} onClick={toggleMotion}>Reduce motion</button><SocialLinks/></div>
       </> : <div className={styles.contactInner} data-contact-inner>
         <h2>Lets work together.</h2>

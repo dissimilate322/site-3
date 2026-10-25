@@ -77,14 +77,14 @@ async function noOverflow(page, label) {
       // Cycle beyond the number of controls in the panel, checking focus never escapes.
       for(let i=0;i<15;i++) {
         await page.keyboard.press('Tab');
-        assert(await menu.evaluate(el=>el.contains(document.activeElement)),`${width} menu focus escaped`);
+        assert(await menu.evaluate(el=>el.contains(document.activeElement) || (el.getAttribute("aria-owns")||"").split(" ").some(id=>document.getElementById(id)?.contains(document.activeElement))),`${width} menu focus escaped`);
       }
       await page.keyboard.press('Escape');
       await page.getByRole('dialog').waitFor({state:'detached'});
       assert.equal(await page.getByRole('dialog').count(),0);
       assert.equal(await page.locator('main').evaluate(el=>el.inert),false);
       await page.getByRole('button',{name:'Menu',exact:true}).click();await settle(page);
-      await page.getByRole('dialog').getByRole('button',{name:'Contact Us',exact:true}).filter({visible:true}).click();
+      await page.getByRole('button',{name:'Contact Us',exact:true}).filter({visible:true}).click();
       await settle(page);
       await page.waitForFunction(() => [...document.querySelectorAll('input')].every(e => getComputedStyle(e).opacity === '1'));
       const contact=page.getByRole('dialog',{name:'Contact us',exact:true});
