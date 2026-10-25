@@ -6,7 +6,7 @@ Reference: https://www.otherlife.xyz, inspected 25 October 2026.
 
 Implemented separate Home, Work, Company and Careers pages, six full local case-study pages, and a local Senior Designer vacancy page. All four menu entries and project/client links resolve on the current site. The contact panel is shared across pages; the job application button opens it with a role-prefilled subject. Social links remain unset until owner URLs are provided. No navigation, application or form submission goes to Otherlife, MoonPay or an external hiring service.
 
-Home includes four featured project panels, original video loops, studio description, showreel and eight client tiles. Company includes the introduction, two founders, five service groups, two office images, testimonial carousel and eight award entries. Careers includes the hiring introduction, perks, four-image gallery, vacancy and contact CTA. All 37 case-study pageBuilder blocks were implemented: media, image rows, media grids, outcomes, quotes, numbered process sections and press citations. Content is from the requested reference, not invented owner/team/job information.
+Home follows the supplied 60-second screen recording: phone/rocks opening film, studio introduction, four featured project planes, eight client tiles and closing film. Company includes the introduction, two founders, five service groups, two office images, testimonial carousel and eight award entries. Careers includes the hiring introduction, perks, four-image gallery, vacancy and contact CTA. All 37 case-study pageBuilder blocks were implemented: media, image rows, media grids, outcomes, quotes, numbered process sections and press citations. Content is from the requested reference, not invented owner/team/job information.
 
 ## Sources and browser inspection
 
@@ -16,9 +16,9 @@ The settled Work, Company and Careers pages are white; the initial original load
 
 ## Media and content
 
-The original six Work banners, wordmark, favicon and Aeonik 300/400/500 plus Tobias regular fonts remain in public/assets. All 122 additional referenced media assets were downloaded locally into public/media. src/data/content.json contains normalized page/section data; content.ts supplies types. Source URLs are retained in media-sources.json and projects.ts. There are no hotlinked display assets.
+The original six Work banners, wordmark, favicon and Aeonik 300/400/500 plus Tobias regular fonts remain in public/assets. All 126 additional referenced media assets were downloaded locally into public/media. src/data/content.json contains normalized page/section data; content.ts supplies types. Source URLs are retained in media-sources.json and projects.ts. There are no hotlinked display assets.
 
-Images were limited to 1920px and encoded as WebP; Next Image serves responsive variants. Video was transcoded to H.264 MP4 at up to 1280px wide. These optimizations preserve the source content while introducing compression/resizing differences. All referenced assets were found and locally verified; no unrelated stock imagery was substituted.
+Images were limited to 1920px and encoded as WebP; Next Image serves responsive variants. Video was transcoded to H.264 MP4 at up to 1280px wide, with the desktop opening film retained at 1920px. These optimizations preserve the source content while introducing compression/resizing differences. All referenced assets were found and locally verified; no unrelated stock imagery was substituted.
 
 ## Work geometry
 
@@ -37,9 +37,9 @@ Work uses 16:9 images, 8px corners, desktop/mobile row gaps of 80/60px and 200px
 
 ## Motion, interactions and remaining differences
 
-GSAP handles page/section entrances, reveal timing, service-image scroll masks, menu/contact expansion and exits. Testimonials support previous/next buttons, dots and visibility-aware autoplay. Related-work entries have desktop hover previews. Local video has playback controls; hero loops play only while visible, and reduced motion prevents automatic playback. Timelines, observers, event listeners and timers are cleaned up on unmount.
+GSAP handles page/section entrances, reveal timing, service-image scroll masks, menu/contact expansion and exits. Testimonials support previous/next buttons, dots and visibility-aware autoplay. Related-work entries have desktop hover previews. Every film automatically plays muted and loops while visible, with Pause/Play controls; hidden tabs and offscreen media pause. Reduced motion prevents automatic playback. Timelines, observers, event listeners and timers are cleaned up on unmount.
 
-The original WebGL loader, portal distortion, custom scroll/cursor engine, pinned homepage transitions and bespoke video UI were not ported exactly. This implementation uses the published DOM fallback's section sequence, native scrolling, GSAP reveals and accessible standard video controls. New-page typography, spacing and content follow available source measurements; no pixel-perfect claim is made for the full site. Press citations and awards are displayed without external article/profile links.
+The supplied screen recording was inspected as timestamped frames. Its first screen was corrected to the published phone/rocks film in desktop and portrait formats. Home now uses word-by-word blur reveals, perspective client-card flips, a following circular View Case cursor and a pinned, reversible project sequence driven by native scrolling. Navigation captures the visible page (including the current video frame), shrinks and turns it over the grey Otherlife wordmark, then expands the destination. Browser Back, local menu links and reduced-motion changes are supported. These transformations reproduce the observed movement using DOM/GSAP; the original WebGL geometry, live 3D lighting/camera response and shader distortion are not identical. The hero uses the original rendered fallback film instead of running the original 3D scene. New-page typography, spacing and content follow available source measurements; no pixel-perfect claim is made for the full site. Press citations and awards are displayed without external article/profile links.
 
 Contact and application forms are explicitly local previews: /api/contact validates required fields but never sends or stores enquiries. The vacancy page uses the description available on the original Careers page rather than an externally hosted ATS application system.
 
@@ -48,3 +48,5 @@ Contact and application forms are explicitly local previews: /api/contact valida
 npm run build and npm run typecheck pass. npm run test:pages covers all 11 routes at 1440px and 390px, loaded images, zero external anchors, local menus, horizontal overflow, testimonial controls, application prefilling/submission, hero/back/logo navigation and video metadata. Home/Company/Careers are also checked at 1920, 1024, 768 and 375px. npm run test:ui covers the existing Work interactions and six requested viewports. The standalone ZIP was extracted into a separate directory and tested directly without source dependencies or a build step.
 
 Build a Wispbyte archive with npm run package:wispbyte. Use Node.js 24, startup index.js and the allocated PORT (or SERVER_PORT). All page code, runtime dependencies, static chunks, images, video and fonts are bundled. Source code and the downloadable archive are maintained in the corresponding GitHub branches.
+
+The motion regression suite (`npm run test:motion`) checks the first film and automatic playback, all four pinned project states, case/menu/back/logo transitions, released body/focus locks, live reduced-motion changes, and automatic case-video playback at desktop and mobile sizes.

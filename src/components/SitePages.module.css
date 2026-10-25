@@ -80,12 +80,17 @@
 .heroScrim { position:absolute; inset:0; pointer-events:none; background:linear-gradient(0deg,rgba(0,0,0,.78),transparent 70%); }
 .featuredContent { position:absolute; bottom:60px; left:23px; right:23px; z-index:2; }
 .projectIdentity { margin-bottom:30px; }
-.projectIdentity img { max-width:230px; width:auto; max-height:85px; height:auto; filter:brightness(0) invert(1); object-fit:contain; }
+.projectIdentity img { max-width:230px; width:auto; max-height:85px; height:auto; object-fit:contain; }
 .projectIdentity h2 { font-size:52px; font-weight:400; margin:0; }
 .featuredDescription { display:none; }
 .caseButton { display:inline-flex; align-items:center; gap:24px; border:1px solid white; border-radius:10px; color:white; padding:17px 45px; font-size:12px; text-transform:uppercase; transition:background .2s,color .2s; }
 .caseButton:hover { background:white; color:#3c3c3c; }
 .homeAbout { padding-top:100px; padding-bottom:40px; text-align:center; }
+.aboutLine { display:block; }
+.featuredProjects { position:relative; margin-top:80px; }
+.featuredProject { overflow:hidden; }
+.projectHitArea { position:absolute; inset:0; z-index:1; }
+.homeAbout [data-word],.clients [data-word] { display:inline-block; }
 .homeAbout h1 { color:#3c3c3c; font-size:30px; line-height:140%; font-weight:400; letter-spacing:-1.2px; margin:0; }
 .homeAbout em,.clients em { font-family:Tobias,Georgia,serif; font-weight:400; }
 .homeAbout .outlineButton { margin:62px auto 0; }
@@ -182,6 +187,7 @@
  .outlineButton { padding:29px 53px; }
  .featuredContent { left:50px; right:50px; }
  .homeAbout { padding-top:200px; }
+ .featuredProjects { margin-top:150px; }
  .homeAbout h1 { font-size:65px; line-height:68.68px; letter-spacing:-1.968px; }
  .desktopBreak { display:block; }
  .clients { padding-top:260px; padding-bottom:260px; }

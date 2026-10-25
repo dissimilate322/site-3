@@ -78,8 +78,10 @@ export default function Header() {
   function openContact(value = "") { setSubject(value); setPanel("contact"); }
   useEffect(() => {
     const open = (event: Event) => openContact((event as CustomEvent<string>).detail || "");
+    const navigate = () => setPanel(null);
     window.addEventListener("site:contact", open);
-    return () => window.removeEventListener("site:contact", open);
+    window.addEventListener("site:navigate", navigate);
+    return () => {window.removeEventListener("site:contact", open);window.removeEventListener("site:navigate", navigate)};
   }, []);
   const root = useRef<HTMLElement>(null);
   const dialog = useRef<HTMLDivElement>(null);
