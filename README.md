@@ -34,3 +34,7 @@ submission. Otherlife's form endpoint is never called.
 
 See [REFERENCE.md](REFERENCE.md) for inspection, measurements, source-assisted
 screenshot methodology, and remaining animation differences.
+
+Navigation is configured in `src/data/site.ts`. Only implemented local pages are
+listed; social links are hidden until owner URLs are supplied. Project cards open
+local `/work/[slug]` overview pages. These are summaries, not full original cases.

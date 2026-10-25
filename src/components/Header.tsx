@@ -2,28 +2,30 @@
 
 import { useEffect, useLayoutEffect, useRef, useState, type FormEvent } from "react";
 import { gsap } from "gsap";
+import { usePathname } from "next/navigation";
+import { navigation, socialLinks } from "../data/site";
 import styles from "./Header.module.css";
 
 type Panel = "menu" | "contact" | null;
 
-const navigation = [
-  { label: "Home", href: "https://www.otherlife.xyz/" },
-  { label: "Work", href: "/work" },
-  { label: "Company", href: "https://www.otherlife.xyz/company" },
-  { label: "Careers", href: "https://www.otherlife.xyz/careers" },
-];
-
 function SocialLinks() {
+  if (!Object.values(socialLinks).some(Boolean)) return null;
   return <div className={styles.socials}>
-    <a href="https://www.instagram.com/otherlife.xyz" aria-label="Instagram" target="_blank" rel="noreferrer">
+    {socialLinks.instagram && <>
+    <a href={socialLinks.instagram} aria-label="Instagram" target="_blank" rel="noreferrer">
       <svg width="27" height="26" viewBox="0 0 27 26" fill="none" aria-hidden="true"><rect x="2" y="2" width="22" height="22" rx="6" stroke="currentColor" strokeWidth="2.3"/><circle cx="13" cy="13" r="5" stroke="currentColor" strokeWidth="2.3"/><circle cx="20" cy="6.5" r="1.5" fill="currentColor"/></svg>
     </a>
-    <a href="https://x.com/otherlifexyz" aria-label="X" target="_blank" rel="noreferrer">
+    </>}
+    {socialLinks.x && <>
+    <a href={socialLinks.x} aria-label="X" target="_blank" rel="noreferrer">
       <svg width="26" height="25" viewBox="0 0 26 25" fill="none" aria-hidden="true"><path d="M2 1.5h5.5L24 23.5h-5.5L2 1.5Z" stroke="currentColor" strokeWidth="1.5"/><path d="m23 1.5-21 22" stroke="currentColor" strokeWidth="1.5"/></svg>
     </a>
-    <a href="https://www.linkedin.com/company/otherlife/" aria-label="LinkedIn" target="_blank" rel="noreferrer">
+    </>}
+    {socialLinks.linkedin && <>
+    <a href={socialLinks.linkedin} aria-label="LinkedIn" target="_blank" rel="noreferrer">
       <svg width="24" height="25" viewBox="0 0 24 25" fill="currentColor" aria-hidden="true"><circle cx="3" cy="3" r="3"/><path d="M.5 8H5v16H.5zM9 8h4.5v2.2C15 7 23.5 6 23.5 14v10H19V14c0-4-5.5-4-5.5 0v10H9z"/></svg>
     </a>
+    </>}
   </div>;
 }
 
@@ -60,7 +62,7 @@ function ContactForm() {
       <input name={name} placeholder={placeholder} autoComplete={autoComplete} type={type ?? "text"} required={name === "name" || name === "email" || name === "description"} maxLength={2000} />
     </label>)}
     <div className={styles.formBottom}>
-      <p>By submitting, you acknowledge that your information will be processed in accordance with our <a href="https://www.moonpay.com/legal/privacy_policy" target="_blank" rel="noreferrer">Privacy Policy</a></p>
+      <p>This form is a local preview. Enquiries are not sent or stored.</p>
       <button type="submit" disabled={status === "pending"}>{status === "pending" ? "Sending…" : "Send"}</button>
     </div>
     <p className={styles.formStatus} role="status" aria-live="polite">
@@ -70,6 +72,7 @@ function ContactForm() {
 }
 
 export default function Header() {
+  const pathname = usePathname();
   const [panel, setPanel] = useState<Panel>(null);
   const root = useRef<HTMLElement>(null);
   const dialog = useRef<HTMLDivElement>(null);
@@ -160,7 +163,7 @@ export default function Header() {
   }, [panel]);
 
   return <header ref={root} className={styles.header}>
-    <a href="https://www.otherlife.xyz/" className={styles.logo} aria-label="Otherlife home">
+    <a href="/" className={styles.logo} aria-label="Otherlife home">
       {/* Original wordmark is a locally stored SVG, including the MoonPay signature. */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img src="/assets/otherlife-logo.svg" width="974" height="325" alt="Otherlife — a MoonPay Company" />
@@ -185,7 +188,7 @@ export default function Header() {
         </div>
         <div className={styles.mobileLogo} aria-hidden="true"><img src="/assets/otherlife-logo.svg" width="100" height="34" alt=""/></div>
         <nav className={styles.navigation} aria-label="Main navigation">
-          {navigation.map(({ label, href }, index) => <a href={href} key={label} aria-current={label === "Work" ? "page" : undefined} onClick={label === "Work" ? (event) => { event.preventDefault(); closePanel(); } : undefined}>
+          {navigation.map(({ label, href }, index) => <a href={href} key={label} aria-current={pathname === href || (href === "/work" && pathname.startsWith("/work/")) ? "page" : undefined} onClick={pathname === href ? (event) => { event.preventDefault(); closePanel(); } : undefined}>
             <span className={styles.navText} data-menu-link><span><small>0{index + 1}</small>{label}</span></span>
             <span className={styles.navHover} aria-hidden="true"><span><small>0{index + 1}</small>{label}</span></span>
           </a>)}
