@@ -1,6 +1,6 @@
 """Download reference content/media locally; retain source URLs in the asset manifest."""
 from pathlib import Path
-import json, hashlib, subprocess, concurrent.futures, re
+import json, hashlib, subprocess, concurrent.futures, re, sys
 from PIL import Image
 ROOT=Path(__file__).resolve().parents[1]
 DEST=ROOT/'public/media';DEST.mkdir(exist_ok=True)
@@ -38,7 +38,6 @@ careers={k:r[k] for k in ['hiringLabel','hiringTitle','hiringDescription','perks
 careers['image']=media(r['hiringImage']);careers['gallery']=[media(m) for m in r['gallery']]
 careers['jobs']=[{'slug':re.sub('[^a-z0-9]+','-',j['title'].lower()).strip('-'),'title':j['title'],'description':j['description']} for j in r['jobOpenings']]
 home={'projects':[{'slug':p['slug'],'title':p['title'],'description':p['projectText'],'services':p['servicesText'],'image':media(p['homepageBannerImage']),'mobileImage':media(p['homepageBannerImageMobile']),'video':media(p['homepageBannerVideo']),'logo':media(p['logo'])} for p in h['featuredCaseStudies']], 'clients':[{'name':x['name'],'href':x['url'] if (x.get('url') or '').startswith('/work/') else None,'image':media(x['logo']),'hover':media(x.get('logoHover')),'background':media(x.get('logoHoverBackground'))} for x in h['featuredClients']]}
-home['showreel']=media({'url':'https://www.otherlife.xyz/assets/webgl/showreel/showreel.webm'})
 cases=[]
 for p in sorted(CACHE.glob('work-*.json')):
  d=json.loads(p.read_text())['props']['pageProps']['caseStudy']
@@ -62,15 +61,20 @@ content={'home':home,'company':company,'careers':careers,'cases':cases}
 for orientation in ['landscape','portrait']:
  for ext in ['mp4','jpg']:
   name='hero-'+orientation+'.'+ext
-  assets['https://www.otherlife.xyz/assets/videos/'+name]={'file':name,'kind':'video' if ext=='mp4' else 'image','maxWidth':1920 if orientation=='landscape' else 720,'crf':'23' if orientation=='landscape' else '24'}
+  assets['https://www.otherlife.xyz/assets/videos/'+name]={'file':name,'kind':'video' if ext=='mp4' else 'image'}
 print('Assets:',len(assets),'videos:',sum(a['kind']=='video' for a in assets.values()),flush=True)
 def download(item):
  url,info=item;dest=DEST/info['file']
- if dest.exists():return
+ if dest.exists() and not (info['kind']=='video' and '--refresh-videos' in sys.argv):return
  temp=Path('/tmp/otherlife-download-'+info['file'])
  subprocess.run(['curl','-fLs','--retry','2','--max-time','180',url,'-o',str(temp)],check=True)
  if info['kind']=='video':
-  subprocess.run(['ffmpeg','-v','error','-y','-threads','1','-i',str(temp),'-vf',"scale='min("+str(info.get('maxWidth',1280))+",iw)':-2",'-r','30','-c:v','libx264','-threads','1','-preset','fast','-crf',info.get('crf','28'),'-c:a','aac','-b:a','96k','-movflags','+faststart',str(dest)],check=True)
+  subprocess.run(['ffmpeg','-v','error','-y','-threads','1','-i',str(temp),'-vf',"scale='min(1920,iw)':'min(1920,ih)':force_original_aspect_ratio=decrease:force_divisible_by=2",'-c:v','libx264','-threads','2','-preset','slow','-crf','18','-pix_fmt','yuv420p','-profile:v','high','-c:a','aac','-b:a','160k','-movflags','+faststart',str(dest)],check=True)
+  native=json.loads(subprocess.check_output(['ffprobe','-v','error','-select_streams','v:0','-show_entries','stream=codec_name,pix_fmt,width,height','-of','json',str(temp)]))['streams'][0]
+  if native['codec_name']=='h264' and native.get('pix_fmt')=='yuv420p' and max(native['width'],native['height'])<=1920 and temp.stat().st_size<dest.stat().st_size:
+   remux=dest.with_suffix('.remux.mp4')
+   subprocess.run(['ffmpeg','-v','error','-y','-i',str(temp),'-map','0:v:0','-map','0:a?','-c','copy','-movflags','+faststart',str(remux)],check=True)
+   remux.replace(dest)
  elif dest.suffix=='.webp':
   with Image.open(temp) as im:
    im.thumbnail((1920,1920));im.save(dest,'WEBP',quality=90,method=4)

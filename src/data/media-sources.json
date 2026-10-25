@@ -61,7 +61,16 @@
   },
   "https://incredible-wonder-2edce76da7.media.strapiapp.com/19c3de8851532bd92d35fdd0dd2baa62ad5333c3_5dc01e4599.mp4": {
     "file": "33713189abb2ad849cf0.mp4",
-    "kind": "video"
+    "kind": "video",
+    "encoding": {
+      "resolution": [
+        1920,
+        1080
+      ],
+      "frameRate": "30/1",
+      "quality": "original lossless remux",
+      "bytes": 6391462
+    }
   },
   "https://incredible-wonder-2edce76da7.media.strapiapp.com/f42eca5b957db265c9ef5de410f9f24fdeaec750_717x143_06c0d6f56c.svg": {
     "file": "10313c64f923c7981c0d.svg",
@@ -77,7 +86,16 @@
   },
   "https://incredible-wonder-2edce76da7.media.strapiapp.com/32ef19946ec48d83e8b3337d52ae0376af14c67b_fb0cb2ec53.mp4": {
     "file": "1d05780bab7e95844286.mp4",
-    "kind": "video"
+    "kind": "video",
+    "encoding": {
+      "resolution": [
+        1920,
+        1080
+      ],
+      "frameRate": "30/1",
+      "quality": "H.264 CRF 18 / slow",
+      "bytes": 4558725
+    }
   },
   "https://incredible-wonder-2edce76da7.media.strapiapp.com/54637cfff7eb76093bf4d9a80a7523c2b3f0b231_889x140_e2e13bd6aa.svg": {
     "file": "f8450a38b442d31037dc.svg",
@@ -93,7 +111,16 @@
   },
   "https://incredible-wonder-2edce76da7.media.strapiapp.com/3c41f1a4f2a2048e2d660ee5316258ec28ab0e6b_7ce6e01a23.mp4": {
     "file": "6ee5b3b516555a926e63.mp4",
-    "kind": "video"
+    "kind": "video",
+    "encoding": {
+      "resolution": [
+        1920,
+        1080
+      ],
+      "frameRate": "30/1",
+      "quality": "H.264 CRF 18 / slow",
+      "bytes": 6962525
+    }
   },
   "https://incredible-wonder-2edce76da7.media.strapiapp.com/876476accce453dd2abd3342d71961a6c6a97a37_147x42_4f9e037f17.svg": {
     "file": "5873a422206caf3c3a42.svg",
@@ -109,7 +136,16 @@
   },
   "https://incredible-wonder-2edce76da7.media.strapiapp.com/04c7b1e20875f4d864c3e95759d69833070256b0_f0c2a71202.mp4": {
     "file": "c93c9f460fbd3e45202d.mp4",
-    "kind": "video"
+    "kind": "video",
+    "encoding": {
+      "resolution": [
+        1920,
+        1080
+      ],
+      "frameRate": "30/1",
+      "quality": "H.264 CRF 18 / slow",
+      "bytes": 4022844
+    }
   },
   "https://incredible-wonder-2edce76da7.media.strapiapp.com/291e623b35fbde66e00358920e31469a13c70ab7_388x51_c81a11ab1f.svg": {
     "file": "99dca115582397bc1478.svg",
@@ -211,10 +247,6 @@
     "file": "60c99003373ae8a7be6f.webp",
     "kind": "image"
   },
-  "https://www.otherlife.xyz/assets/webgl/showreel/showreel.webm": {
-    "file": "e1a61b01ec7535eb95d1.mp4",
-    "kind": "video"
-  },
   "https://incredible-wonder-2edce76da7.media.strapiapp.com/a994b444067bac382f521881a85afebc7f236f5f_79c3d8d7c6.pdf": {
     "file": "3290e3dea4448d348393.pdf",
     "kind": "file"
@@ -269,7 +301,16 @@
   },
   "https://incredible-wonder-2edce76da7.media.strapiapp.com/411c0c64457f286bf7e51b17a89a57a81c1375bb_bff33c4d4e.mp4": {
     "file": "538b7d941e5bb584709f.mp4",
-    "kind": "video"
+    "kind": "video",
+    "encoding": {
+      "resolution": [
+        1200,
+        1200
+      ],
+      "frameRate": "30/1",
+      "quality": "H.264 CRF 18 / slow",
+      "bytes": 175835
+    }
   },
   "https://incredible-wonder-2edce76da7.media.strapiapp.com/bd53881f4a2799a0bc2072d62b163e988dc478f6_1320x1320_126b019028.jpeg": {
     "file": "a344cb1b5131cc948928.webp",
@@ -277,7 +318,16 @@
   },
   "https://incredible-wonder-2edce76da7.media.strapiapp.com/126cf2425103f26fc39386198ba9a5754ffdd301_61bc8924ec.mp4": {
     "file": "15d221ae6f60dcb0ef81.mp4",
-    "kind": "video"
+    "kind": "video",
+    "encoding": {
+      "resolution": [
+        1200,
+        1200
+      ],
+      "frameRate": "30/1",
+      "quality": "H.264 CRF 18 / slow",
+      "bytes": 555373
+    }
   },
   "https://incredible-wonder-2edce76da7.media.strapiapp.com/b3fa8d70cb75615d799c4c3b96317ef2e7a3da57_660x660_928b29b03a.jpeg": {
     "file": "8822485d83a1f0b0bf62.webp",
@@ -365,7 +415,16 @@
   },
   "https://incredible-wonder-2edce76da7.media.strapiapp.com/f1a93b8802d64616dab84dc307156859a2e1e897_ec4271e5c4.mp4": {
     "file": "9de287f13de8a7efbff0.mp4",
-    "kind": "video"
+    "kind": "video",
+    "encoding": {
+      "resolution": [
+        1920,
+        1080
+      ],
+      "frameRate": "30/1",
+      "quality": "H.264 CRF 18 / slow",
+      "bytes": 1375071
+    }
   },
   "https://incredible-wonder-2edce76da7.media.strapiapp.com/fcdd9f0ccb3f3e4ad4fe3ad930581561ac584ee3_1875x1875_ab50ee91e0.jpeg": {
     "file": "7ff6f22fe07d1ba33816.webp",
@@ -457,7 +516,16 @@
   },
   "https://incredible-wonder-2edce76da7.media.strapiapp.com/bf7de3cef6aafc8c7457e7675a4133dbedd46e67_33baff285e.mp4": {
     "file": "c190c49251f08f9108e3.mp4",
-    "kind": "video"
+    "kind": "video",
+    "encoding": {
+      "resolution": [
+        1280,
+        720
+      ],
+      "frameRate": "30/1",
+      "quality": "H.264 CRF 18 / slow",
+      "bytes": 3414189
+    }
   },
   "https://incredible-wonder-2edce76da7.media.strapiapp.com/205c61449aabfa990170b86882e1fa17e7258f0d_101x101_67187174d3.png": {
     "file": "58711901e5b7c6386db2.webp",
@@ -489,7 +557,16 @@
   },
   "https://www.otherlife.xyz/assets/videos/hero-landscape.mp4": {
     "file": "hero-landscape.mp4",
-    "kind": "video"
+    "kind": "video",
+    "encoding": {
+      "resolution": [
+        1920,
+        1080
+      ],
+      "frameRate": "60/1",
+      "quality": "H.264 CRF 18 / slow",
+      "bytes": 11143427
+    }
   },
   "https://www.otherlife.xyz/assets/videos/hero-landscape.jpg": {
     "file": "hero-landscape.jpg",
@@ -497,7 +574,16 @@
   },
   "https://www.otherlife.xyz/assets/videos/hero-portrait.mp4": {
     "file": "hero-portrait.mp4",
-    "kind": "video"
+    "kind": "video",
+    "encoding": {
+      "resolution": [
+        1080,
+        1920
+      ],
+      "frameRate": "60/1",
+      "quality": "H.264 CRF 18 / slow",
+      "bytes": 12245821
+    }
   },
   "https://www.otherlife.xyz/assets/videos/hero-portrait.jpg": {
     "file": "hero-portrait.jpg",

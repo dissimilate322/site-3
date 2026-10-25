@@ -13,10 +13,11 @@ async function assertWhitePixel(page,png,x,y){
 (async()=>{
  const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||'/usr/bin/chromium',args:['--no-sandbox']});
  try{
-  for(const [width,height] of [[1920,936],[1440,900],[390,844]]){
-   const p=await browser.newPage({viewport:{width,height}});const errors=[];p.on('pageerror',e=>errors.push(e.message));
+  for(const [width,height,preference] of [[1920,936,'reduce'],[1440,900,'no-preference'],[390,844,'reduce']]){
+   const p=await browser.newPage({viewport:{width,height},reducedMotion:preference});const errors=[];p.on('pageerror',e=>errors.push(e.message));
    await p.goto(base+'/',{waitUntil:'networkidle'});
-   const idle=()=>p.waitForFunction(()=>document.querySelector('[data-page-transition]').dataset.state==='idle');await idle();
+   const idle=()=>p.waitForFunction(()=>document.documentElement.dataset.motionReady==='true'&&document.querySelector('[data-page-transition]').dataset.state==='idle');await idle();
+   assert.equal(await p.locator('html').getAttribute('data-motion'),'full','animations default on even when the OS requests reduced motion');
    const hero=p.locator('[data-home-film] video:visible');assert.equal(await hero.count(),1);
    assert((await hero.getAttribute('poster')).includes(width<768?'hero-portrait':'hero-landscape'));
    await p.waitForFunction(()=>[...document.querySelectorAll('[data-home-film] video')].some(v=>v.clientWidth>0&&!v.paused&&v.currentTime>0));
@@ -25,9 +26,12 @@ async function assertWhitePixel(page,png,x,y){
    assert(await p.locator('video').evaluateAll(vs=>vs.every(v=>v.muted&&v.loop&&v.playsInline&&!v.controls)),'all films are inline muted loops without controls');
    await p.screenshot({path:path.join(out,'home-'+width+'.png')});
    const tracks=await p.locator('[data-project-track]').evaluateAll(es=>es.map(e=>e.getBoundingClientRect().top+scrollY));
+   await p.evaluate(y=>scrollTo(0,y),tracks[0]-height*.5);await p.waitForTimeout(300);
+   const enteringTransform=await p.locator('[data-featured-project]').first().evaluate(e=>e.style.transform);
    for(let index=0;index<tracks.length;index++){
     await p.evaluate(y=>scrollTo(0,y),tracks[index]+height*.5);await p.waitForTimeout(400);
     const panel=p.locator('[data-featured-project]').nth(index);const rect=await panel.boundingBox();assert(Math.abs(rect.y)<2&&Math.abs(rect.height-height)<2,'project holds at full screen');
+    if(index===0)assert.notEqual(await panel.evaluate(e=>e.style.transform),enteringTransform,'scroll actually changes the plane transform');
     await p.waitForFunction(i=>{const v=document.querySelectorAll('[data-featured-project]')[i].querySelector('video');return !v.paused&&v.currentTime>0},index);
     assert(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'no horizontal overflow');
     if(index===1)await p.screenshot({path:path.join(out,'project-'+width+'.png')});
@@ -53,10 +57,20 @@ async function assertWhitePixel(page,png,x,y){
    await p.goBack();await p.waitForFunction(()=>document.querySelector('[data-page-scene] h1')?.textContent==='Artist Accelerator');await idle();assert(p.url().includes('/work/artist-accelerator'));
    await p.getByRole('link',{name:'Otherlife home'}).click();await p.waitForFunction(()=>document.querySelector('[data-page-transition]').dataset.state==='leaving');await p.emulateMedia({reducedMotion:'reduce'});await p.waitForURL(base+'/');await idle();
    await p.waitForFunction(()=>[...document.querySelectorAll('[data-home-film] video')].some(v=>v.clientWidth>0&&!v.paused));
+   assert.equal(await p.locator('html').getAttribute('data-motion'),'full','OS changes do not silently disable the selected animation mode');
+   assert(await p.locator('[data-featured-project]').first().evaluate(e=>getComputedStyle(e).transform!=='none'));
+   await p.getByRole('button',{name:'Menu',exact:true}).click();await p.getByRole('button',{name:'Reduce motion',exact:true}).click();
+   assert.equal(await p.getByRole('button',{name:'Reduce motion',exact:true}).getAttribute('aria-pressed'),'true');
+   assert.equal(await p.evaluate(()=>document.body.style.overflow),'hidden','motion switch preserves menu scroll lock');
+   await p.keyboard.press('Escape');await p.getByRole('dialog').waitFor({state:'detached'});
    assert(await p.locator('[data-featured-project]').evaluateAll(es=>es.every(e=>getComputedStyle(e).transform==='none'&&!e.inert)),'reduced motion removes project transforms while preserving access and autoplay');
    assert.equal(await p.locator('main button').count(),0,'film buttons also absent with reduced motion');
    await p.getByRole('button',{name:'Menu',exact:true}).click();await p.getByRole('link',{name:/Work/}).click();await p.waitForURL('**/work');await idle();assert.equal(await p.locator('[data-page-scene]').evaluate(e=>e.inert),false);
-   assert.deepEqual(errors,[]);report.checks.push({width,height,autoplay:true,projectPlanes:4,transitions:'case/menu/back/logo',reducedMotion:true,passed:true});
+   await p.reload({waitUntil:'networkidle'});await idle();assert.equal(await p.locator('html').getAttribute('data-motion'),'reduced','explicit preference persists after reload');
+   await p.getByRole('button',{name:'Menu',exact:true}).click();await p.getByRole('button',{name:'Reduce motion',exact:true}).click();await p.keyboard.press('Escape');await p.getByRole('dialog').waitFor({state:'detached'});
+   assert.equal(await p.locator('html').getAttribute('data-motion'),'full','animations can be restored without changing the OS');
+   await p.getByRole('link',{name:'Otherlife home'}).click();await p.waitForFunction(()=>document.querySelector('[data-page-transition]').dataset.state==='leaving');await p.waitForURL(base+'/');await idle();
+   assert.deepEqual(errors,[]);report.checks.push({width,height,osMotion:preference,defaultMotion:'full',autoplay:true,projectPlanes:4,transitions:'case/menu/back/logo',explicitReducedMotion:true,persistentMotionSetting:true,passed:true});
    console.log('PASS scroll, white gaps and autoplay',width,height);await p.close();
   }
   for(const width of [1440,390]){

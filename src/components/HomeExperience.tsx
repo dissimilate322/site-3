@@ -4,18 +4,20 @@ import {useLayoutEffect, useRef, type ReactNode} from 'react';
 import {gsap} from 'gsap';
 import {ScrollTrigger} from 'gsap/ScrollTrigger';
 import Media from './Media';
+import {useSiteMotion} from './MotionSettings';
 import styles from './HomeExperience.module.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
 /** The film, introduction and four scroll-driven project planes in the recording. */
 export default function HomeExperience({children}:{children:ReactNode}) {
+ const {reduced}=useSiteMotion();
  const root=useRef<HTMLDivElement>(null);
  const cursor=useRef<HTMLSpanElement>(null);
  useLayoutEffect(()=>{
   const media=gsap.matchMedia();
   const context=gsap.context(()=>{
-   media.add('(prefers-reduced-motion: no-preference)',()=>{
+   if(!reduced){
     const hero=root.current!.querySelector<HTMLElement>('[data-home-film]')!;
     gsap.fromTo(hero,{clipPath:'inset(0px 0px round 0px)'},{clipPath:()=>`inset(0 ${innerWidth<1024?15:42}px round 8px)`,ease:'none',scrollTrigger:{trigger:hero,start:'top top',end:'bottom 60%',scrub:true,invalidateOnRefresh:true}});
 
@@ -44,8 +46,8 @@ export default function HomeExperience({children}:{children:ReactNode}) {
     });
     const clientCards=root.current!.querySelectorAll<HTMLElement>('[data-client-card]');
     gsap.from(clientCards,{opacity:0,rotationZ:20,rotationX:-95,transformPerspective:1000,transformOrigin:'50% 50%',duration:1.75,stagger:.1,ease:'power2.out',scrollTrigger:{trigger:'[data-client-grid]',start:'top 90%',toggleActions:'play none none reverse'}});
-   });
-   media.add('(prefers-reduced-motion: no-preference) and (hover: hover) and (pointer: fine)',()=>{
+   }
+   if(!reduced)media.add('(hover: hover) and (pointer: fine)',()=>{
     const x=gsap.quickTo(cursor.current,'x',{duration:.22,ease:'power2.out'});
     const y=gsap.quickTo(cursor.current,'y',{duration:.22,ease:'power2.out'});
     root.current!.dataset.cursor='true';
@@ -63,11 +65,11 @@ export default function HomeExperience({children}:{children:ReactNode}) {
   document.fonts.ready.then(refresh);
   window.addEventListener('load',refresh);
   return()=>{window.removeEventListener('load',refresh);media.revert();context.revert()};
- },[]);
+ },[reduced]);
  return <div ref={root} className={styles.experience}>
   <section className={styles.hero} aria-label="Otherlife studio film" data-home-film>
    <div className={styles.landscape}><Media priority asset={{src:'/media/hero-landscape.mp4',kind:'video',width:1920,height:1080,alt:'Otherlife studio film: a phone among floating rocks'}} poster={{src:'/media/hero-landscape.jpg',kind:'image',width:1920,height:1080,alt:''}} className={styles.film}/></div>
-   <div className={styles.portrait}><Media priority asset={{src:'/media/hero-portrait.mp4',kind:'video',width:720,height:1280,alt:'Otherlife studio film: a phone among floating rocks'}} poster={{src:'/media/hero-portrait.jpg',kind:'image',width:720,height:1280,alt:''}} className={styles.film}/></div>
+   <div className={styles.portrait}><Media priority asset={{src:'/media/hero-portrait.mp4',kind:'video',width:1080,height:1920,alt:'Otherlife studio film: a phone among floating rocks'}} poster={{src:'/media/hero-portrait.jpg',kind:'image',width:720,height:1280,alt:''}} className={styles.film}/></div>
   </section>
   {children}
   <span ref={cursor} className={styles.cursor} aria-hidden="true">View case</span>

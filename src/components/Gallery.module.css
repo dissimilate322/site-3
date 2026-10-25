@@ -201,9 +201,5 @@
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .image,
-  .row {
-    transition: none;
-  }
-}
+:global(html[data-motion='reduced']) .image,
+:global(html[data-motion='reduced']) .row { transition:none; }

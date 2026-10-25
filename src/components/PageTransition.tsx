@@ -4,6 +4,7 @@ import {useEffect,useLayoutEffect,useRef,type ReactNode} from 'react';
 import {usePathname,useRouter} from 'next/navigation';
 import {gsap} from 'gsap';
 import styles from './PageTransition.module.css';
+import {useSiteMotion} from './MotionSettings';
 
 /** Freeze only the visible page while its plane turns over the grey wordmark. */
 function snapshot(source:HTMLElement,host:HTMLElement){
@@ -39,16 +40,19 @@ function snapshot(source:HTMLElement,host:HTMLElement){
 }
 
 export default function PageTransition({children}:{children:ReactNode}){
+ const {reduced}=useSiteMotion();const reducedRef=useRef(reduced);reducedRef.current=reduced;
+ const lastPath=useRef<string|null>(null);
  const pathname=usePathname();const router=useRouter();
  const scene=useRef<HTMLDivElement>(null);const overlay=useRef<HTMLDivElement>(null);const sheet=useRef<HTMLDivElement>(null);const count=useRef<HTMLSpanElement>(null);
  const busy=useRef(false);const mounted=useRef(true);const timeline=useRef<gsap.core.Timeline|null>(null);const fallback=useRef<ReturnType<typeof setTimeout>|null>(null);
  const destination=useRef<string|null>(null);
  const restore=()=>{
+  const wasBusy=busy.current;
   timeline.current?.kill();
   if(fallback.current)clearTimeout(fallback.current);
   if(scene.current){scene.current.style.visibility='';scene.current.inert=false}
   if(overlay.current){overlay.current.style.display='none';overlay.current.dataset.state='idle'}
-  sheet.current?.replaceChildren();document.body.style.overflow='';busy.current=false;
+  sheet.current?.replaceChildren();if(wasBusy)document.body.style.overflow='';busy.current=false;
   window.dispatchEvent(new Event('site:transition-end'));
  };
 
@@ -60,7 +64,7 @@ export default function PageTransition({children}:{children:ReactNode}){
    if(!link||link.target==='_blank'||link.hasAttribute('download'))return;
    const url=new URL(link.href,location.href);
    if(url.origin!==location.origin||url.pathname===location.pathname||!/^https?:$/.test(url.protocol))return;
-   if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+   if(reducedRef.current)return;
    event.preventDefault();event.stopPropagation();if(busy.current)return;
    busy.current=true;destination.current=url.pathname+url.search+url.hash;router.prefetch(url.pathname);window.dispatchEvent(new Event('site:navigate'));
    snapshot(scene.current!,sheet.current!);
@@ -81,8 +85,13 @@ export default function PageTransition({children}:{children:ReactNode}){
  },[router]);
 
  useLayoutEffect(()=>{
+  const changed=lastPath.current!==pathname;lastPath.current=pathname;
+  const pending=destination.current;
   destination.current=null;
-  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){restore();return}
+  if(reduced){restore();if(pending)router.push(pending);return}
+  // Strict Mode repeats layout effects during startup. Restart an unfinished
+  // entrance, but do not replay the page when motion is simply re-enabled.
+  if(!changed&&!busy.current)return;
   let cancelled=false;
   busy.current=true;overlay.current!.style.display='block';overlay.current!.dataset.state='loading';
   scene.current!.style.visibility='hidden';scene.current!.inert=true;document.body.style.overflow='hidden';
@@ -110,10 +119,8 @@ export default function PageTransition({children}:{children:ReactNode}){
    }}).fromTo(sheet.current,{autoAlpha:1,scale:.08,rotationY:48,rotationZ:12,borderRadius:28},{scale:1,rotationY:0,rotationZ:0,borderRadius:0,duration:1.1,ease:'power3.inOut'});
   };
   void ready();
-  const reduce=()=>{if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){cancelled=true;const href=destination.current;destination.current=null;restore();if(href)router.push(href)}};
-  const query=window.matchMedia('(prefers-reduced-motion: reduce)');query.addEventListener('change',reduce);
-  return()=>{cancelled=true;query.removeEventListener('change',reduce)};
- },[pathname]);
+  return()=>{cancelled=true};
+ },[pathname,reduced]);
 
  return <><div ref={scene} className={styles.scene} data-page-scene>{children}</div><div ref={overlay} className={styles.overlay} aria-hidden="true" inert data-page-transition data-state="idle"><span className={styles.wordmark}>Otherlife</span><span ref={count} className={styles.count}/><div ref={sheet} className={styles.sheet}/></div></>;
 }
