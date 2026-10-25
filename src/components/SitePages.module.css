@@ -74,7 +74,6 @@
 .jobPage > button { margin-left:auto; }
 .video { position:relative; }
 .video video { display:block; width:100%; height:100%; object-fit:cover; border-radius:inherit; }
-.playToggle { position:absolute; bottom:22px; right:22px; border:1px solid #fff; background:#172806bb; color:white; border-radius:8px; padding:10px 14px; text-transform:uppercase; font-size:11px; z-index:3; }
 .featuredProject,.caseHero { position:relative; min-height:100svh; height:100svh; background:#172806; color:#fff; font-family:Aeonik,Arial,sans-serif; }
 .featuredVisual { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
 .heroScrim { position:absolute; inset:0; pointer-events:none; background:linear-gradient(0deg,rgba(0,0,0,.78),transparent 70%); }
@@ -87,8 +86,9 @@
 .caseButton:hover { background:white; color:#3c3c3c; }
 .homeAbout { padding-top:100px; padding-bottom:40px; text-align:center; }
 .aboutLine { display:block; }
-.featuredProjects { position:relative; margin-top:80px; }
-.featuredProject { overflow:hidden; }
+.featuredProjects { position:relative; margin-top:80px; background:#fff; }
+.projectTrack { position:relative; height:200svh; }
+.featuredProject { position:sticky; top:0; overflow:hidden; }
 .projectHitArea { position:absolute; inset:0; z-index:1; }
 .homeAbout [data-word],.clients [data-word] { display:inline-block; }
 .homeAbout h1 { color:#3c3c3c; font-size:30px; line-height:140%; font-weight:400; letter-spacing:-1.2px; margin:0; }
@@ -235,3 +235,4 @@
 @media(min-width:1536px){.quote blockquote{font-size:38px;}}
 @keyframes quoteIn { from {opacity:0;} to {opacity:1;} }
 @media(prefers-reduced-motion:reduce){.quote blockquote{animation:none;}.workPreview{transition:none;}}
+@media(prefers-reduced-motion:reduce){.projectTrack{height:auto;}.projectTrack+.projectTrack{margin-top:24svh;}.featuredProject{position:relative;}}
