@@ -5,21 +5,23 @@ import { gsap } from "gsap";
 import Gallery, { type GalleryView } from "./Gallery";
 import Header from "./Header";
 import styles from "./WorkPage.module.css";
+import { useSiteMotion } from "./MotionSettings";
 
 export default function WorkPage() {
+  const { reduced } = useSiteMotion();
   const [view, setView] = useState<GalleryView>("grid");
   const heading = useRef<HTMLElement>(null);
 
   useLayoutEffect(() => {
     const media = gsap.matchMedia();
     const ctx = gsap.context(() => {
-      media.add("(prefers-reduced-motion: no-preference)", () => {
+      if (!reduced) {
         gsap.from("[data-reveal]", { opacity: 0, y: 40, duration: 0.65, stagger: 0.13, ease: "power2.out" });
         gsap.from("[data-rule]", { scaleX: 0, transformOrigin: "left", duration: 1.3, ease: "power2.out" });
-      });
+      }
     }, heading);
     return () => { media.revert(); ctx.revert(); };
-  }, []);
+  }, [reduced]);
 
   return (
     <>

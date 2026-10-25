@@ -5,6 +5,7 @@ import { gsap } from "gsap";
 import { usePathname } from "next/navigation";
 import { navigation, socialLinks } from "../data/site";
 import styles from "./Header.module.css";
+import { useSiteMotion } from "./MotionSettings";
 
 type Panel = "menu" | "contact" | null;
 
@@ -72,6 +73,7 @@ function ContactForm({subject}: {subject: string}) {
 }
 
 export default function Header() {
+  const { reduced, toggleMotion } = useSiteMotion();
   const pathname = usePathname();
   const [panel, setPanel] = useState<Panel>(null);
   const [subject, setSubject] = useState("");
@@ -93,7 +95,7 @@ export default function Header() {
   function closePanel(next: Panel = null) {
     if (closing.current) return;
     const element = dialog.current;
-    if (!element || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    if (!element || reduced) {
       setPanel(next);
       return;
     }
@@ -143,12 +145,12 @@ export default function Header() {
       if (before?.isConnected) before.focus({ preventScroll: true });
       else menuButton.current?.focus({ preventScroll: true });
     };
-  }, [panel]);
+  }, [panel, reduced]);
 
   useLayoutEffect(() => {
     const media = gsap.matchMedia();
     const ctx = gsap.context(() => {
-      media.add("(prefers-reduced-motion: no-preference)", () => {
+      if (!reduced) {
         if (dialog.current) {
           if (!previousPanel.current) gsap.from(dialog.current, { x: 540, duration: 0.65, ease: "power4.out" });
           const links = dialog.current.querySelectorAll("[data-menu-link]");
@@ -165,11 +167,11 @@ export default function Header() {
             gsap.from("[data-contact-content] button, [data-contact-content] p", { opacity: 0, duration: 0.5, delay: 1.2 });
           }
         }
-      });
+      }
     }, root);
     previousPanel.current = panel;
     return () => { media.revert(); ctx.revert(); };
-  }, [panel]);
+  }, [panel, reduced]);
 
   return <header ref={root} className={styles.header}>
     <a href="/" className={styles.logo} aria-label="Otherlife home">
@@ -203,7 +205,7 @@ export default function Header() {
           </a>)}
         </nav>
         <button className={styles.mobileContact} onClick={() => openContact()}>Contact Us</button>
-        <div className={styles.menuBottom}><p>Unconventional Solutions</p><SocialLinks/></div>
+        <div className={styles.menuBottom}><p>Unconventional Solutions</p><button className={styles.motionToggle} aria-pressed={reduced} onClick={toggleMotion}>Reduce motion</button><SocialLinks/></div>
       </> : <div className={styles.contactInner} data-contact-inner>
         <h2>Lets work together.</h2>
         <button className={styles.closeContact} aria-label="Close contact form" onClick={() => closePanel("menu")}><Hamburger open/></button>

@@ -215,7 +215,12 @@
  .featuredContent > .caseButton { margin-left:auto; flex-shrink:0; }
 }
 @media(min-width:1536px){ .label{font-size:24px;} .editorialTitle{font-size:44px;} .bodyCopy{font-size:22px;} .serviceGrid>h3{font-size:44px;} .serviceCopy>p{font-size:28px;} .team h2,.team p{font-size:20px;} }
-@media(prefers-reduced-motion:reduce){.clientLogo,.clientHover,.clientBackground,.moreWork a span,.caseButton,.outlineButton { transition:none; }}
+:global(html[data-motion='reduced']) .clientLogo,
+:global(html[data-motion='reduced']) .clientHover,
+:global(html[data-motion='reduced']) .clientBackground,
+:global(html[data-motion='reduced']) .moreWork a span,
+:global(html[data-motion='reduced']) .caseButton,
+:global(html[data-motion='reduced']) .outlineButton { transition:none; }
 /* Shared quote typography and related-work previews measured from the reference. */
 .quote blockquote { font-family:Tobias,Georgia,serif; text-align:center; font-size:20px; line-height:150%; letter-spacing:-.3px; animation:quoteIn .35s ease-out; }
 .quoteAuthor { justify-content:center; width:fit-content; max-width:100%; margin:56px auto 0; border:1px solid #dfdfdf; border-radius:8px; padding:18px 16px; gap:16px; }
@@ -234,5 +239,8 @@
 @media(min-width:1280px){.quote blockquote{font-size:34px;}.workPreview{width:660px;height:400px;}}
 @media(min-width:1536px){.quote blockquote{font-size:38px;}}
 @keyframes quoteIn { from {opacity:0;} to {opacity:1;} }
-@media(prefers-reduced-motion:reduce){.quote blockquote{animation:none;}.workPreview{transition:none;}}
-@media(prefers-reduced-motion:reduce){.projectTrack{height:auto;}.projectTrack+.projectTrack{margin-top:24svh;}.featuredProject{position:relative;}}
+:global(html[data-motion='reduced']) .quote blockquote { animation:none; }
+:global(html[data-motion='reduced']) .workPreview { transition:none; }
+:global(html[data-motion='reduced']) .projectTrack { height:auto; }
+:global(html[data-motion='reduced']) .projectTrack+.projectTrack { margin-top:24svh; }
+:global(html[data-motion='reduced']) .featuredProject { position:relative; }

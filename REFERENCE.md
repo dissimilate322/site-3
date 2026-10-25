@@ -16,9 +16,9 @@ The settled Work, Company and Careers pages are white; the initial original load
 
 ## Media and content
 
-The original six Work banners, wordmark, favicon and Aeonik 300/400/500 plus Tobias regular fonts remain in public/assets. All 126 additional referenced media assets were downloaded locally into public/media. src/data/content.json contains normalized page/section data; content.ts supplies types. Source URLs are retained in media-sources.json and projects.ts. There are no hotlinked display assets.
+The original six Work banners, wordmark, favicon and Aeonik 300/400/500 plus Tobias regular fonts remain in public/assets. All 125 additional referenced media assets were downloaded locally into public/media. src/data/content.json contains normalized page/section data; content.ts supplies types. Source URLs are retained in media-sources.json and projects.ts. There are no hotlinked display assets.
 
-Images were limited to 1920px and encoded as WebP; Next Image serves responsive variants. Video was transcoded to H.264 MP4 at up to 1280px wide, with the desktop opening film retained at 1920px. These optimizations preserve the source content while introducing compression/resizing differences. All referenced assets were found and locally verified; no unrelated stock imagery was substituted.
+Images were limited to 1920px and encoded as WebP; Next Image serves responsive variants. All videos were regenerated from original sources at native resolution (up to 1920 × 1080 landscape, 1080 × 1920 portrait) with H.264 CRF 18 / slow instead of the previous 720p / CRF 28 variants. The Artist Accelerator loop retains the original H.264 stream without a lossy re-encode. The unused standalone phone-screen texture was removed from the package; the opening/closing films already include it in their rendered scene. Source frame rates are preserved and faststart allows progressive playback. These optimizations preserve the source content while introducing compression/resizing differences. All referenced assets were found and locally verified; no unrelated stock imagery was substituted.
 
 ## Work geometry
 
@@ -49,4 +49,8 @@ npm run build and npm run typecheck pass. npm run test:pages covers all 11 route
 
 Build a Wispbyte archive with npm run package:wispbyte. Use Node.js 24, startup index.js and the allocated PORT (or SERVER_PORT). All page code, runtime dependencies, static chunks, images, video and fonts are bundled. Source code and the downloadable archive are maintained in the corresponding GitHub branches.
 
-The motion regression suite (`npm run test:motion`) checks the first film and automatic playback, all four project holds, case/menu/back/logo transitions, released body/focus locks, live reduced-motion changes, visible white pixels in all three project gaps, absent film controls and automatic playback of every case film at desktop and mobile sizes.
+The motion regression suite (`npm run test:motion`) checks the first film and automatic playback, all four project holds, case/menu/back/logo transitions, released body/focus locks, explicit reduced-motion selection and persistence, visible white pixels in all three project gaps, absent film controls and automatic playback of every case film at desktop and mobile sizes.
+
+The animation failure was reproduced by emulating `prefers-reduced-motion: reduce`: it bypassed the original scroll timelines, page transitions and CSS sticky tracks. The deployed host served its JS chunks successfully and animated with no OS reduction. Full motion is now the requested default, independently of that OS signal. An explicit Reduce motion menu control persists the visitor’s choice and drives both CSS and GSAP. Regression checks cover full-motion scroll/transitions with the OS flag set, deliberate reduction, persistence, and re-enabling animation. The HTML build marker is `motion-settings-20261025`.
+
+Quality spot check: on the first three seconds of the Onramper loop, compared at 1920 × 1080 against the original, SSIM improved from 0.967921 for the previous 720p encode (upscaled for comparison) to 0.992148 for the new 1080p encode. Both opening-film orientations retain the original 60 fps. Video URLs carry the HQ revision so an older cached encode is not reused.

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import PageTransition from '@/components/PageTransition';
+import MotionSettings from '@/components/MotionSettings';
 
 export const metadata: Metadata = {
   title: "Our Work | Unconventional Solutions",
@@ -10,12 +11,12 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
+    <html lang="en" data-motion="full" data-site-version="motion-settings-20261025">
       <head>
         <link rel="preload" href="/assets/ff9ccf87d4ee1f04-s.p.ttf" as="font" type="font/ttf" crossOrigin="anonymous" />
         <link rel="preload" href="/assets/f6b0aeaf3ea04f3b-s.p.ttf" as="font" type="font/ttf" crossOrigin="anonymous" />
       </head>
-      <body><PageTransition>{children}</PageTransition></body>
+      <body><MotionSettings><PageTransition>{children}</PageTransition></MotionSettings></body>
     </html>
   );
 }

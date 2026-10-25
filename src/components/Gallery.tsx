@@ -5,29 +5,31 @@ import { useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { projects } from "../data/projects";
 import styles from "./Gallery.module.css";
+import { useSiteMotion } from "./MotionSettings";
 
 export type GalleryView = "grid" | "list";
 
 export function Gallery({ view }: { view: GalleryView }) {
+  const { reduced } = useSiteMotion();
   const gallery = useRef<HTMLElement>(null);
 
   useLayoutEffect(() => {
     const media = gsap.matchMedia();
     const context = gsap.context(() => {
-      media.add("(prefers-reduced-motion: no-preference)", () => {
+      if (!reduced) {
         gsap.fromTo(
           "[data-project]",
           { opacity: 0, y: 40 },
           { opacity: 1, y: 0, duration: 0.5, stagger: 0.13, ease: "power2.out" },
         );
-      });
+      }
     }, gallery);
 
     return () => {
       media.revert();
       context.revert();
     };
-  }, [view]);
+  }, [view, reduced]);
 
   return (
     <section

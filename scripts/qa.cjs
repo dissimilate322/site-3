@@ -11,7 +11,7 @@ fs.mkdirSync(output, { recursive: true });
 const results = { baseURL, startedAt: new Date().toISOString(), checks: [], errors: [], viewports: [] };
 function record(name, detail = {}) { results.checks.push({ name, passed: true, ...detail }); console.log('PASS', name); }
 const viewports = [[1920,1080],[1440,900],[1024,768],[768,1024],[390,844],[375,812]];
-async function settle(page) { await page.waitForFunction(()=>document.querySelector('[data-page-transition]')?.dataset.state==='idle'); await page.waitForTimeout(1500); await page.evaluate(() => document.fonts.ready); }
+async function settle(page) { await page.waitForFunction(()=>document.documentElement.dataset.motionReady==='true'&&document.querySelector('[data-page-transition]')?.dataset.state==='idle'); await page.waitForTimeout(1500); await page.evaluate(() => document.fonts.ready); }
 async function loadAllImages(page) {
   await page.evaluate(async () => {
     const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
@@ -143,6 +143,7 @@ async function noOverflow(page, label) {
     record('Project card opens its local project overview without external links');
     await context.close();
     const reduced=await browser.newContext({viewport:{width:390,height:844},reducedMotion:'reduce',hasTouch:true});
+    await reduced.addInitScript(()=>localStorage.setItem('otherlife-motion','reduced'));
     const reducedPage=await reduced.newPage();
     await reducedPage.goto(`${baseURL}/work`,{waitUntil:'networkidle'});
     const motion=await reducedPage.locator('#projects [data-project]').evaluateAll(els=>els.map(e=>({opacity:getComputedStyle(e).opacity,transform:getComputedStyle(e).transform})));
@@ -150,7 +151,7 @@ async function noOverflow(page, label) {
     await reducedPage.getByRole('button',{name:'List',exact:true}).click();
     assert.equal(await reducedPage.locator('#projects [data-project]').count(),6);
     assert((await reducedPage.locator('#projects [data-project]').evaluateAll(els=>els.map(e=>getComputedStyle(e).transform))).every(e=>e==='none'));
-    record('Reduced motion renders immediately without project transforms');
+    record('Explicit reduced motion renders immediately without project transforms');
     await reduced.close();
   } catch(error) { results.errors.push(error.stack||error.message); console.error(error); process.exitCode=1; }
   finally { await browser.close(); results.finishedAt=new Date().toISOString();results.passed=results.errors.length===0; fs.writeFileSync(path.join(output,'results.json'),JSON.stringify(results,null,2)); }
