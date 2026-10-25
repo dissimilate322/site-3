@@ -1,35 +1,20 @@
-import Image from "next/image";
-import Link from "next/link";
-import { notFound } from "next/navigation";
-import Header from "@/components/Header";
-import { projects } from "@/data/projects";
-import styles from "./project.module.css";
-
-export const dynamicParams = false;
-
-export function generateStaticParams() {
-  return projects.map(({ slug }) => ({ slug }));
-}
-
-export default async function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params;
-  const project = projects.find((item) => item.slug === slug);
-  if (!project) notFound();
-
-  return <>
-    <Header />
-    <main className={styles.page}>
-      <Link href="/work" className={styles.back}>← All work</Link>
-      <div className={styles.heading}>
-        <h1>{project.title}</h1>
-        <span>{project.year}</span>
-      </div>
-      <Image src={project.image.src} alt={project.image.alt} width={project.image.width} height={project.image.height} sizes="(min-width: 1920px) 1820px, (min-width: 1024px) calc(100vw - 100px), calc(100vw - 46px)" quality={90} priority className={styles.image} />
-      <div className={styles.description}>
-        <p>{project.description}</p>
-        <p>{project.services}</p>
-      </div>
-      <Link href="/work" className={styles.back}>← Back to work</Link>
-    </main>
-  </>;
-}
+import type {Metadata} from 'next';
+import Link from 'next/link';
+import {notFound} from 'next/navigation';
+import Header from '@/components/Header';
+import Reveal from '@/components/Reveal';
+import Media from '@/components/Media';
+import MoreWork from '@/components/MoreWork';
+import CaseBlocks from '@/components/CaseBlocks';
+import {content} from '@/data/content';
+import styles from '@/components/SitePages.module.css';
+export const dynamicParams=false;
+export function generateStaticParams(){return content.cases.map(({slug})=>({slug}))}
+export async function generateMetadata({params}:{params:Promise<{slug:string}>}):Promise<Metadata>{const {slug}=await params;const p=content.cases.find(p=>p.slug===slug);return {title:(p?.title||'Project')+' | Otherlife',description:p?.projectText}}
+export default async function CaseStudy({params}:{params:Promise<{slug:string}>}){const {slug}=await params;const p=content.cases.find(p=>p.slug===slug);if(!p)notFound();return <><Header/><main><Reveal>
+ <section className={styles.caseHero}><Media asset={p.video||p.image} poster={p.image} autoplay={!!p.video} priority className={styles.featuredVisual}/><div className={styles.heroScrim}/><div className={styles.caseHeroContent}><p className={styles.subtitle} data-reveal>{p.subtitle}</p><h1 data-reveal>{p.title}</h1><div className={styles.caseDetails} data-reveal><div><span>Client</span><p>{p.projectText}</p></div><div><span>Services</span><p>{p.servicesText}</p></div><a href="#project" className={styles.caseButton}>Explore project ↓</a></div></div></section>
+ <div className={`${styles.container} ${styles.mobileCaseDetails}`}><div><h2>Client</h2><p>{p.projectText}</p></div><div><h2>Services</h2><p>{p.servicesText}</p></div></div>
+ <div id="project"><CaseBlocks blocks={p.blocks}/></div>
+ {p.pdf&&<div className={`${styles.container} ${styles.pdf}`}><a href={p.pdf.src} download>Download case study PDF ↓</a></div>}
+ <div className={styles.container}><Link href="/work" className={styles.backLink}>← Back to work</Link></div><MoreWork exclude={p.slug}/>
+ </Reveal></main></>}

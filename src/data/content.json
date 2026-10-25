@@ -1,0 +1,2056 @@
+{
+  "home": {
+    "projects": [
+      {
+        "slug": "artist-accelerator",
+        "title": "Artist Accelerator",
+        "description": "Interactive experience to create your own unique one-of-a-kind music pass with generative artwork and your own sonic anthem.",
+        "services": "Visual Design, Engineering, Strategy, Interactive",
+        "image": {
+          "src": "/media/586c4e1cabe9dd5ae905.webp",
+          "kind": "image",
+          "alt": "Mastercard",
+          "width": 2880,
+          "height": 1652
+        },
+        "mobileImage": {
+          "src": "/media/650be9624d06b346bb7f.webp",
+          "kind": "image",
+          "alt": "Mastercard",
+          "width": 720,
+          "height": 1280
+        },
+        "video": {
+          "src": "/media/33713189abb2ad849cf0.mp4",
+          "kind": "video",
+          "alt": "An image uploaded to Strapi called 19c3de8851532bd92d35fdd0dd2baa62ad5333c3",
+          "width": 1920,
+          "height": 1080
+        },
+        "logo": {
+          "src": "/media/10313c64f923c7981c0d.svg",
+          "kind": "image",
+          "alt": "Mastercard",
+          "width": 717,
+          "height": 143
+        }
+      },
+      {
+        "slug": "onramper",
+        "title": "Onramper",
+        "description": "A global rebrand and website for Onramper, the fiat-to-crypto aggregator powering 2000+ assets across 190+ countries.",
+        "services": "Branding, Visual Design, Strategy, Website",
+        "image": {
+          "src": "/media/1549a613b764fd18a99f.webp",
+          "kind": "image",
+          "alt": "Onramper",
+          "width": 3413,
+          "height": 1920
+        },
+        "mobileImage": {
+          "src": "/media/5f3c0b44c163c91c9fdf.webp",
+          "kind": "image",
+          "alt": "An image uploaded to Strapi called 5aa06cd0fc70cac6993a24507eb0d9b82fcf469f-720x1080",
+          "width": 720,
+          "height": 1080
+        },
+        "video": {
+          "src": "/media/1d05780bab7e95844286.mp4",
+          "kind": "video",
+          "alt": "An image uploaded to Strapi called 32ef19946ec48d83e8b3337d52ae0376af14c67b",
+          "width": 1920,
+          "height": 1080
+        },
+        "logo": {
+          "src": "/media/f8450a38b442d31037dc.svg",
+          "kind": "image",
+          "alt": "An image uploaded to Strapi called 54637cfff7eb76093bf4d9a80a7523c2b3f0b231-889x140",
+          "width": 889,
+          "height": 140
+        }
+      },
+      {
+        "slug": "narcos",
+        "title": "Narcos",
+        "description": "Immersive NARCOS storefront and digital collectibles that re-engaged fans and seamlessly introduced them to Web3 via NFC technology.",
+        "services": "Visual Design, Engineering, Strategy",
+        "image": {
+          "src": "/media/ea8e2ed3cfdb361410bd.webp",
+          "kind": "image",
+          "alt": "Narcos",
+          "width": 2880,
+          "height": 1652
+        },
+        "mobileImage": {
+          "src": "/media/1fddf82acacbe05d960a.webp",
+          "kind": "image",
+          "alt": "Narcos",
+          "width": 720,
+          "height": 1280
+        },
+        "video": {
+          "src": "/media/6ee5b3b516555a926e63.mp4",
+          "kind": "video",
+          "alt": "An image uploaded to Strapi called 3c41f1a4f2a2048e2d660ee5316258ec28ab0e6b",
+          "width": 1920,
+          "height": 1080
+        },
+        "logo": {
+          "src": "/media/5873a422206caf3c3a42.svg",
+          "kind": "image",
+          "alt": "Narcos",
+          "width": 147,
+          "height": 42
+        }
+      },
+      {
+        "slug": "christies",
+        "title": "Christie's",
+        "description": " The Christie's Art+Tech Summit 2024, in partnership with MoonPay, featuring a unique NFT series tied to key themes of the summit.",
+        "services": "Visual Design, Engineering, Strategy",
+        "image": {
+          "src": "/media/02ce1ae952a8a652b04f.webp",
+          "kind": "image",
+          "alt": "Christie's",
+          "width": 2880,
+          "height": 1652
+        },
+        "mobileImage": {
+          "src": "/media/d1b41d18f7d41f3b5201.webp",
+          "kind": "image",
+          "alt": "christies",
+          "width": 720,
+          "height": 1280
+        },
+        "video": {
+          "src": "/media/c93c9f460fbd3e45202d.mp4",
+          "kind": "video",
+          "alt": "An image uploaded to Strapi called 04c7b1e20875f4d864c3e95759d69833070256b0",
+          "width": 1920,
+          "height": 1080
+        },
+        "logo": {
+          "src": "/media/99dca115582397bc1478.svg",
+          "kind": "image",
+          "alt": "chrisites",
+          "width": 388,
+          "height": 51
+        }
+      }
+    ],
+    "clients": [
+      {
+        "name": "Narcos",
+        "href": "/work/narcos",
+        "image": {
+          "src": "/media/84651b3e466b96654ded.webp",
+          "kind": "image",
+          "alt": "Narcos",
+          "width": 273,
+          "height": 76
+        },
+        "hover": {
+          "src": "/media/9482a2fc3ba953e7e673.webp",
+          "kind": "image",
+          "alt": "Narcos",
+          "width": 273,
+          "height": 76
+        },
+        "background": {
+          "src": "/media/a53bd452ae586e73d01b.webp",
+          "kind": "image",
+          "alt": "Narcos",
+          "width": 628,
+          "height": 628
+        }
+      },
+      {
+        "name": "Mastercard",
+        "href": "/work/artist-accelerator",
+        "image": {
+          "src": "/media/cf19ceaacc638d206364.webp",
+          "kind": "image",
+          "alt": "Mastercard",
+          "width": 330,
+          "height": 204
+        },
+        "hover": {
+          "src": "/media/9f8aedf4eff6cf3d1989.webp",
+          "kind": "image",
+          "alt": "Mastercard",
+          "width": 331,
+          "height": 205
+        },
+        "background": {
+          "src": "/media/58a9f0a29d2301926760.webp",
+          "kind": "image",
+          "alt": "Mastercard",
+          "width": 628,
+          "height": 628
+        }
+      },
+      {
+        "name": "Hypernative",
+        "href": "/work/hypernative",
+        "image": {
+          "src": "/media/9d83b6dc53271797ac32.webp",
+          "kind": "image",
+          "alt": "Hypernative",
+          "width": 356,
+          "height": 314
+        },
+        "hover": {
+          "src": "/media/0ea43e14e828ab730170.webp",
+          "kind": "image",
+          "alt": "Hypernative",
+          "width": 356,
+          "height": 314
+        },
+        "background": {
+          "src": "/media/2b84533091479c223c6f.webp",
+          "kind": "image",
+          "alt": "Hypernative",
+          "width": 628,
+          "height": 628
+        }
+      },
+      {
+        "name": "MoonPay",
+        "href": null,
+        "image": {
+          "src": "/media/30804d65ac0392df78eb.webp",
+          "kind": "image",
+          "alt": "MoonPay",
+          "width": 457,
+          "height": 84
+        },
+        "hover": {
+          "src": "/media/476930d46a2406c96289.webp",
+          "kind": "image",
+          "alt": "MoonPay",
+          "width": 457,
+          "height": 84
+        },
+        "background": {
+          "src": "/media/0b4670aa8984c9761905.webp",
+          "kind": "image",
+          "alt": "MoonPay",
+          "width": 628,
+          "height": 628
+        }
+      },
+      {
+        "name": "Arsenal",
+        "href": null,
+        "image": {
+          "src": "/media/fa21fed7139a09f034b4.webp",
+          "kind": "image",
+          "alt": "Arsenal",
+          "width": 236,
+          "height": 275
+        },
+        "hover": {
+          "src": "/media/45cd3bd44e2af2d14114.webp",
+          "kind": "image",
+          "alt": "Arsenal",
+          "width": 236,
+          "height": 276
+        },
+        "background": {
+          "src": "/media/da2616907b67768cca9f.webp",
+          "kind": "image",
+          "alt": "Arsenal",
+          "width": 628,
+          "height": 628
+        }
+      },
+      {
+        "name": "DeLorean Labs",
+        "href": null,
+        "image": {
+          "src": "/media/c16572669c04c3be893b.webp",
+          "kind": "image",
+          "alt": "DeLorean Labs",
+          "width": 442,
+          "height": 200
+        },
+        "hover": {
+          "src": "/media/4a06b78a1f9fd8803d08.webp",
+          "kind": "image",
+          "alt": "DeLorean Labs",
+          "width": 442,
+          "height": 200
+        },
+        "background": {
+          "src": "/media/0b963d18832108c25b4b.webp",
+          "kind": "image",
+          "alt": "DeLorean Labs",
+          "width": 628,
+          "height": 628
+        }
+      },
+      {
+        "name": "Shopify",
+        "href": null,
+        "image": {
+          "src": "/media/3f92516ea599407bb3d5.webp",
+          "kind": "image",
+          "alt": "Shopify",
+          "width": 317,
+          "height": 91
+        },
+        "hover": {
+          "src": "/media/f2bc7ea917f308c2a878.webp",
+          "kind": "image",
+          "alt": "Shopify",
+          "width": 317,
+          "height": 91
+        },
+        "background": {
+          "src": "/media/6ee4481c203a8ff44df9.webp",
+          "kind": "image",
+          "alt": "Shopify",
+          "width": 628,
+          "height": 628
+        }
+      },
+      {
+        "name": "Vercel",
+        "href": null,
+        "image": {
+          "src": "/media/eca5d2685edf2a1e273b.webp",
+          "kind": "image",
+          "alt": "Vercel",
+          "width": 376,
+          "height": 84
+        },
+        "hover": {
+          "src": "/media/286f5300ca5602e9785d.webp",
+          "kind": "image",
+          "alt": "Vercel",
+          "width": 376,
+          "height": 84
+        },
+        "background": {
+          "src": "/media/60c99003373ae8a7be6f.webp",
+          "kind": "image",
+          "alt": "Vercel",
+          "width": 628,
+          "height": 628
+        }
+      }
+    ],
+    "showreel": {
+      "src": "/media/e1a61b01ec7535eb95d1.mp4",
+      "kind": "video",
+      "alt": "",
+      "width": 1920,
+      "height": 1080
+    }
+  },
+  "company": {
+    "heroTitle": "Otherlife is a creative agency building unconventional solutions at the forefront of brand, digital design, web experience and engineering.",
+    "heroLabel": "About Us",
+    "heroDescription": "We partner with like minded people and businesses to elevate digital experiences using creativity and technology. Founded as Nightshift and acquired by MoonPay in 2023, we are a trusted partner for global brands. ",
+    "servicesLabel": "Services",
+    "servicesAdditionalText": "*Additional services available upon request",
+    "services": [
+      {
+        "__typename": "Service",
+        "title": "Branding",
+        "description": "Distinct and future-proofed brand strategy and design systems to create market leadership.",
+        "features": [
+          {
+            "__typename": "ComponentSharedOfferingGroup",
+            "title": "Services",
+            "offerings": [
+              {
+                "__typename": "ComponentSharedText",
+                "text": "Strategy"
+              },
+              {
+                "__typename": "ComponentSharedText",
+                "text": "Identity"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "__typename": "Service",
+        "title": "Interactive",
+        "description": "Seamless cross platform digital brand experiences and interactions.",
+        "features": [
+          {
+            "__typename": "ComponentSharedOfferingGroup",
+            "title": "Services",
+            "offerings": [
+              {
+                "__typename": "ComponentSharedText",
+                "text": "User Experience Design (UX)"
+              },
+              {
+                "__typename": "ComponentSharedText",
+                "text": " User Interface Design (UI)"
+              },
+              {
+                "__typename": "ComponentSharedText",
+                "text": "Interaction Design"
+              },
+              {
+                "__typename": "ComponentSharedText",
+                "text": "Motion Design"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "__typename": "Service",
+        "title": "Engineering",
+        "description": "Cutting edge engineering solutions for the next generation of the internet.",
+        "features": [
+          {
+            "__typename": "ComponentSharedOfferingGroup",
+            "title": "Creative",
+            "offerings": [
+              {
+                "__typename": "ComponentSharedText",
+                "text": "Immersive 3D Web Experiences"
+              },
+              {
+                "__typename": "ComponentSharedText",
+                "text": "Spatial Experiences"
+              },
+              {
+                "__typename": "ComponentSharedText",
+                "text": "AR / VR / XR"
+              },
+              {
+                "__typename": "ComponentSharedText",
+                "text": "WebGL, Three.js"
+              },
+              {
+                "__typename": "ComponentSharedText",
+                "text": "Unity3D"
+              }
+            ]
+          },
+          {
+            "__typename": "ComponentSharedOfferingGroup",
+            "title": "Web3/Blockchain",
+            "offerings": [
+              {
+                "__typename": "ComponentSharedText",
+                "text": "Blockchain Applications Development (dApps)"
+              },
+              {
+                "__typename": "ComponentSharedText",
+                "text": "On-chain/Off-chain/Hybrid Loyalty programs"
+              },
+              {
+                "__typename": "ComponentSharedText",
+                "text": "Smart Contract & Web3 Integrations"
+              },
+              {
+                "__typename": "ComponentSharedText",
+                "text": "NFT Mint Experiences"
+              }
+            ]
+          },
+          {
+            "__typename": "ComponentSharedOfferingGroup",
+            "title": "Development",
+            "offerings": [
+              {
+                "__typename": "ComponentSharedText",
+                "text": "Website Design & Build"
+              },
+              {
+                "__typename": "ComponentSharedText",
+                "text": "Full-Stack Development"
+              },
+              {
+                "__typename": "ComponentSharedText",
+                "text": "Custom Applications (Web Apps)"
+              },
+              {
+                "__typename": "ComponentSharedText",
+                "text": "Enterprise Software Solutions"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "__typename": "Service",
+        "title": "Visual Design",
+        "description": "Anything your brand can imagine.",
+        "features": [
+          {
+            "__typename": "ComponentSharedOfferingGroup",
+            "title": "Services",
+            "offerings": [
+              {
+                "__typename": "ComponentSharedText",
+                "text": "3D"
+              },
+              {
+                "__typename": "ComponentSharedText",
+                "text": "Animation"
+              },
+              {
+                "__typename": "ComponentSharedText",
+                "text": "Motion Systems"
+              },
+              {
+                "__typename": "ComponentSharedText",
+                "text": "Production Design"
+              },
+              {
+                "__typename": "ComponentSharedText",
+                "text": "Illustration"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "__typename": "Service",
+        "title": "Strategy",
+        "description": "Strategies and consultation for brand growth and innovation.",
+        "features": [
+          {
+            "__typename": "ComponentSharedOfferingGroup",
+            "title": "Services",
+            "offerings": [
+              {
+                "__typename": "ComponentSharedText",
+                "text": "Brand Strategy"
+              },
+              {
+                "__typename": "ComponentSharedText",
+                "text": "Creative Direction"
+              },
+              {
+                "__typename": "ComponentSharedText",
+                "text": "Web3 Strategy"
+              },
+              {
+                "__typename": "ComponentSharedText",
+                "text": "Innovation Strategy"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "awardsLabel": "Awards & Recognition",
+    "team": [
+      {
+        "name": "Michael Perrow",
+        "position": "CEO / Co-Founder",
+        "image": {
+          "src": "/media/5fabda7c492d7e5873b4.webp",
+          "kind": "image",
+          "alt": "Headshot of Michael Perrow",
+          "width": 770,
+          "height": 910
+        }
+      },
+      {
+        "name": "Michael Moodie",
+        "position": "CCO / Co-Founder",
+        "image": {
+          "src": "/media/d6305257acf764178889.webp",
+          "kind": "image",
+          "alt": "Headshot of Michael Moodie",
+          "width": 770,
+          "height": 910
+        }
+      }
+    ],
+    "topImage": {
+      "src": "/media/41a2d98b8d166405720e.webp",
+      "kind": "image",
+      "alt": "Otherlife 2024 team",
+      "width": 2680,
+      "height": 1080
+    },
+    "bottomImage": {
+      "src": "/media/9e2ece1ee9cecc4af56c.webp",
+      "kind": "image",
+      "alt": "Designers at Otherlife",
+      "width": 2680,
+      "height": 1150
+    },
+    "testimonials": [
+      {
+        "quote": "“I've been working with agencies my entire career, and I haven't seen the level of detail, strategy, and forward-thinking vision like what I've experienced at Otherlife. Their approach is truly unparalleled, consistently demonstrating a deep understanding of market dynamics and a commitment to innovation.” ",
+        "author": "Sebbastian Oddo",
+        "role": "Global VP marketing",
+        "company": "Mastercard",
+        "image": {
+          "src": "/media/1e0523c775ff0ae1725b.svg",
+          "kind": "image",
+          "alt": "Mastercard",
+          "width": 73,
+          "height": 45
+        }
+      },
+      {
+        "quote": "“Otherlife is such a wonderful team to work with! They have been a seamless extension of our brand design team, they quickly learned our brand style and are always ready to contribute new ideas or build onto existing ones.”",
+        "author": "Genny Davila",
+        "role": "Creative Design Director",
+        "company": "Vercel",
+        "image": {
+          "src": "/media/79e6ddcfe38ecde08e91.svg",
+          "kind": "image",
+          "alt": "Vercel",
+          "width": 45,
+          "height": 45
+        }
+      },
+      {
+        "quote": "“Otherlife continues to be an invaluable partner in helping us develop a market-leading strategy, strengthen the relationships with our fans and drive innovation” ",
+        "author": "Sean Thornley",
+        "role": "Business Development Lead",
+        "company": "Arsenal FC",
+        "image": {
+          "src": "/media/9e5a0516377607b6d128.svg",
+          "kind": "image",
+          "alt": "Arsenal",
+          "width": 39,
+          "height": 45
+        }
+      },
+      {
+        "quote": "“With the addition of Otherlife, we can provide companies, brands, and creative agencies with world-class, end-to-end support to unlock new revenue through groundbreaking  products, experiences and ideas”   ",
+        "author": "Ivan Soto-Wright",
+        "role": "Co-Founder and CEO",
+        "company": "MoonPay",
+        "image": {
+          "src": "/media/77eb670328500aef3bd6.svg",
+          "kind": "image",
+          "alt": "MoonPay",
+          "width": 45,
+          "height": 45
+        }
+      }
+    ],
+    "awards": [
+      {
+        "title": "Canadian SME",
+        "amount": 1,
+        "type": "Small Business of the Year"
+      },
+      {
+        "title": "AWWWARDS",
+        "amount": 1,
+        "type": "Site of the Day"
+      },
+      {
+        "title": "AWWWARDS",
+        "amount": 1,
+        "type": "Developer Award"
+      },
+      {
+        "title": "AWWWARDS",
+        "amount": 2,
+        "type": "Honorable Mention"
+      },
+      {
+        "title": "The FWA",
+        "amount": 3,
+        "type": "Site of the Day"
+      },
+      {
+        "title": "CSS Design Awards",
+        "amount": 2,
+        "type": "Site of the Day"
+      },
+      {
+        "title": "AGDA",
+        "amount": 1,
+        "type": "Finalist"
+      },
+      {
+        "title": "AGDA",
+        "amount": 1,
+        "type": "Merit"
+      }
+    ],
+    "work": [
+      "narcos",
+      "hypernative",
+      "artist-accelerator",
+      "christies"
+    ]
+  },
+  "careers": {
+    "hiringLabel": "Hiring",
+    "hiringTitle": "If you're driven by craft, creativity, and solving real problems with emerging tech, we’d love to hear from you.",
+    "hiringDescription": [
+      {
+        "type": "paragraph",
+        "children": [
+          {
+            "text": "We’re a tight-knit team of strategists, designers, and engineers who move with intention and operate at a high level. We value curiosity, clear thinking, and attention to detail. We work collaboratively across disciplines, and we’re always looking for people who take ownership and push ideas forward.",
+            "type": "text"
+          }
+        ]
+      }
+    ],
+    "perksLabel": "Perks",
+    "perksDescription": [
+      {
+        "type": "paragraph",
+        "children": [
+          {
+            "text": "We offer competitive salaries and share options, along with comprehensive health and dental benefits. Daily office lunches and team events are part of how we operate. We also offer optional work-from-home Fridays to support productivity and work-life balance. We invest in our team with the tools, environment, and support to do great work.",
+            "type": "text"
+          }
+        ]
+      }
+    ],
+    "jobOpeningsLabel": "Job Openings",
+    "contactMessage": "Don’t see a role that fits? We’re always open to meeting talented people. If you’d like to propose a position or share your work, reach out to below.",
+    "image": {
+      "src": "/media/6bf5d9e8c5a9ce2b6b32.webp",
+      "kind": "image",
+      "alt": "Team Photo @ Otherlife HQ",
+      "width": 1340,
+      "height": 540
+    },
+    "gallery": [
+      {
+        "src": "/media/570917cd6cc5b7fbcd54.webp",
+        "kind": "image",
+        "alt": "Photo of Jesse Watson Focused at Work",
+        "width": 660,
+        "height": 660
+      },
+      {
+        "src": "/media/39d611ace6d4e3897266.webp",
+        "kind": "image",
+        "alt": "Photo of Sammi Stemmerman behind Laptop Working",
+        "width": 660,
+        "height": 660
+      },
+      {
+        "src": "/media/8652c69b41e49c1b6757.webp",
+        "kind": "image",
+        "alt": "Photo of Crowd Otherlife Speak Easy Event 2024",
+        "width": 660,
+        "height": 660
+      },
+      {
+        "src": "/media/25e0c8576d6d1df51350.webp",
+        "kind": "image",
+        "alt": "Photo of Joshua Isaac Working",
+        "width": 660,
+        "height": 660
+      }
+    ],
+    "jobs": [
+      {
+        "slug": "senior-designer",
+        "title": "Senior Designer",
+        "description": [
+          {
+            "type": "paragraph",
+            "children": [
+              {
+                "text": "The Senior Designer is primarily responsible for leading branding projects at Otherlife. They are also responsible for delivering against a wide range of design mandates in a multidisciplinary environment including but not limited to web design/UIUX, motion design, and collaborating on 3D and Illustration.",
+                "type": "text"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "cases": [
+    {
+      "title": "Artist Accelerator",
+      "subtitle": "Mastercard",
+      "slug": "artist-accelerator",
+      "projectText": "Interactive experience to create your own unique one-of-a-kind music pass with generative artwork and your own sonic anthem.",
+      "servicesText": "Visual Design, Engineering, Strategy, Interactive",
+      "year": "2024",
+      "image": {
+        "src": "/media/586c4e1cabe9dd5ae905.webp",
+        "kind": "image",
+        "alt": "Mastercard",
+        "width": 2880,
+        "height": 1652
+      },
+      "mobileImage": {
+        "src": "/media/650be9624d06b346bb7f.webp",
+        "kind": "image",
+        "alt": "Mastercard",
+        "width": 720,
+        "height": 1280
+      },
+      "video": null,
+      "pdf": {
+        "src": "/media/3290e3dea4448d348393.pdf",
+        "kind": "file",
+        "alt": "",
+        "width": 1920,
+        "height": 1080
+      },
+      "blocks": [
+        {
+          "type": "media",
+          "title": "",
+          "image": {
+            "src": "/media/a5aaa9d2e2d01d1c506e.webp",
+            "kind": "image",
+            "alt": "Artist Accelerator Season Two",
+            "width": 1340,
+            "height": 630
+          },
+          "poster": {
+            "src": "/media/e6d2fc922e14deeac95e.webp",
+            "kind": "image",
+            "alt": "An image uploaded to Strapi called 125e49119955aed4b9754582d530d791bd763b22-2300x1277",
+            "width": 2300,
+            "height": 1277
+          },
+          "video": {
+            "src": "/media/33713189abb2ad849cf0.mp4",
+            "kind": "video",
+            "alt": "",
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        {
+          "type": "stats",
+          "title": "Outcome",
+          "stats": [
+            {
+              "value": "32k",
+              "label": "Unique 3D NFTs"
+            },
+            {
+              "value": "2.7k+",
+              "label": "Personalized AI generated Sonic Sounds"
+            },
+            {
+              "value": "92%",
+              "label": "Conversion rate since launch"
+            }
+          ]
+        },
+        {
+          "type": "images",
+          "images": [
+            {
+              "src": "/media/fac58baba9a017cc32e2.webp",
+              "kind": "image",
+              "alt": "Artist Accelerator",
+              "width": 1340,
+              "height": 830
+            },
+            {
+              "src": "/media/7065e67834c8ddee8e40.webp",
+              "kind": "image",
+              "alt": "Artist Accelerator",
+              "width": 660,
+              "height": 660
+            },
+            {
+              "src": "/media/01b57890e8a9c0f4e46e.webp",
+              "kind": "image",
+              "alt": "Artist Accelerator",
+              "width": 660,
+              "height": 660
+            }
+          ]
+        },
+        {
+          "type": "quote",
+          "quote": {
+            "quote": "“I've been working with agencies my entire career, and I haven't seen the level of detail, strategy, and forward-thinking vision like what I've experienced at Otherlife. Their approach is truly unparalleled, consistently demonstrating a deep understanding of market dynamics and a commitment to innovation.” ",
+            "author": "Sebbastian Oddo",
+            "role": "Global VP marketing",
+            "company": "Mastercard",
+            "image": {
+              "src": "/media/1e0523c775ff0ae1725b.svg",
+              "kind": "image",
+              "alt": "Mastercard",
+              "width": 73,
+              "height": 45
+            }
+          }
+        },
+        {
+          "type": "steps",
+          "steps": [
+            {
+              "title": "Craft Your Own Sonic Anthem: A WebGL Journey to Your Perfect Sound",
+              "subtitle": "Project Overview",
+              "description": [
+                {
+                  "type": "paragraph",
+                  "children": [
+                    {
+                      "text": "This project invites users to create their own custom Sonic Anthem by interacting with an innovative WebGL-powered platform. Through a series of personalized choices, users can select various musical elements, sounds, and moods to compose a unique anthem that resonates with their personal style. The seamless integration of WebGL technology provides a visually engaging and intuitive interface, making the creative process both fun and accessible. By the end of the experience, users walk away with a fully customized soundtrack that captures their individuality, offering a deeply personalized and memorable interaction with the brand.",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Challenge",
+              "subtitle": "",
+              "description": [
+                {
+                  "type": "paragraph",
+                  "children": [
+                    {
+                      "text": "Mastercard’s Artist Accelerator Season 1 was a huge success. With all eyes on the project for Season Two, the question was: How do they deliver an even better sequel?\n",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Solution",
+              "subtitle": "",
+              "description": [
+                {
+                  "type": "paragraph",
+                  "children": [
+                    {
+                      "text": "Otherlife built a first-of-its-kind immersive, fully accessible, WebGL experience integrating Mastercard’s sonic brand into a dynamic digital pass creation and claim, evolving Mastercard’s visual brand into 3D.",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Result",
+              "subtitle": "",
+              "description": [
+                {
+                  "type": "paragraph",
+                  "children": [
+                    {
+                      "text": "Working with Mastercard’s global marketing innovation team, Otherlife set a new digital standard for Mastercard’s sonic and digital brand.",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "images",
+          "images": [
+            {
+              "src": "/media/2597e76c703e7818a346.webp",
+              "kind": "image",
+              "alt": "Artist Accelerator",
+              "width": 1340,
+              "height": 540
+            },
+            {
+              "src": "/media/10c0a95e682f0d736860.webp",
+              "kind": "image",
+              "alt": "Artist Accelerator",
+              "width": 1340,
+              "height": 790
+            }
+          ]
+        },
+        {
+          "type": "press",
+          "articles": [
+            {
+              "title": "Mastercard Partners MoonPay to Incorporate Web3 in...",
+              "date": "Oct 25, 2023",
+              "image": {
+                "src": "/media/3dd0720ab95e92f0ef17.webp",
+                "kind": "image",
+                "alt": "PYMNTS",
+                "width": 347,
+                "height": 72
+              }
+            },
+            {
+              "title": "Mastercard Drops Free Music Pass NFTs With Perks for Holders",
+              "date": "April 13, 2023",
+              "image": {
+                "src": "/media/ca5d6d909d35915ef3b1.webp",
+                "kind": "image",
+                "alt": "Decrypt",
+                "width": 433,
+                "height": 144
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Cake Wallet",
+      "subtitle": "Cake Wallet",
+      "slug": "cake-wallet",
+      "projectText": "Creating a brand is a piece of cake",
+      "servicesText": "Branding, Visual Design, Strategy",
+      "year": "2025",
+      "image": {
+        "src": "/media/22dca97176830fe9b80c.webp",
+        "kind": "image",
+        "alt": "Cake Wallet",
+        "width": 2880,
+        "height": 1652
+      },
+      "mobileImage": {
+        "src": "/media/a1f491e62373e2c64259.webp",
+        "kind": "image",
+        "alt": "An image uploaded to Strapi called ae0e09d3570bf8bc3239c69b273ecdc331a7d646-1080x1920",
+        "width": 1080,
+        "height": 1920
+      },
+      "video": null,
+      "pdf": {
+        "src": "/media/6593f8c8017b86cf8f67.pdf",
+        "kind": "file",
+        "alt": "",
+        "width": 1920,
+        "height": 1080
+      },
+      "blocks": [
+        {
+          "type": "mediaGrid",
+          "rows": [
+            [
+              {
+                "src": "/media/538b7d941e5bb584709f.mp4",
+                "kind": "video",
+                "alt": "An image uploaded to Strapi called 411c0c64457f286bf7e51b17a89a57a81c1375bb",
+                "width": 1920,
+                "height": 1080
+              },
+              {
+                "src": "/media/a344cb1b5131cc948928.webp",
+                "kind": "image",
+                "alt": "An image uploaded to Strapi called bd53881f4a2799a0bc2072d62b163e988dc478f6-1320x1320",
+                "width": 1320,
+                "height": 1320
+              }
+            ],
+            [
+              {
+                "src": "/media/15d221ae6f60dcb0ef81.mp4",
+                "kind": "video",
+                "alt": "An image uploaded to Strapi called 126cf2425103f26fc39386198ba9a5754ffdd301",
+                "width": 1920,
+                "height": 1080
+              },
+              {
+                "src": "/media/8822485d83a1f0b0bf62.webp",
+                "kind": "image",
+                "alt": "An image uploaded to Strapi called b3fa8d70cb75615d799c4c3b96317ef2e7a3da57-660x660",
+                "width": 660,
+                "height": 660
+              }
+            ]
+          ]
+        },
+        {
+          "type": "media",
+          "title": "",
+          "image": {
+            "src": "/media/bd763bdbf9f32c6796fd.webp",
+            "kind": "image",
+            "alt": "Cake Wallet Logo",
+            "width": 2880,
+            "height": 1100
+          },
+          "poster": null,
+          "video": null
+        },
+        {
+          "type": "steps",
+          "steps": [
+            {
+              "title": "Creating a brand is a piece of cake. ",
+              "subtitle": "Project Overview",
+              "description": [
+                {
+                  "type": "paragraph",
+                  "children": [
+                    {
+                      "text": "Otherlife partnered with Cake Wallet to redefine their brand from the ground up. The new identity repositions Cake Wallet as a simple, secure, and accessible solution - with visual and verbal cues that bring its name to life. Through strategic refinement and a complete brand system, we introduced uplifting design elements, refreshed typography, a bold new logo, and a layered color palette to create a playful yet credible brand that stands out in a crowded category.",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Challenge",
+              "subtitle": "",
+              "description": [
+                {
+                  "type": "paragraph",
+                  "children": [
+                    {
+                      "text": "Cake Wallet had a loyal user base and strong functionality, but its brand lacked distinctiveness and emotional resonance. The name “Cake” presented an opportunity to be more approachable and memorable - but it wasn’t being fully leveraged. The challenge was to create a cohesive brand strategy that communicated simplicity, security, and delight, while helping Cake appeal to a broader audience and compete more confidently in the wallet space.",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Solution",
+              "subtitle": "",
+              "description": [
+                {
+                  "type": "paragraph",
+                  "children": [
+                    {
+                      "text": "Otherlife delivered a comprehensive rebrand rooted in clarity, creativity, and consistency. We developed a playful visual language inspired by the idea of “layered simplicity” - drawing from the metaphor of cake slices to inform logo design, iconography, and motion behavior. The refreshed identity includes a vibrant color system, modern typography, and UI-inspired graphics designed to convey trust, ease, and fun across all platforms. These assets were supported by a clear brand strategy that gave Cake Wallet a stronger voice in the market.",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Result",
+              "subtitle": "",
+              "description": [
+                {
+                  "type": "paragraph",
+                  "children": [
+                    {
+                      "text": "Cake Wallet emerged with a fresh identity that’s both technically sound and emotionally engaging. The new brand makes a strong first impression, improves credibility, and gives the team the tools to scale communications across product and marketing. With a stronger foundation and distinct market position, Cake Wallet is now better equipped to grow its audience, expand awareness, and compete with leading wallets - while staying true to its name.",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "media",
+          "title": "",
+          "image": {
+            "src": "/media/c46722f9459cec0dca5f.webp",
+            "kind": "image",
+            "alt": "Cake Wallet Colors",
+            "width": 2880,
+            "height": 1620
+          },
+          "poster": null,
+          "video": null
+        },
+        {
+          "type": "quote",
+          "quote": {
+            "quote": "\"Otherlife delivered a smart, scalable brand for Cake Wallet — clean, secure, and true to who we are. The logo is clever and beautifully crafted, setting us up for growth. Most importantly, they took the time to truly understand our business. We couldn’t be happier.\"",
+            "author": "Vikrant Sharma",
+            "role": "CEO",
+            "company": "Cake Wallet",
+            "image": {
+              "src": "/media/5694e545a109669922b3.webp",
+              "kind": "image",
+              "alt": "An image uploaded to Strapi called ffb3cd59306eb8cfbbcc0b7e6b7592f1abcc6813-50x50",
+              "width": 50,
+              "height": 50
+            }
+          }
+        },
+        {
+          "type": "media",
+          "title": "",
+          "image": {
+            "src": "/media/83d8aebe70fa8b85e249.webp",
+            "kind": "image",
+            "alt": "Cake Wallet",
+            "width": 2880,
+            "height": 1600
+          },
+          "poster": null,
+          "video": null
+        }
+      ]
+    },
+    {
+      "title": "Christie's",
+      "subtitle": "Art + Tech Summit",
+      "slug": "christies",
+      "projectText": " The Christie's Art+Tech Summit 2024, in partnership with MoonPay, featuring a unique NFT series tied to key themes of the summit.",
+      "servicesText": "Visual Design, Engineering, Strategy",
+      "year": "2024",
+      "image": {
+        "src": "/media/02ce1ae952a8a652b04f.webp",
+        "kind": "image",
+        "alt": "Christie's",
+        "width": 2880,
+        "height": 1652
+      },
+      "mobileImage": {
+        "src": "/media/d1b41d18f7d41f3b5201.webp",
+        "kind": "image",
+        "alt": "christies",
+        "width": 720,
+        "height": 1280
+      },
+      "video": null,
+      "pdf": {
+        "src": "/media/202aef59047cff9dc7f9.pdf",
+        "kind": "file",
+        "alt": "",
+        "width": 1920,
+        "height": 1080
+      },
+      "blocks": [
+        {
+          "type": "media",
+          "title": "",
+          "image": null,
+          "poster": {
+            "src": "/media/8d63972c4b148c1516b8.webp",
+            "kind": "image",
+            "alt": "An image uploaded to Strapi called 5679d92c430aad73035faea11a8b1f2792d4a0ec-1920x1080",
+            "width": 1920,
+            "height": 1080
+          },
+          "video": {
+            "src": "/media/c93c9f460fbd3e45202d.mp4",
+            "kind": "video",
+            "alt": "",
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        {
+          "type": "stats",
+          "title": "Outcome",
+          "stats": [
+            {
+              "value": "160+",
+              "label": "Mints of Along The River In Auntieverse"
+            },
+            {
+              "value": "340+",
+              "label": "IRL Mints"
+            },
+            {
+              "value": "QR",
+              "label": "Code Technology"
+            }
+          ]
+        },
+        {
+          "type": "images",
+          "images": [
+            {
+              "src": "/media/d787af7f29a96ded1cfd.webp",
+              "kind": "image",
+              "alt": "An image uploaded to Strapi called f0dac3804239fc1dc82a21b85bc0b9b1dfa634a8-3334x1875",
+              "width": 3334,
+              "height": 1875
+            },
+            {
+              "src": "/media/2c37e24feb3cb8e08be7.webp",
+              "kind": "image",
+              "alt": "An image uploaded to Strapi called 45c332784cf5e1fd32095e614a6a3a46f9be75fd-1600x1600",
+              "width": 1600,
+              "height": 1600
+            },
+            {
+              "src": "/media/61fc05d0380045d37ae4.webp",
+              "kind": "image",
+              "alt": "An image uploaded to Strapi called 4a6fe453e1a530ea385f9c7a815eab4c837281ad-1600x1600",
+              "width": 1600,
+              "height": 1600
+            }
+          ]
+        },
+        {
+          "type": "steps",
+          "steps": [
+            {
+              "title": "Exploring the Future of Art, Luxury, and Technology",
+              "subtitle": "Project Overview",
+              "description": [
+                {
+                  "type": "paragraph",
+                  "children": [
+                    {
+                      "text": "The Christie's Art+Tech Summit 2024, in collaboration with MoonPay, presents a series of NFTs available to attendees through QR codes displayed during the summit. The NFTs correspond to the event’s four core innovation pillars: AI in Real Life, Thoughtful Luxury, Art and its Market, and New Paradigms in Technology. Attendees who collect all four NFTs will receive an exclusive gift from the artist Niceaunties. This project aims to merge the world of digital art, sustainability, luxury, and advanced technologies, exploring new frontiers in these fields.\n\n\n\n\n\n\n",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Challenge",
+              "subtitle": "",
+              "description": [
+                {
+                  "type": "paragraph",
+                  "children": [
+                    {
+                      "text": "Christie’s needed an engaging Web3 experience for the 2024 Art + Tech Summit, allowing attendees to claim NFTs via QR codes.",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Solution",
+              "subtitle": "",
+              "description": [
+                {
+                  "type": "paragraph",
+                  "children": [
+                    {
+                      "text": "Otherlife created a seamless web platform where attendees could mint Summit NFTs using QR codes linked to event sections. The platform used HyperMint API for time-restricted minting, with a personalized \"My Collection\" page for viewing all NFTs, including airdrops from featured artist Niceaunties.\n",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Result",
+              "subtitle": "",
+              "description": [
+                {
+                  "type": "paragraph",
+                  "children": [
+                    {
+                      "text": "The activation successfully blended art and technology, delivering an interactive NFT experience. Attendees easily collected and viewed NFTs, while the event demonstrated Christie’s leadership in digital innovation.",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "images",
+          "images": [
+            {
+              "src": "/media/9f2849e19332dc232ea3.webp",
+              "kind": "image",
+              "alt": "An image uploaded to Strapi called 1af8483c58eb4b5963a43651509f0e9db47397b2-2878x1734",
+              "width": 2878,
+              "height": 1734
+            },
+            {
+              "src": "/media/4498ca2d36920b7bdfc7.webp",
+              "kind": "image",
+              "alt": "An image uploaded to Strapi called 73167d99b3221aa27fd5b7f3403e6f0fde71b34f-1328x1328",
+              "width": 1328,
+              "height": 1328
+            },
+            {
+              "src": "/media/c9efa0c11134c592d37b.webp",
+              "kind": "image",
+              "alt": "An image uploaded to Strapi called e83653dd25b728530c76ecd3b72d6dd60bf5d18e-1328x1328",
+              "width": 1328,
+              "height": 1328
+            },
+            {
+              "src": "/media/5559a7dcfa96477bdbef.webp",
+              "kind": "image",
+              "alt": "An image uploaded to Strapi called de9385de54be5bb6f43a152769708e387f68b4ae-1328x1328",
+              "width": 1328,
+              "height": 1328
+            },
+            {
+              "src": "/media/931f7d13f2e504affc96.webp",
+              "kind": "image",
+              "alt": "An image uploaded to Strapi called fb7b5f457c45c0320d288d0d6af776f07920ae74-1328x1328",
+              "width": 1328,
+              "height": 1328
+            }
+          ]
+        },
+        {
+          "type": "press",
+          "articles": [
+            {
+              "title": "MoonPay and Christie’s dip into AI-generated art with new ‘Web3 Tools’",
+              "date": "July 16h, 2024",
+              "image": {
+                "src": "/media/b0fcc7a6d9954c9322c0.webp",
+                "kind": "image",
+                "alt": "cointelegraph",
+                "width": 600,
+                "height": 600
+              }
+            },
+            {
+              "title": "Christie’s Art + Tech Summit 2024 Features Refik Anadol, Beeple, Sasha Stiles & More",
+              "date": "July 10, 2024",
+              "image": {
+                "src": "/media/8b3cfbf921ada54ea0c6.svg",
+                "kind": "image",
+                "alt": "nft now",
+                "width": 466,
+                "height": 130
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Hypernative",
+      "subtitle": null,
+      "slug": "hypernative",
+      "projectText": "Elevating Hypernative’s brand with an interactive 3D motion design system and dynamic, multi-layered website",
+      "servicesText": "Branding, Visual Design, Engineering, Interactive",
+      "year": "2024",
+      "image": {
+        "src": "/media/7148e6855417dca463ac.webp",
+        "kind": "image",
+        "alt": "Hypernative",
+        "width": 2880,
+        "height": 1652
+      },
+      "mobileImage": {
+        "src": "/media/be1504ed474b405e9c29.webp",
+        "kind": "image",
+        "alt": "Hypernative",
+        "width": 720,
+        "height": 1280
+      },
+      "video": null,
+      "pdf": {
+        "src": "/media/bbb7863541996625fb54.pdf",
+        "kind": "file",
+        "alt": "",
+        "width": 1920,
+        "height": 1080
+      },
+      "blocks": [
+        {
+          "type": "media",
+          "title": "",
+          "image": null,
+          "poster": {
+            "src": "/media/565ed7b93e4e97881ea8.webp",
+            "kind": "image",
+            "alt": "An image uploaded to Strapi called 196ae2a6c167efc6ca54368ae16fc16eb992ce3c-1920x1080",
+            "width": 1920,
+            "height": 1080
+          },
+          "video": {
+            "src": "/media/9de287f13de8a7efbff0.mp4",
+            "kind": "video",
+            "alt": "",
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        {
+          "type": "steps",
+          "steps": [
+            {
+              "title": "Proactive Web3 Security Solutions",
+              "subtitle": "Project Overview",
+              "description": [
+                {
+                  "type": "paragraph",
+                  "children": [
+                    {
+                      "text": "Hypernative is a Web3 security platform designed to detect and prevent attacks in real-time, safeguarding blockchain protocols, chains, and digital assets. It uses automated monitoring, risk detection, and transaction-level policy enforcement to protect users and projects from exploits before they cause damage. Hypernative’s solutions, such as its Security Oracle and Screener, have helped protect over $37 billion in assets across multiple blockchains. With a strong focus on proactive security, Hypernative aims to eliminate vulnerabilities and enhance the safety of decentralized ecosystems.\n\n",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Challenge",
+              "subtitle": "",
+              "description": [
+                {
+                  "type": "paragraph",
+                  "children": [
+                    {
+                      "text": "Hypernative sought to refresh their brand and expand their online presence beyond a landing page, aiming for a comprehensive website that better reflected their identity and values.",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Solution",
+              "subtitle": "",
+              "description": [
+                {
+                  "type": "paragraph",
+                  "children": [
+                    {
+                      "text": "Otherlife collaborated closely with Hypernative to integrate a cutting-edge 3D motion design system into their brand. This innovative approach was seamlessly scaled across their new, multi-layered interactive website, enhancing both visual appeal and user experience. ",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Result",
+              "subtitle": "",
+              "description": [
+                {
+                  "type": "paragraph",
+                  "children": [
+                    {
+                      "text": "The rebrand and expanded website gave Hypernative a modern, elevated presence. The 3D motion elements not only elevated the site's aesthetics,  but also reinforced Hypernative's polished and secure brand image. This strategic update successfully conveyed the sense of trust and sophistication that Hypernative desired, strengthening their connection with customers and enhancing their overall brand perception. ",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "images",
+          "images": [
+            {
+              "src": "/media/7ff6f22fe07d1ba33816.webp",
+              "kind": "image",
+              "alt": "Hypernative",
+              "width": 1875,
+              "height": 1875
+            },
+            {
+              "src": "/media/220055978c082d85ee71.webp",
+              "kind": "image",
+              "alt": "Tablet of Hypernative website",
+              "width": 1875,
+              "height": 1875
+            },
+            {
+              "src": "/media/a5db8b05df1df31ad100.webp",
+              "kind": "image",
+              "alt": "An image uploaded to Strapi called ad3a30ca79a724a4f521b488b11dece1b07fc6e8-1875x1875",
+              "width": 1875,
+              "height": 1875
+            },
+            {
+              "src": "/media/f51805d2fd21f2f5534b.webp",
+              "kind": "image",
+              "alt": "Hypernative design system",
+              "width": 2048,
+              "height": 2048
+            },
+            {
+              "src": "/media/836ce08a59c2a8435f00.webp",
+              "kind": "image",
+              "alt": "On phone ",
+              "width": 660,
+              "height": 660
+            }
+          ]
+        },
+        {
+          "type": "press",
+          "articles": [
+            {
+              "title": "Hypernative secures $16m in Series A to enhance Web3 security solutions",
+              "date": "September 4, 2024",
+              "image": {
+                "src": "/media/e0d28211c007ba7567e3.webp",
+                "kind": "image",
+                "alt": "FinTech Global",
+                "width": 329,
+                "height": 109
+              }
+            },
+            {
+              "title": "Hypernative Bolsters Bitcoin L2 Security as Stacks Ecosystem Gets Real-Time Protection",
+              "date": "July 9, 2024",
+              "image": {
+                "src": "/media/2014438d0fbdc0d5b5a3.webp",
+                "kind": "image",
+                "alt": "Hackernoon",
+                "width": 900,
+                "height": 900
+              }
+            },
+            {
+              "title": "Hypernative: Mitigating Web3 risks with resilient Chainstack infrastructure",
+              "date": "May 28, 2024",
+              "image": {
+                "src": "/media/5b4368efbad4f2b805b0.svg",
+                "kind": "image",
+                "alt": "Chainstack",
+                "width": 204,
+                "height": 33
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Narcos",
+      "subtitle": "Locke Holdings / Dazzy",
+      "slug": "narcos",
+      "projectText": "Immersive NARCOS storefront and digital collectibles that re-engaged fans and seamlessly introduced them to Web3 via NFC technology.",
+      "servicesText": "Visual Design, Engineering, Strategy",
+      "year": "2024",
+      "image": {
+        "src": "/media/ea8e2ed3cfdb361410bd.webp",
+        "kind": "image",
+        "alt": "Narcos",
+        "width": 2880,
+        "height": 1652
+      },
+      "mobileImage": {
+        "src": "/media/1fddf82acacbe05d960a.webp",
+        "kind": "image",
+        "alt": "Narcos",
+        "width": 720,
+        "height": 1280
+      },
+      "video": null,
+      "pdf": {
+        "src": "/media/d755a3de393eb3732ef4.pdf",
+        "kind": "file",
+        "alt": "",
+        "width": 1920,
+        "height": 1080
+      },
+      "blocks": [
+        {
+          "type": "media",
+          "title": "",
+          "image": {
+            "src": "/media/ac9a811e48153b103670.webp",
+            "kind": "image",
+            "alt": "Narcos TV",
+            "width": 1340,
+            "height": 630
+          },
+          "poster": {
+            "src": "/media/71e8637d3c453f1ddfc4.webp",
+            "kind": "image",
+            "alt": "An image uploaded to Strapi called 08f3cac1ffffcdbca296dcf3ec742576c4769e8f-3413x1920",
+            "width": 3413,
+            "height": 1920
+          },
+          "video": {
+            "src": "/media/6ee5b3b516555a926e63.mp4",
+            "kind": "video",
+            "alt": "",
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        {
+          "type": "stats",
+          "title": "Outcome",
+          "stats": [
+            {
+              "value": "3.3k",
+              "label": "Bitcoin Inscriptions"
+            },
+            {
+              "value": "Web3",
+              "label": "Token gated commerce"
+            },
+            {
+              "value": "NFC",
+              "label": "Digital collectibles via NFC technology"
+            }
+          ]
+        },
+        {
+          "type": "images",
+          "images": [
+            {
+              "src": "/media/9c78655cf147c91ea2d1.webp",
+              "kind": "image",
+              "alt": "An image uploaded to Strapi called 14048e15a667efb02ab5fa9594722afe97bfa621-3334x1875",
+              "width": 3334,
+              "height": 1875
+            },
+            {
+              "src": "/media/64ab08669ade800ce275.webp",
+              "kind": "image",
+              "alt": "An image uploaded to Strapi called 2711c8de44ef4486d2d143674d71bd290b342906-1600x1600",
+              "width": 1600,
+              "height": 1600
+            },
+            {
+              "src": "/media/66d914b1ef24b53d561a.webp",
+              "kind": "image",
+              "alt": "An image uploaded to Strapi called fd4f5dbac7271499672af642637d240b90babeb1-1600x1600",
+              "width": 1600,
+              "height": 1600
+            }
+          ]
+        },
+        {
+          "type": "steps",
+          "steps": [
+            {
+              "title": "Fusing Fashion with Iconic Narcos Aesthetic",
+              "subtitle": "Project Overview",
+              "description": [
+                {
+                  "type": "paragraph",
+                  "children": [
+                    {
+                      "text": "The Narcos On Chain project merges fashion with digital collectibles, drawing inspiration from the Narcos universe. It offers a variety of merchandise such as hoodies, t-shirts, and sculptures based on iconic elements from the show. The collection emphasizes unique designs and limited-edition items, appealing to fans of the series and collectors alike.",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Challenge",
+              "subtitle": "",
+              "description": [
+                {
+                  "type": "paragraph",
+                  "children": [
+                    {
+                      "text": "To give the hit Netflix show NARCOS new life, Otherlife was challenged with developing a digital merchandise and collectibles storefront that would re-engage global fans and introduce them to Web3. The project was developed for Locke Holdings, a NARCOS IP holder.",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Solution",
+              "subtitle": "",
+              "description": [
+                {
+                  "type": "paragraph",
+                  "children": [
+                    {
+                      "text": "Otherlife crafted an immersive Shopify experience transporting users to Pablo Esocabar’s iconic estate Hacienda Napoles, where they could purchase exclusive NARCOS merchandise paired with digital collectibles via NFC technology. We designed 3D versions of the merchandise collection, and digital twins for each product.  The innovative platform paid tribute to the iconic NARCOS legacy, re-excited fans, and set a new standard for e-commerce.",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Result",
+              "subtitle": "",
+              "description": [
+                {
+                  "type": "paragraph",
+                  "children": [
+                    {
+                      "text": "The collaboration with Locke Holdings and Gaumont resulted in a unique, immersive shopping experience that revitalized the NARCOS brand and offered fans new ways to experience the show. Otherlife pushed the boundaries of what’s possible with Shopify, and created an easy fan pathway into Web3 by allowing them to effortlessly claim digital twins of their purchases using NFC technology.",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "images",
+          "images": [
+            {
+              "src": "/media/4aa40d3963d44c0d4570.webp",
+              "kind": "image",
+              "alt": "An image uploaded to Strapi called ccaae7d1ff5572a9e32a5e7a719c48971fdb7a66-3334x1875",
+              "width": 3334,
+              "height": 1875
+            },
+            {
+              "src": "/media/6aa3d765921a75e3f994.webp",
+              "kind": "image",
+              "alt": "An image uploaded to Strapi called 7c750c7a70a168326ea922007c576099efbb0b58-1600x1600",
+              "width": 1600,
+              "height": 1600
+            },
+            {
+              "src": "/media/4150d691b97363a3e7be.webp",
+              "kind": "image",
+              "alt": "An image uploaded to Strapi called 13d4c8dd94b6d1f884117089cf78eda7f6234925-1600x1600",
+              "width": 1600,
+              "height": 1600
+            },
+            {
+              "src": "/media/ed9bbf8050b99c180050.webp",
+              "kind": "image",
+              "alt": "An image uploaded to Strapi called 9b686750419bc5ef30c23f1ac243da3ff9ef9366-1600x1600",
+              "width": 1600,
+              "height": 1600
+            },
+            {
+              "src": "/media/8f0ccfcb21429cfa26ff.webp",
+              "kind": "image",
+              "alt": "An image uploaded to Strapi called 9de55d60f253869951271490ba6cdd6224b85aaa-1600x1600",
+              "width": 1600,
+              "height": 1600
+            }
+          ]
+        },
+        {
+          "type": "images",
+          "images": [
+            {
+              "src": "/media/e265a343f3fd3456a76d.webp",
+              "kind": "image",
+              "alt": "Narcos on iPhone",
+              "width": 1340,
+              "height": 790
+            }
+          ]
+        },
+        {
+          "type": "images",
+          "images": [
+            {
+              "src": "/media/46e8b4b960d88474454c.webp",
+              "kind": "image",
+              "alt": "Narcos Desktop & Mobile View",
+              "width": 1340,
+              "height": 790
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Onramper",
+      "subtitle": "Simplifying Transaction Success",
+      "slug": "onramper",
+      "projectText": "A global rebrand and website for Onramper, the fiat-to-crypto aggregator powering 2000+ assets across 190+ countries.",
+      "servicesText": "Branding, Visual Design, Strategy, Website",
+      "year": "2025",
+      "image": {
+        "src": "/media/1549a613b764fd18a99f.webp",
+        "kind": "image",
+        "alt": "Onramper",
+        "width": 3413,
+        "height": 1920
+      },
+      "mobileImage": {
+        "src": "/media/5f3c0b44c163c91c9fdf.webp",
+        "kind": "image",
+        "alt": "An image uploaded to Strapi called 5aa06cd0fc70cac6993a24507eb0d9b82fcf469f-720x1080",
+        "width": 720,
+        "height": 1080
+      },
+      "video": {
+        "src": "/media/1d05780bab7e95844286.mp4",
+        "kind": "video",
+        "alt": "",
+        "width": 1920,
+        "height": 1080
+      },
+      "pdf": null,
+      "blocks": [
+        {
+          "type": "media",
+          "title": "",
+          "image": null,
+          "poster": {
+            "src": "/media/098549950da35802f543.webp",
+            "kind": "image",
+            "alt": "An image uploaded to Strapi called bf7d53fba04cc0682c4c2b47df199abca7c127ec-1920x1080",
+            "width": 1920,
+            "height": 1080
+          },
+          "video": {
+            "src": "/media/c190c49251f08f9108e3.mp4",
+            "kind": "video",
+            "alt": "",
+            "width": 1920,
+            "height": 1080
+          }
+        },
+        {
+          "type": "stats",
+          "title": "",
+          "stats": [
+            {
+              "value": "130+",
+              "label": "payment methods"
+            },
+            {
+              "value": "2000+",
+              "label": " assets"
+            },
+            {
+              "value": "190+",
+              "label": "countries"
+            }
+          ]
+        },
+        {
+          "type": "quote",
+          "quote": {
+            "quote": "\"Otherlife amazed us with how effortlessly they weave strategy, design, and engineering into a single, fluid workflow. Their team moved with impressive speed and great attention to detail, all while showcasing a world‑class eye for standout design.\"",
+            "author": "Thijs Maas",
+            "role": "Co-Founder and CEO",
+            "company": "Onramper",
+            "image": {
+              "src": "/media/58711901e5b7c6386db2.webp",
+              "kind": "image",
+              "alt": "Thjis Maas",
+              "width": 101,
+              "height": 101
+            }
+          }
+        },
+        {
+          "type": "steps",
+          "steps": [
+            {
+              "title": "Build Brilliant Onramp Experiences - A Global Brand & Product Overhaul",
+              "subtitle": "Project Overview",
+              "description": [
+                {
+                  "type": "paragraph",
+                  "children": [
+                    {
+                      "text": "Onramper is simplifying how the world accesses digital assets. With support for over 130+ payment methods, 2000+ assets, and coverage in 190+ countries, the platform needed a refined brand and web experience to reflect its leadership in fiat-to-crypto aggregation. Otherlife partnered with Onramper to evolve its identity, redesign its digital footprint, and position the company as the category’s trusted, intelligent authority. Inspired by the brand promise - “Build brilliant fiat to crypto onramp experiences\" - we restructured the site architecture, developed a flexible design system, and surfaced proof points across trust, speed, and integration simplicity.",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Challenge",
+              "subtitle": "",
+              "description": [
+                {
+                  "type": "paragraph",
+                  "children": [
+                    {
+                      "text": "Onramper had outgrown its brand. It was positioned as a simple widget, not as a platform. The existing site lacked clarity, trust signals, and differentiation. With expanding features - swaps, offramps, analytics - it needed a unified brand system that could scale across products and markets.\n\n",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Solution",
+              "subtitle": "",
+              "description": [
+                {
+                  "type": "paragraph",
+                  "children": [
+                    {
+                      "text": "Starting from strategy, we refined Onramper’s purpose (“to give financial power to everyone”) and positioned it as an expert-led aggregator - trusted, fast, and proven. We introduced sub-brand lockups (swaps, terminal, withdraw), implemented a modular design system, and built a new web experience anchored in glass textures, bold colorwork, and asymmetrical layouts. The updated site integrates product modules, dynamic partner logos, metric callouts (e.g. “130+ APMs”), and interactive demos to showcase the platform’s API and routing intelligence. Everything - from typography to UI motif - was built for clarity, flexibility, and global scale.",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Result",
+              "subtitle": "",
+              "description": [
+                {
+                  "type": "paragraph",
+                  "children": [
+                    {
+                      "text": "The full brand and website launched to strong internal and industry-wide reception. Clients and partners now understand Onramper’s role as the world’s leading aggregator - not just a widget. With conversion-focused UX, scalable components, and consistent messaging, the platform is now equipped to onboard enterprise clients and support rapid growth. Success metrics and partner adoption - including Bitcoin.com and Token.com - reinforce the market shift toward Onramper’s unified stack.",
+                      "type": "text"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "media",
+          "title": "",
+          "image": {
+            "src": "/media/67b69a71dfa0233c2f7f.webp",
+            "kind": "image",
+            "alt": "An image uploaded to Strapi called d1f59fbbd7c1a63f39991f2ea581e7884331ed7e-1340x830",
+            "width": 1340,
+            "height": 830
+          },
+          "poster": null,
+          "video": null
+        },
+        {
+          "type": "mediaGrid",
+          "rows": [
+            [
+              {
+                "src": "/media/4e55effa1a9d86cfe5df.webp",
+                "kind": "image",
+                "alt": "An image uploaded to Strapi called 562d765a082fb12b95843940bd19dc4bc45e680f-660x660",
+                "width": 660,
+                "height": 660
+              },
+              {
+                "src": "/media/faab18cb9ac973cd8268.webp",
+                "kind": "image",
+                "alt": "An image uploaded to Strapi called d5d9dc27706a94b0b97be79fdcd2c1614176fe37-660x660",
+                "width": 660,
+                "height": 660
+              }
+            ],
+            [
+              {
+                "src": "/media/9e5582a5e6cd4e931935.webp",
+                "kind": "image",
+                "alt": "An image uploaded to Strapi called ac79b547b0de8d43cc7ac6cc31b4c5f9619b8e99-660x660",
+                "width": 660,
+                "height": 660
+              },
+              {
+                "src": "/media/bf73f672f8453bb228b9.webp",
+                "kind": "image",
+                "alt": "An image uploaded to Strapi called df440e7240b0e2bb3e9090baa2d7def3649bf6ac-660x660",
+                "width": 660,
+                "height": 660
+              }
+            ]
+          ]
+        },
+        {
+          "type": "media",
+          "title": "",
+          "image": {
+            "src": "/media/61fd8c73fc78534ab5c3.webp",
+            "kind": "image",
+            "alt": "An image uploaded to Strapi called a2dddb44346325c444fd2e9bf83356e781ace5bc-1920x1080",
+            "width": 1920,
+            "height": 1080
+          },
+          "poster": null,
+          "video": null
+        }
+      ]
+    }
+  ]
+}
