@@ -5,3 +5,7 @@
 .count { position:absolute; bottom:45px; left:50%; transform:translateX(-50%); font-family:Aeonik,Arial,sans-serif; color:#888; font-size:14px; }
 .sheet { position:absolute; inset:0; width:100%; height:100%; overflow:hidden; will-change:clip-path; }
 .snapshot { min-height:100%; background:#fff; }
+
+.overlay[data-color-theme='ivory-burgundy'] { background:var(--home-paper); }
+.overlay[data-color-theme='ivory-burgundy'] .wordmark img { filter:url(#home-burgundy-ink); }
+.overlay[data-color-theme='ivory-burgundy'] .count { color:#86616b; }

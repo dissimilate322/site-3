@@ -6,9 +6,9 @@ const content=require('../src/data/content.json');
 const base=process.argv[2]||'http://localhost:3000';
 const out=path.resolve('artifacts/motion');fs.mkdirSync(out,{recursive:true});
 const report={checks:[],errors:[]};
-async function assertWhitePixel(page,png,x,y){
+async function assertPaperPixel(page,png,x,y){
  const pixel=await page.evaluate(async({data,x,y})=>{const img=new Image();img.src='data:image/png;base64,'+data;await img.decode();const c=document.createElement('canvas');c.width=img.width;c.height=img.height;const context=c.getContext('2d');context.drawImage(img,0,0);return [...context.getImageData(x,y,1,1).data]}, {data:png.toString('base64'),x:Math.round(x),y:Math.round(y)});
- assert(pixel.slice(0,3).every(v=>v>=250),'space between projects is visibly white: '+pixel);
+ assert(pixel.slice(0,3).every((v,i)=>Math.abs(v-[247,243,239][i])<=2),'space between projects matches the ivory page background: '+pixel);
 }
 (async()=>{
  const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||'/usr/bin/chromium',args:['--no-sandbox','--enable-unsafe-swiftshader']});
@@ -46,8 +46,8 @@ async function assertWhitePixel(page,png,x,y){
      });
      assert.equal(bounds.length,2,'both curved neighbouring surfaces remain visible');
      const start=bounds[0][1],end=bounds[1][0],gap=end-start;
-     assert(gap>height*.35&&gap<height*.45,'recorded white gap separates neighbouring projects: '+gap);
-     const png=await p.screenshot({path:path.join(out,`gap-${index}-${width}.png`)});await assertWhitePixel(p,png,width/2,start+gap/2);
+     assert(gap>height*.35&&gap<height*.45,'recorded gap separates neighbouring projects: '+gap);
+     const png=await p.screenshot({path:path.join(out,`gap-${index}-${width}.png`)});await assertPaperPixel(p,png,width/2,start+gap/2);
      if(width===1920&&index===1){
       const edge=await p.evaluate(()=>{const c=document.createElement('canvas');c.width=1920;c.height=936;const cx=c.getContext('2d');cx.drawImage(document.querySelector('[data-project-canvas]'),0,0);const data=cx.getImageData(0,0,1920,936).data;return [192,384,576,768,960,1152,1344,1536,1728].map(x=>{for(let y=140;y<936;y++)if(data[(y*1920+x)*4+3]>200)return y;return 936})});
       // Measured from the user's recording at 19.75s, browser chrome cropped.
@@ -56,7 +56,7 @@ async function assertWhitePixel(page,png,x,y){
       report.checks.push({reference:'user clip 19.75s',edge,maxError,outgoingBottom:start,passed:true});
      }
      const films=await p.locator('[data-featured-project] video').evaluateAll(vs=>vs.map(v=>!v.paused));assert(films[index-1]&&films[index],'both visible films play in the gap');
-     report.checks.push({width,gapBetween:index-1+' / '+index,pixels:Math.round(gap),white:true,passed:true});
+     report.checks.push({width,gapBetween:index-1+' / '+index,pixels:Math.round(gap),ivory:true,passed:true});
     }
    }
    await p.evaluate(y=>scrollTo(0,y),tracks[0]+height*.5);await p.waitForTimeout(400);
@@ -89,7 +89,7 @@ async function assertWhitePixel(page,png,x,y){
    await p.getByRole('link',{name:'Otherlife home'}).click();await p.waitForFunction(()=>document.querySelector('[data-page-transition]').dataset.state==='leaving');await p.waitForURL(base+'/');await idle();
    await p.waitForFunction(()=>document.querySelector('[data-project-canvas]')?.closest('[data-webgl="ready"]'));await p.evaluate(()=>scrollTo(0,document.documentElement.scrollHeight-innerHeight-10));await p.waitForTimeout(150);await p.mouse.wheel(0,200);await p.waitForFunction(()=>scrollY<5);await p.waitForFunction(()=>[...document.querySelectorAll('[data-home-film] video')].some(v=>v.clientWidth>0&&!v.paused));
    assert.deepEqual(errors,[]);report.checks.push({width,height,osMotion:preference,defaultMotion:'full',autoplay:true,projectPlanes:4,transitions:'case/menu/back/logo',explicitReducedMotion:true,persistentMotionSetting:true,footerLoop:true,passed:true});
-   console.log('PASS scroll, white gaps and autoplay',width,height);await p.close();
+   console.log('PASS scroll, ivory gaps and autoplay',width,height);await p.close();
   }
   for(const width of [1440,390]){
    const p=await browser.newPage({viewport:{width,height:width===390?844:900},reducedMotion:'reduce'});const errors=[];p.on('pageerror',e=>errors.push(e.message));

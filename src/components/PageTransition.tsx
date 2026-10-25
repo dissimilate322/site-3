@@ -33,7 +33,7 @@ function snapshot(source:HTMLElement,host:HTMLElement){
    if(node.readyState>=2){
     const canvas=document.createElement('canvas');canvas.width=node.videoWidth;canvas.height=node.videoHeight;
     const computed=getComputedStyle(node);
-    for(const property of ['position','left','top','width','height','object-fit','transform','mask-image','mask-composite','border-radius'])canvas.style.setProperty(property,computed.getPropertyValue(property));
+    for(const property of ['position','left','top','width','height','object-fit','transform','mask-image','mask-composite','border-radius','filter'])canvas.style.setProperty(property,computed.getPropertyValue(property));
     canvas.style.display='block';
     try{canvas.getContext('2d')?.drawImage(node,0,0);clone.replaceWith(canvas)}catch{clone.removeAttribute('autoplay')}
    }else clone.removeAttribute('autoplay');
@@ -127,5 +127,5 @@ export default function PageTransition({children}:{children:ReactNode}){
   gsap.set(count.current,{opacity:1});void ready();
   return()=>{cancelled=true;if(header){gsap.killTweensOf(header);gsap.set(header,{clearProps:'opacity'})}};
  },[pathname,reduced]);
- return <><div ref={scene} id="site-content" className={styles.scene} data-page-scene>{children}</div><div ref={overlay} className={styles.overlay} aria-hidden="true" inert data-page-transition data-state="idle"><div className={styles.wordmark}><img ref={other} src="/assets/loading-other.png" alt=""/><img ref={life} src="/assets/loading-life.png" alt=""/></div><span ref={count} className={styles.count}/><div ref={sheet} className={styles.sheet}/></div></>;
+ return <><div ref={scene} id="site-content" className={styles.scene} data-page-scene>{children}</div><div ref={overlay} className={styles.overlay} aria-hidden="true" inert data-page-transition data-state="idle" data-color-theme={pathname==='/'?'ivory-burgundy':undefined}><div className={styles.wordmark}><img ref={other} src="/assets/loading-other.png" alt=""/><img ref={life} src="/assets/loading-life.png" alt=""/></div><span ref={count} className={styles.count}/><div ref={sheet} className={styles.sheet}/></div></>;
 }
