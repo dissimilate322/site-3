@@ -263,7 +263,7 @@
  --nav-focus:var(--home-highlight);
  --nav-text:var(--home-ink);
  --nav-placeholder:var(--home-ink);
- --nav-field-rule:var(--home-line);
+ --nav-field-rule:#85858b;
  --nav-social:var(--home-highlight);
 }
 .homePage::selection,.homePage ::selection { background:var(--home-highlight); color:var(--home-ink); }

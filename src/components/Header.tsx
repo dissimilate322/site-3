@@ -77,7 +77,7 @@ export default function Header() {
   const pathname = usePathname();
   const [panel, setPanel] = useState<Panel>(null);
   const [subject, setSubject] = useState("");
-  function openContact(value = "") { setSubject(value); setPanel("contact"); }
+  function openContact(value = "") { if (closing.current) return; setSubject(value); setPanel("contact"); }
   useEffect(() => {
     const open = (event: Event) => openContact((event as CustomEvent<string>).detail || "");
     const navigate = () => setPanel(null);
@@ -90,6 +90,7 @@ export default function Header() {
   const menuButton = useRef<HTMLButtonElement>(null);
   const previousPanel = useRef<Panel>(null);
   const exitAnimation = useRef<gsap.core.Timeline | null>(null);
+  const entranceAnimation = useRef<gsap.core.Timeline | null>(null);
   const closing = useRef(false);
 
   function closePanel(next: Panel = null) {
@@ -100,6 +101,7 @@ export default function Header() {
       return;
     }
     closing.current = true;
+    entranceAnimation.current?.kill();
     gsap.killTweensOf([element, ...element.querySelectorAll("*")]);
     const timeline = gsap.timeline({
       defaults: { ease: "power2.inOut" },
@@ -112,12 +114,13 @@ export default function Header() {
         .to(element.querySelector("[data-contact-inner]"), { width: window.innerWidth < 768 ? 48 : 207, duration: 0.35 });
       if (!next) timeline.to(element, { opacity: 0, duration: 0.15 });
     } else {
-      timeline.to(element.querySelectorAll("[data-menu-link]"), { yPercent: 110, stagger: 0.04, duration: 0.25 })
-        .to(element, { x: element.clientWidth + 60, duration: 0.65, ease: "power4.in" }, "-=0.1");
+      // Move the whole panel from its current position. This also interrupts an
+      // unfinished entrance without resetting the links or hover transforms.
+      timeline.to(element, { x: window.innerWidth - element.getBoundingClientRect().left + Number(gsap.getProperty(element, "x")), opacity: 0, duration: 0.45, ease: "power2.inOut", overwrite: "auto" });
     }
   }
 
-  useEffect(() => () => { exitAnimation.current?.kill(); }, []);
+  useEffect(() => () => { exitAnimation.current?.kill(); entranceAnimation.current?.kill(); }, []);
 
   useEffect(() => {
     if (!panel) return;
@@ -142,19 +145,23 @@ export default function Header() {
       document.removeEventListener("keydown", handleKey);
       document.body.style.overflow = savedOverflow;
       if (main) main.inert = false;
-      if (before?.isConnected) before.focus({ preventScroll: true });
+      if (before?.isConnected && before !== document.body) before.focus({ preventScroll: true });
       else menuButton.current?.focus({ preventScroll: true });
     };
   }, [panel, reduced]);
 
   useLayoutEffect(() => {
+    exitAnimation.current?.kill();
+    closing.current = false;
     const media = gsap.matchMedia();
     const ctx = gsap.context(() => {
       if (!reduced) {
         if (dialog.current) {
-          if (!previousPanel.current) gsap.from(dialog.current, { x: 540, duration: 0.65, ease: "power4.out" });
+          const entrance = gsap.timeline();
+          entranceAnimation.current = entrance;
+          if (!previousPanel.current) entrance.from(dialog.current, { x: window.innerWidth - dialog.current.getBoundingClientRect().left, duration: 0.65, ease: "power4.out" }, 0);
           const links = dialog.current.querySelectorAll("[data-menu-link]");
-          if (links.length) gsap.from(links, { yPercent: 110, duration: 0.7, stagger: 0.04, delay: 0.1, ease: "power2.out" });
+          if (links.length) entrance.from(links, { yPercent: 110, duration: 0.7, stagger: 0.04, ease: "power2.out" }, 0.1);
           const inner = dialog.current.querySelector<HTMLElement>("[data-contact-inner]");
           if (inner) {
             const width = inner.clientWidth, height = inner.clientHeight;
@@ -170,7 +177,7 @@ export default function Header() {
       }
     }, root);
     previousPanel.current = panel;
-    return () => { media.revert(); ctx.revert(); };
+    return () => { entranceAnimation.current?.kill(); media.revert(); ctx.revert(); };
   }, [panel, reduced]);
 
   return <header ref={root} className={styles.header}>

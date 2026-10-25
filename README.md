@@ -29,6 +29,7 @@ npm start
 npm run test:ui -- http://localhost:3000
 npm run test:pages -- http://localhost:3000
 npm run test:motion -- http://localhost:3000
+npm run test:menu -- http://localhost:3000
 ```
 
 Playwright uses `/usr/bin/chromium` or `CHROMIUM_PATH`. Reports/screenshots are stored in ignored `artifacts/qa`, `artifacts/pages` and `artifacts/motion` directories.
@@ -58,3 +59,5 @@ See [REFERENCE.md](REFERENCE.md) for verification details and the remaining diff
 The Home interface uses the requested near-white `#fafafa` background, light grey `#eeeef0` cards/dividers, graphite `#242427` text, violet `#8750f7` buttons/active elements and light violet `#b594fa` graphics/highlights. Button labels use white for contrast. This covers typography, controls, menus/forms, loading portal and scrollbar. Client logos and hover media retain their original colours on the new light-grey card surfaces. All films and posters remain ungraded, with no filter on the video elements, project canvas or native fallback. HD files, playback and animation are unchanged. The site name remains meruem. Other routes retain their existing interface palette.
 
 [Desktop preview](https://raw.githubusercontent.com/dissimilate322/site-3/codex/wispbyte-download/meruem-preview.jpg).
+
+The meruem wordmark stays plain black and unframed across all headers and loading transitions. Form inputs have visible grey underlines, with violet focus on Home. The mobile menu has a light header band so its black wordmark remains readable.
