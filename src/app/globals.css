@@ -28,6 +28,8 @@
 }
 * { box-sizing: border-box; }
 html { background: #fff; overscroll-behavior: none; }
+html[data-smooth-scroll='ready'] { scrollbar-width:none; scroll-behavior:auto; }
+html[data-smooth-scroll='ready']::-webkit-scrollbar { display:none; }
 body {
   margin: 0;
   background: #fff;
