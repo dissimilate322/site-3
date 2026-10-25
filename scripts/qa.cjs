@@ -70,7 +70,7 @@ async function noOverflow(page, label) {
       await page.getByRole('button',{name:'Menu',exact:true}).click(); await settle(page);
       const menu=page.getByRole('dialog',{name:'Navigation'});
       assert(await menu.isVisible());
-      assert.equal(await menu.locator('nav a').count(),4);
+      assert.equal(await menu.locator('nav a').count(),2);
       await page.waitForFunction(() => [...document.querySelectorAll('[data-menu-link]')].every(e => Math.abs(new DOMMatrix(getComputedStyle(e).transform).m42) < 0.1));
       await noOverflow(page,`${width} menu`);
       await page.screenshot({path:path.join(output,`menu-${width}.png`)});
@@ -134,10 +134,11 @@ async function noOverflow(page, label) {
     assert.equal(valid.status(),200);assert.deepEqual(await valid.json(),{ok:true,mode:'preview',sent:false});
     record('Contact API rejects malformed/invalid data and confirms preview mode');
     await page.goto(`${baseURL}/work`,{waitUntil:'networkidle'});await settle(page);
-    await page.route('https://www.otherlife.xyz/work/artist-accelerator', route => route.fulfill({status:200,contentType:'text/html',body:'<title>Case study destination</title>'}));
     await page.locator('#projects a').first().click();
-    await page.waitForURL('https://www.otherlife.xyz/work/artist-accelerator');
-    record('Project card navigates to its verified original case-study URL');
+    await page.waitForURL(`${baseURL}/work/artist-accelerator`);
+    assert.equal(await page.locator('h1').innerText(),'Artist Accelerator');
+    assert.equal(await page.locator('a[href^="https://"]').count(),0);
+    record('Project card opens its local project overview without external links');
     await context.close();
     const reduced=await browser.newContext({viewport:{width:390,height:844},reducedMotion:'reduce',hasTouch:true});
     const reducedPage=await reduced.newPage();

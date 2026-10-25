@@ -24,7 +24,7 @@ export const projects: readonly Project[] = [
     "description": "Fully accessible, WebGL experience integrating Mastercard’s sonic brand into a dynamic digital pass.",
     "year": "2024",
     "services": "Visual Design, Engineering, Strategy, Interactive",
-    "href": "https://www.otherlife.xyz/work/artist-accelerator",
+    "href": "/work/artist-accelerator",
     "image": {
       "src": "/assets/artist-accelerator.jpeg",
       "width": 2880,
@@ -40,7 +40,7 @@ export const projects: readonly Project[] = [
     "description": "Rebranding Onramper for Scale",
     "year": "2025",
     "services": "Branding, Visual Design, Strategy, Website",
-    "href": "https://www.otherlife.xyz/work/onramper",
+    "href": "/work/onramper",
     "image": {
       "src": "/assets/onramper.png",
       "width": 3413,
@@ -56,7 +56,7 @@ export const projects: readonly Project[] = [
     "description": " The Christie's Art+Tech Summit 2024",
     "year": "2024",
     "services": "Visual Design, Engineering, Strategy",
-    "href": "https://www.otherlife.xyz/work/christies",
+    "href": "/work/christies",
     "image": {
       "src": "/assets/christies.jpeg",
       "width": 2880,
@@ -72,7 +72,7 @@ export const projects: readonly Project[] = [
     "description": "Creating a brand is a piece of cake",
     "year": "2025",
     "services": "Branding, Visual Design, Strategy",
-    "href": "https://www.otherlife.xyz/work/cake-wallet",
+    "href": "/work/cake-wallet",
     "image": {
       "src": "/assets/cake-wallet.png",
       "width": 2880,
@@ -88,7 +88,7 @@ export const projects: readonly Project[] = [
     "description": "Immersive NARCOS storefront and digital collectibles.",
     "year": "2024",
     "services": "Visual Design, Engineering, Strategy",
-    "href": "https://www.otherlife.xyz/work/narcos",
+    "href": "/work/narcos",
     "image": {
       "src": "/assets/narcos.jpeg",
       "width": 2880,
@@ -104,7 +104,7 @@ export const projects: readonly Project[] = [
     "description": "Rebranded and expanded website with a modern elevated presence.",
     "year": "2024",
     "services": "Branding, Visual Design, Engineering, Interactive",
-    "href": "https://www.otherlife.xyz/work/hypernative",
+    "href": "/work/hypernative",
     "image": {
       "src": "/assets/hypernative.jpeg",
       "width": 2880,

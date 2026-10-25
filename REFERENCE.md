@@ -42,8 +42,10 @@ uses Aeonik; List rows and large navigation labels inherit system sans.
 
 Verified interactions include image scale 1.1 over 300 ms, green List-row hover,
 numbered navigation, a separate mobile menu Contact Us button, and the five-field
-contact form. Closing contact restores the menu. Unrelated navigation and
-case-study links point to their verified original URLs.
+contact form. Closing contact restores the menu. Navigation now stays on the local site. Home and Work link to existing routes;
+Company and Careers are omitted until their actual pages exist. All six cards
+open local project overviews. Original social/profile and MoonPay privacy links
+were removed; owner social URLs can be configured in src/data/site.ts.
 
 ## Implemented motion and limits
 
@@ -81,3 +83,10 @@ Use `http://localhost:3000` for development. In this cloud browser, the numeric
 `127.0.0.1` hostname caused an HMR WebSocket handshake failure and prevented
 hydration; `localhost` and the production server worked. The dev script uses the
 verified Webpack mode. Production rendering does not require HMR.
+
+## Navigation correction
+
+The /work/[slug] pages are local image-and-description overviews using the existing
+project metadata. They are not full reproductions of the original case studies.
+Company, Careers, and a separate original-style Home page are still unimplemented.
+No links to those unimplemented pages or original third-party profiles are shown.
