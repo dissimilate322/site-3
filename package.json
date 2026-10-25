@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start --hostname 0.0.0.0",
     "typecheck": "tsc --noEmit",
-    "test:ui": "node scripts/qa.cjs"
+    "test:ui": "node scripts/qa.cjs",
+    "test:pages": "node scripts/qa-pages.cjs",
+    "package:wispbyte": "node scripts/package-wispbyte.cjs"
   },
   "dependencies": {
     "gsap": "3.15.0",

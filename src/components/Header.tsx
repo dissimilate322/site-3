@@ -33,7 +33,7 @@ function Hamburger({ open }: { open: boolean }) {
   return <span className={`${styles.hamburger} ${open ? styles.cross : ""}`} aria-hidden="true"><span/><span/><span/></span>;
 }
 
-function ContactForm() {
+function ContactForm({subject}: {subject: string}) {
   const [status, setStatus] = useState<"idle" | "pending" | "success" | "error">("idle");
 
   async function submit(event: FormEvent<HTMLFormElement>) {
@@ -59,7 +59,7 @@ function ContactForm() {
       { name: "hearAboutUs", placeholder: "How did you hear about us?" },
     ].map(({ name, placeholder, autoComplete, type }) => <label key={name} className={styles.field}>
       <span className={styles.srOnly}>{placeholder}</span>
-      <input name={name} placeholder={placeholder} autoComplete={autoComplete} type={type ?? "text"} required={name === "name" || name === "email" || name === "description"} maxLength={2000} />
+      <input name={name} placeholder={placeholder} autoComplete={autoComplete} type={type ?? "text"} required={name === "name" || name === "email" || name === "description"} maxLength={2000} defaultValue={name === "description" ? subject : undefined} />
     </label>)}
     <div className={styles.formBottom}>
       <p>This form is a local preview. Enquiries are not sent or stored.</p>
@@ -74,6 +74,13 @@ function ContactForm() {
 export default function Header() {
   const pathname = usePathname();
   const [panel, setPanel] = useState<Panel>(null);
+  const [subject, setSubject] = useState("");
+  function openContact(value = "") { setSubject(value); setPanel("contact"); }
+  useEffect(() => {
+    const open = (event: Event) => openContact((event as CustomEvent<string>).detail || "");
+    window.addEventListener("site:contact", open);
+    return () => window.removeEventListener("site:contact", open);
+  }, []);
   const root = useRef<HTMLElement>(null);
   const dialog = useRef<HTMLDivElement>(null);
   const menuButton = useRef<HTMLButtonElement>(null);
@@ -170,7 +177,7 @@ export default function Header() {
     </a>
     {!panel && <div className={styles.controls}>
       <button ref={menuButton} className={styles.menuButton} aria-label="Menu" aria-expanded={false} aria-controls="navigation-panel" onClick={() => setPanel("menu")}><Hamburger open={false}/></button>
-      <button className={styles.contactButton} onClick={() => setPanel("contact")}>Contact Us</button>
+      <button className={styles.contactButton} onClick={() => openContact()}>Contact Us</button>
     </div>}
     {panel && <div
       ref={dialog}
@@ -184,7 +191,7 @@ export default function Header() {
       {panel === "menu" ? <>
         <div className={`${styles.controls} ${styles.openControls}`}>
           <button className={styles.menuButton} aria-label="Close menu" aria-expanded={true} onClick={() => closePanel()}><Hamburger open/></button>
-          <button className={styles.contactButton} onClick={() => setPanel("contact")}>Contact Us</button>
+          <button className={styles.contactButton} onClick={() => openContact()}>Contact Us</button>
         </div>
         <div className={styles.mobileLogo} aria-hidden="true"><img src="/assets/otherlife-logo.svg" width="100" height="34" alt=""/></div>
         <nav className={styles.navigation} aria-label="Main navigation">
@@ -193,12 +200,12 @@ export default function Header() {
             <span className={styles.navHover} aria-hidden="true"><span><small>0{index + 1}</small>{label}</span></span>
           </a>)}
         </nav>
-        <button className={styles.mobileContact} onClick={() => setPanel("contact")}>Contact Us</button>
+        <button className={styles.mobileContact} onClick={() => openContact()}>Contact Us</button>
         <div className={styles.menuBottom}><p>Unconventional Solutions</p><SocialLinks/></div>
       </> : <div className={styles.contactInner} data-contact-inner>
         <h2>Lets work together.</h2>
         <button className={styles.closeContact} aria-label="Close contact form" onClick={() => closePanel("menu")}><Hamburger open/></button>
-        <div data-contact-content><ContactForm/></div>
+        <div data-contact-content><ContactForm key={subject} subject={subject}/></div>
       </div>}
     </div>}
   </header>;

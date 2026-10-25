@@ -70,7 +70,7 @@ async function noOverflow(page, label) {
       await page.getByRole('button',{name:'Menu',exact:true}).click(); await settle(page);
       const menu=page.getByRole('dialog',{name:'Navigation'});
       assert(await menu.isVisible());
-      assert.equal(await menu.locator('nav a').count(),2);
+      assert.equal(await menu.locator('nav a').count(),4);
       await page.waitForFunction(() => [...document.querySelectorAll('[data-menu-link]')].every(e => Math.abs(new DOMMatrix(getComputedStyle(e).transform).m42) < 0.1));
       await noOverflow(page,`${width} menu`);
       await page.screenshot({path:path.join(output,`menu-${width}.png`)});
@@ -124,8 +124,8 @@ async function noOverflow(page, label) {
     assert.equal(await image.evaluate(e=>getComputedStyle(e).transform),'none');
     record('Desktop image hover scales to 1.1 and resets');
     await page.goto(baseURL,{waitUntil:'networkidle'});
-    assert.equal(await page.locator('h1').innerText(),'Work.');
-    record('Root entry renders Work page');
+    assert((await page.locator('h1').innerText()).includes('Otherlife is a creative agency'));
+    record('Root entry renders the separate Home page');
     const malformed=await context.request.post(`${baseURL}/api/contact`,{data:'broken-json',headers:{'Content-Type':'application/json'}});
     assert.equal(malformed.status(),400);
     const invalid=await context.request.post(`${baseURL}/api/contact`,{data:{name:'Test',email:'invalid',description:'Test'}});

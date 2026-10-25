@@ -1,40 +1,51 @@
-# Otherlife Work
+# Otherlife — local multipage site
 
-A Next.js / React / TypeScript reproduction of the current Otherlife Work page.
-The page is available at `/work` and `/`.
+Next.js / React / TypeScript implementation with all site navigation kept local.
+
+## Pages
+
+- `/`: separate Home page with four featured projects, videos, studio showreel, agency section and eight client tiles.
+- `/work`: original six-project portfolio with List/Grid modes.
+- `/company`: agency introduction, two founders, five service groups, office imagery, testimonial carousel, eight award entries and related work.
+- `/careers`: hiring introduction, office gallery, perks and current reference vacancy.
+- `/careers/senior-designer`: local vacancy details and a preview application flow.
+- Six `/work/[slug]` pages: full reference content blocks, project imagery/video, outcomes, quotes, process steps, press citations and related work.
+
+All project text, people, jobs and media are reference content from Otherlife, not newly invented owner information. Social URLs remain unset until owner URLs are supplied. No navigation, job application or case-study link redirects to Otherlife or MoonPay.
+
+## Development
 
 ```sh
 npm ci
 npm run dev
 ```
 
-Open **http://localhost:3000/work**. Use `localhost` for development in this cloud
-environment; the numeric loopback hostname can fail the HMR WebSocket handshake.
-Node.js 24 and npm 11 were used. Next.js requires Node 20.9 or newer.
-The project-local npm cache keeps installation writable in cloud sandboxes.
+Use **http://localhost:3000** (and `/work` for the portfolio). Node.js 24 is recommended; minimum Node 20.9. Use `localhost` rather than `127.0.0.1` for development HMR in this cloud environment. The project uses a local npm cache and verified Webpack development mode.
 
 ```sh
 npm run typecheck
 npm run build
 npm start
+npm run test:ui -- http://localhost:3000
+npm run test:pages -- http://localhost:3000
 ```
 
-With a server running, `npm run test:ui -- http://localhost:3000` runs Playwright
-at all six requested viewport sizes and saves screenshots/results to
-`artifacts/qa`. Chromium is preinstalled at `/usr/bin/chromium` in this cloud
-environment; set `CHROMIUM_PATH` to another installed executable elsewhere.
+Playwright uses `/usr/bin/chromium` or `CHROMIUM_PATH`. Reports/screenshots are stored in ignored `artifacts/qa` and `artifacts/pages` directories.
 
-Project content and asset provenance are in `src/data/projects.ts`; all media
-and fonts are served locally. CSS Modules contain the measured layouts.
+## Wispbyte deployment
 
-`POST /api/contact` is a local preview handler. It validates the required name,
-email, and idea, returns `{ ok: true, mode: "preview", sent: false }`, and neither
-sends nor stores enquiries. The form makes the preview state explicit after
-submission. Otherlife's form endpoint is never called.
+```sh
+npm run package:wispbyte -- /path/to/otherlife-wispbyte-full.zip
+```
 
-See [REFERENCE.md](REFERENCE.md) for inspection, measurements, source-assisted
-screenshot methodology, and remaining animation differences.
+Packaging requires Python 3. It builds the Next.js standalone output and includes runtime dependencies, public assets and static chunks. Extract the ZIP into an empty server root. Use Node.js 24 with startup file **index.js**, or command `node index.js`. Set `PORT` to the allocated host port if `PORT`/`SERVER_PORT` is not injected. No build/install is needed on the host. For an update, stop the old server and replace its entire `.next`, `public` and `node_modules` directories plus root application files before restarting.
 
-Navigation is configured in `src/data/site.ts`. Only implemented local pages are
-listed; social links are hidden until owner URLs are supplied. Project cards open
-local `/work/[slug]` overview pages. These are summaries, not full original cases.
+## Content and behavior
+
+Content lives in `src/data/content.json`, typed by `content.ts`; project gallery data is in `projects.ts`. Navigation and optional owner social URLs are in `site.ts`. The media provenance manifest is `src/data/media-sources.json`.
+
+122 additional media assets are local in `public/media`, alongside the original Work-page assets. Images are resized to a maximum of 1920px and encoded as WebP; video is encoded to H.264 MP4, up to 1280px wide. Source-refresh utility `scripts/sync-reference.py` requires curl, Python/Pillow and ffmpeg; it is not needed at runtime.
+
+Forms are **previews**: `POST /api/contact` validates without sending or storing enquiries or applications. Apply opens the local contact panel prefilled with the role name. Testimonials support arrows/dots and visibility-aware autoplay. Video supports local playback; reduced motion prevents automatic playback. GSAP reveal/scroll timelines, observers and listeners are cleaned up on unmount.
+
+See [REFERENCE.md](REFERENCE.md) for verification details and the remaining differences from the original WebGL experience.

@@ -1,29 +1,28 @@
-# Otherlife Work — reference and implementation audit
+# Otherlife site — reference and implementation audit
 
-Reference: https://www.otherlife.xyz/work (inspected 25 October 2026).
-The initial network block was resolved before implementation.
+Reference: https://www.otherlife.xyz, inspected 25 October 2026.
 
-## Sources and verification
+## Current scope
 
-Inspected the live page in Chromium, its published HTML, Next.js page data,
-stylesheets, and Work/header JavaScript. The current live data, rather than the
-historical Lapa image, determines the six projects and their order.
+Implemented separate Home, Work, Company and Careers pages, six full local case-study pages, and a local Senior Designer vacancy page. All four menu entries and project/client links resolve on the current site. The contact panel is shared across pages; the job application button opens it with a role-prefilled subject. Social links remain unset until owner URLs are provided. No navigation, application or form submission goes to Otherlife, MoonPay or an external hiring service.
 
-All six original banners, the current MoonPay-signed wordmark, favicon, Aeonik
-300/400/500, and Tobias regular are stored in `public/assets`. There are no
-hotlinked media dependencies or replacement stock images. Original image URLs
-are recorded alongside project data in `src/data/projects.ts`.
+Home includes four featured project panels, original video loops, studio description, showreel and eight client tiles. Company includes the introduction, two founders, five service groups, two office images, testimonial carousel and eight award entries. Careers includes the hiring introduction, perks, four-image gallery, vacancy and contact CTA. All 37 case-study pageBuilder blocks were implemented: media, image rows, media grids, outcomes, quotes, numbered process sections and press citations. Content is from the requested reference, not invented owner/team/job information.
 
-Chromium's software WebGL renderer delayed/stalled the original entrance.
-The loader and some menu/contact states were observed without intervention.
-For stable comparisons we also dispatched the original runtime's
-`playOpenAnimationEnd` event, completed the original GSAP entrance targets, and
-hid its heavy canvas. For full-page captures, the original scroll container was
-allowed to flow naturally. These are **source-assisted reference screenshots**,
-not evidence that the untouched WebGL animation was reproduced.
-TLS verification stayed enabled; Chromium used the environment's proxy CA.
+## Sources and browser inspection
 
-## Measured layout
+Inspected published HTML, Next.js CMS data, Work/header/Company/Careers/Home/case-study JavaScript and CSS. Live desktop/mobile browser inspection used Chromium and the trusted environment proxy CA with TLS verification enabled. The original software-rendered WebGL entrance was slow or stalled on some pages. Its original playOpenAnimationEnd event and GSAP endpoint instrumentation were used for source-assisted captures; the heavy canvas was hidden where needed. For full-page Work captures, its locked scroll container was allowed to flow normally. These assisted screenshots are not proof of identical original WebGL behavior.
+
+The settled Work, Company and Careers pages are white; the initial original loader is gray. Careers' loaded desktop introductory typography and geometry were compared directly. New-page full screenshots and functional reports are in artifacts/pages. Work comparison artifacts are in artifacts/reference and artifacts/comparison (all Git-ignored).
+
+## Media and content
+
+The original six Work banners, wordmark, favicon and Aeonik 300/400/500 plus Tobias regular fonts remain in public/assets. All 122 additional referenced media assets were downloaded locally into public/media. src/data/content.json contains normalized page/section data; content.ts supplies types. Source URLs are retained in media-sources.json and projects.ts. There are no hotlinked display assets.
+
+Images were limited to 1920px and encoded as WebP; Next Image serves responsive variants. Video was transcoded to H.264 MP4 at up to 1280px wide. These optimizations preserve the source content while introducing compression/resizing differences. All referenced assets were found and locally verified; no unrelated stock imagery was substituted.
+
+## Work geometry
+
+The measured heading, divider and first four grid-item rectangles matched source-assisted reference coordinates with 0px difference at these sizes. This measures static geometry, not identical rasterization or animation.
 
 | Viewport | Heading top / size | First image top | Gallery |
 | --- | --- | --- | --- |
@@ -34,59 +33,18 @@ TLS verification stayed enabled; Chromium used the environment's proxy CA.
 | 390 × 844 | 181 / 48 px | 317.203 px | 1 × 344 px |
 | 375 × 812 | 181 / 48 px | 317.203 px | 1 × 329 px |
 
-The settled page is white. Images use 16:9 cropping and 8 px corners; row gaps
-are 80 px on desktop and 60 px below 1024. Captions, service copy, years, 200 px
-bottom spacing, List rows, fixed header positions, and desktop/mobile menu and
-contact dimensions follow published source and browser measurements. The grid
-uses Aeonik; List rows and large navigation labels inherit system sans.
+Work uses 16:9 images, 8px corners, desktop/mobile row gaps of 80/60px and 200px bottom padding. Grid text uses Aeonik; list rows and large menu labels use system sans. Hover scale is 1.1 over 300ms and List row hover is green. Repeated view switching, focus trapping and Escape are tested.
 
-Verified interactions include image scale 1.1 over 300 ms, green List-row hover,
-numbered navigation, a separate mobile menu Contact Us button, and the five-field
-contact form. Closing contact restores the menu. Navigation now stays on the local site. Home and Work link to existing routes;
-Company and Careers are omitted until their actual pages exist. All six cards
-open local project overviews. Original social/profile and MoonPay privacy links
-were removed; owner social URLs can be configured in src/data/site.ts.
+## Motion, interactions and remaining differences
 
-## Implemented motion and limits
+GSAP handles page/section entrances, reveal timing, service-image scroll masks, menu/contact expansion and exits. Testimonials support previous/next buttons, dots and visibility-aware autoplay. Related-work entries have desktop hover previews. Local video has playback controls; hero loops play only while visible, and reduced motion prevents automatic playback. Timelines, observers, event listeners and timers are cleaned up on unmount.
 
-GSAP handles heading/card entrance, staggered view switching, sliding navigation,
-contact width/height expansion, staggered fields, and exits. Timelines and
-listeners are cleaned up. Reduced motion disables these animations, and touch
-devices do not receive desktop image-hover effects.
+The original WebGL loader, portal distortion, custom scroll/cursor engine, pinned homepage transitions and bespoke video UI were not ported exactly. This implementation uses the published DOM fallback's section sequence, native scrolling, GSAP reveals and accessible standard video controls. New-page typography, spacing and content follow available source measurements; no pixel-perfect claim is made for the full site. Press citations and awards are displayed without external article/profile links.
 
-The original WebGL loader, portal transitions between website pages, and custom
-scroll engine have not been ported. This Work implementation uses a lightweight
-GSAP entrance and native scrolling. Exact WebGL timing, cursor/portal behavior
-during case-study navigation, and scroll feel could not be reliably verified in
-headless Chromium. No extra distortion, tilt, cursor, video playback, or list
-preview effects were invented. The six current Work banners are still images.
-Contact submission validates locally and explicitly confirms that no enquiry
-was sent; it never submits to Otherlife or stores the form values.
+Contact and application forms are explicitly local previews: /api/contact validates required fields but never sends or stores enquiries. The vacancy page uses the description available on the original Careers page rather than an externally hosted ATS application system.
 
-Next Image creates responsive AVIF/WebP variants; minor compression/rasterization
-differences are possible. This is a close reproduction, not a claim of identical
-pixels or identical WebGL behavior.
+## Validation and delivery
 
-## Validation
+npm run build and npm run typecheck pass. npm run test:pages covers all 11 routes at 1440px and 390px, loaded images, zero external anchors, local menus, horizontal overflow, testimonial controls, application prefilling/submission, hero/back/logo navigation and video metadata. Home/Company/Careers are also checked at 1920, 1024, 768 and 375px. npm run test:ui covers the existing Work interactions and six requested viewports. The standalone ZIP was extracted into a separate directory and tested directly without source dependencies or a build step.
 
-`npm run build`, `npm run typecheck`, and the Playwright suite cover both routes,
-all six sizes, all images, repeated List/Grid switching, horizontal overflow,
-layout stability, menu/focus/Escape, desktop/mobile contact, local validation,
-card navigation, hover reset, reduced motion, and browser console errors.
-Evidence is generated under `artifacts/qa` (Git-ignored). Reference captures and
-geometry comparisons are in `artifacts/reference` and `artifacts/comparison`.
-The final comparison found 0 px difference in the measured heading, divider,
-and first four grid-item rectangles at all six viewport sizes. This measures
-layout endpoints; it does not establish identical image compression or motion.
-
-Use `http://localhost:3000` for development. In this cloud browser, the numeric
-`127.0.0.1` hostname caused an HMR WebSocket handshake failure and prevented
-hydration; `localhost` and the production server worked. The dev script uses the
-verified Webpack mode. Production rendering does not require HMR.
-
-## Navigation correction
-
-The /work/[slug] pages are local image-and-description overviews using the existing
-project metadata. They are not full reproductions of the original case studies.
-Company, Careers, and a separate original-style Home page are still unimplemented.
-No links to those unimplemented pages or original third-party profiles are shown.
+Build a Wispbyte archive with npm run package:wispbyte. Use Node.js 24, startup index.js and the allocated PORT (or SERVER_PORT). All page code, runtime dependencies, static chunks, images, video and fonts are bundled. Source code and the downloadable archive are maintained in the corresponding GitHub branches.
