@@ -8,7 +8,7 @@ const out=path.resolve('artifacts/motion');fs.mkdirSync(out,{recursive:true});
 const report={checks:[],errors:[]};
 async function assertPaperPixel(page,png,x,y){
  const pixel=await page.evaluate(async({data,x,y})=>{const img=new Image();img.src='data:image/png;base64,'+data;await img.decode();const c=document.createElement('canvas');c.width=img.width;c.height=img.height;const context=c.getContext('2d');context.drawImage(img,0,0);return [...context.getImageData(x,y,1,1).data]}, {data:png.toString('base64'),x:Math.round(x),y:Math.round(y)});
- assert(pixel.slice(0,3).every((v,i)=>Math.abs(v-[161,161,159][i])<=2),'space between projects matches the grey page background: '+pixel);
+ assert(pixel.slice(0,3).every((v,i)=>Math.abs(v-[250,250,250][i])<=2),'space between projects matches the near-white page background: '+pixel);
 }
 (async()=>{
  const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||'/usr/bin/chromium',args:['--no-sandbox','--enable-unsafe-swiftshader']});
@@ -56,7 +56,7 @@ async function assertPaperPixel(page,png,x,y){
       report.checks.push({reference:'user clip 19.75s',edge,maxError,outgoingBottom:start,passed:true});
      }
      const films=await p.locator('[data-featured-project] video').evaluateAll(vs=>vs.map(v=>!v.paused));assert(films[index-1]&&films[index],'both visible films play in the gap');
-     report.checks.push({width,gapBetween:index-1+' / '+index,pixels:Math.round(gap),gray:true,passed:true});
+     report.checks.push({width,gapBetween:index-1+' / '+index,pixels:Math.round(gap),nearWhite:true,passed:true});
     }
    }
    await p.evaluate(y=>scrollTo(0,y),tracks[0]+height*.5);await p.waitForTimeout(400);
@@ -89,7 +89,7 @@ async function assertPaperPixel(page,png,x,y){
    await p.getByRole('link',{name:'meruem home'}).click();await p.waitForFunction(()=>document.querySelector('[data-page-transition]').dataset.state==='leaving');await p.waitForURL(base+'/');await idle();
    await p.waitForFunction(()=>document.querySelector('[data-project-canvas]')?.closest('[data-webgl="ready"]'));await p.evaluate(()=>scrollTo(0,document.documentElement.scrollHeight-innerHeight-10));await p.waitForTimeout(150);await p.mouse.wheel(0,200);await p.waitForFunction(()=>scrollY<5);await p.waitForFunction(()=>[...document.querySelectorAll('[data-home-film] video')].some(v=>v.clientWidth>0&&!v.paused));
    assert.deepEqual(errors,[]);report.checks.push({width,height,osMotion:preference,defaultMotion:'full',autoplay:true,projectPlanes:4,transitions:'case/menu/back/logo',explicitReducedMotion:true,persistentMotionSetting:true,footerLoop:true,passed:true});
-   console.log('PASS scroll, grey gaps and autoplay',width,height);await p.close();
+   console.log('PASS scroll, near-white gaps and autoplay',width,height);await p.close();
   }
   for(const width of [1440,390]){
    const p=await browser.newPage({viewport:{width,height:width===390?844:900},reducedMotion:'reduce'});const errors=[];p.on('pageerror',e=>errors.push(e.message));

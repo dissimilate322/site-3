@@ -70,5 +70,5 @@ export default function SmoothScroll(){
   };
  },[reduced,pathname]);
  if(reduced)return null;
- return <div ref={bar} className={styles.track} data-color-theme={pathname==='/'?'red-gray':undefined} role="scrollbar" aria-label="Page scroll" aria-orientation="vertical" aria-controls="site-content" aria-valuemin={0} aria-valuemax={100} aria-valuenow={0} tabIndex={0}><div ref={thumb} className={styles.thumb}/></div>;
+ return <div ref={bar} className={styles.track} data-color-theme={pathname==='/'?'violet':undefined} role="scrollbar" aria-label="Page scroll" aria-orientation="vertical" aria-controls="site-content" aria-valuemin={0} aria-valuemax={100} aria-valuenow={0} tabIndex={0}><div ref={thumb} className={styles.thumb}/></div>;
 }

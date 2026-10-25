@@ -50,16 +50,13 @@ button:focus-visible, a:focus-visible, input:focus-visible {
 }
 ::selection { background: #33ff66; color: #172806; }
 
-/* Requested muted red #7A3E3E, neutral grey and off-white. */
+/* Requested Home palette: near-white, light grey, graphite and violet. */
 :root {
- --home-paper:#a1a19f;
- --home-surface:#d4d3ce;
- --home-stone:#b9b8b3;
- --home-line:#857775;
- --home-ink:#4b2828;
- --home-wine:#7a3e3e;
- --home-wine-dark:#7a3e3e;
- --home-rose:#966a68;
- --home-blush:#d4d2cd;
- --home-cream:#f4f3ee;
+ --home-paper:#fafafa;
+ --home-surface:#eeeef0;
+ --home-line:#eeeef0;
+ --home-ink:#242427;
+ --home-accent:#8750f7;
+ --home-highlight:#b594fa;
+ --home-on-accent:#fff;
 }
