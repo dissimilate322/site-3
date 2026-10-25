@@ -50,16 +50,16 @@ button:focus-visible, a:focus-visible, input:focus-visible {
 }
 ::selection { background: #33ff66; color: #172806; }
 
-/* Palette sampled from the supplied ivory stone / burgundy laptop reference. */
+/* Requested muted red #7A3E3E, neutral grey and off-white. */
 :root {
- --home-paper:#f7f3ef;
- --home-surface:#fffaf4;
- --home-stone:#e5d5c7;
- --home-line:#d5bdb9;
- --home-ink:#57172c;
- --home-wine:#7c203a;
- --home-wine-dark:#40101f;
- --home-rose:#b56d80;
- --home-blush:#e7bdc7;
- --home-cream:#fff7ed;
+ --home-paper:#a1a19f;
+ --home-surface:#d4d3ce;
+ --home-stone:#b9b8b3;
+ --home-line:#857775;
+ --home-ink:#4b2828;
+ --home-wine:#7a3e3e;
+ --home-wine-dark:#7a3e3e;
+ --home-rose:#966a68;
+ --home-blush:#d4d2cd;
+ --home-cream:#f4f3ee;
 }

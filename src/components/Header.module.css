@@ -116,7 +116,7 @@
 :global(html[data-motion='reduced']) .field input,
 :global(html[data-motion='reduced']) .formBottom button { transition:none; }
 
-:global([data-home-theme]) .logo { mix-blend-mode:normal; background:#f7f3efdf; box-shadow:0 0 0 10px #f7f3efdf; border-radius:4px; backdrop-filter:blur(10px); }
+:global([data-home-theme]) .logo { mix-blend-mode:normal; background:color-mix(in srgb,var(--home-surface) 88%,transparent); box-shadow:0 0 0 10px color-mix(in srgb,var(--home-surface) 88%,transparent); border-radius:4px; backdrop-filter:blur(10px); }
 :global([data-home-theme]) .logo img { filter:url(#home-burgundy-ink); }
 :global([data-home-theme]) .mobileLogo img { filter:url(#home-cream-ink); }
 :global([data-home-theme]) .menuPanel :is(a,button):focus-visible { outline-color:var(--home-blush); }

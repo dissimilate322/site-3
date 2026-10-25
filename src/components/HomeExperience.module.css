@@ -1,16 +1,16 @@
 .experience { overflow:clip; background:var(--home-paper); color:var(--home-ink); }
-.hero,.footerFilm { position:relative; height:100svh; min-height:100svh; background:var(--home-paper); }
-.hero { background:var(--home-paper); }
+.hero,.footerFilm { position:relative; height:100svh; min-height:100svh; background:#aaa69d; }
+.hero { background:linear-gradient(100deg,#b5b2ac,#958e82); }
 .hero .film video { position:absolute; left:50%; top:50%; width:min(90vw,160svh); height:auto; aspect-ratio:16/9; object-fit:cover; transform:translate(-50%,-50%); mask-image:linear-gradient(to right,transparent,#000 6%,#000 94%,transparent),linear-gradient(to bottom,transparent,#000 7%,#000 93%,transparent); mask-composite:intersect; }
 .film,.landscape,.portrait { width:100%; height:100%; }
-.film video { object-fit:cover; filter:url(#home-porcelain-film); }
+.film video { object-fit:cover; }
 .portrait { display:none; }
 .footerFilm { margin:0; overflow:hidden; }
-.projectCanvas { position:fixed; left:0; top:0; width:100vw; height:100svh; z-index:1; pointer-events:none; opacity:0; filter:url(#home-wine-tone); }
+.projectCanvas { position:fixed; left:0; top:0; width:100vw; height:100svh; z-index:1; pointer-events:none; opacity:0; }
 .experience[data-webgl='ready'] [data-project-stage] { position:relative; z-index:2; background:transparent; }
 .experience[data-webgl='ready'] [data-featured-project] { background:transparent; }
 .experience[data-webgl='ready'] [data-project-visual] { opacity:0; pointer-events:none; }
-.cursor { position:fixed; left:-60px; top:-60px; width:120px; height:120px; display:grid; place-items:center; border:1px solid #fff7edaa; border-radius:50%; color:var(--home-cream); background:#57172c33; font-family:Aeonik,Arial,sans-serif; font-size:12px; text-transform:uppercase; pointer-events:none; z-index:100; visibility:hidden; opacity:0; }
+.cursor { position:fixed; left:-60px; top:-60px; width:120px; height:120px; display:grid; place-items:center; border:1px solid #f4f3eeaa; border-radius:50%; color:var(--home-cream); background:#7a3e3e33; font-family:Aeonik,Arial,sans-serif; font-size:12px; text-transform:uppercase; pointer-events:none; z-index:100; visibility:hidden; opacity:0; }
 .experience[data-cursor] [data-project-hitarea] { cursor:none; }
 @media(hover:none){.cursor{display:none;}}
 :global(html[data-motion='reduced']) .cursor { display:none; }
