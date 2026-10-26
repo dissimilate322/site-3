@@ -1,0 +1,7 @@
+.track { position:fixed; right:8px; top:50%; transform:translateY(-50%); width:8px; height:140px; border-radius:5px; background:#000; opacity:0; z-index:9000; overflow:hidden; touch-action:none; cursor:grab; }
+.thumb { position:absolute; top:0; left:2px; width:4px; height:50px; background:white; border-radius:5px; pointer-events:none; }
+.track:focus-visible { opacity:1!important; outline-color:#33ff66; }
+
+.track[data-color-theme='violet'] { background:var(--home-ink); }
+.track[data-color-theme='violet'] .thumb { background:var(--home-highlight); }
+.track[data-color-theme='violet']:focus-visible { outline-color:var(--home-accent); }

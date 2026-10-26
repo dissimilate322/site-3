@@ -1,0 +1,10 @@
+.scene { min-height:100svh; }
+.overlay { position:fixed; inset:0; z-index:10000; background:#d9d9d9; display:none; overflow:hidden; will-change:clip-path; }
+.wordmark { position:absolute; inset:0; pointer-events:none; }
+.wordmark img { position:absolute; max-width:none; }
+.count { position:absolute; bottom:45px; left:50%; transform:translateX(-50%); font-family:Aeonik,Arial,sans-serif; color:#888; font-size:14px; }
+.sheet { position:absolute; inset:0; width:100%; height:100%; overflow:hidden; will-change:clip-path; }
+.snapshot { min-height:100%; background:var(--home-paper); }
+
+.overlay[data-color-theme='violet'] { background:var(--home-paper); }
+.overlay[data-color-theme='violet'] .count { color:var(--home-ink); }

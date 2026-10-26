@@ -1,0 +1,249 @@
+"use client";
+
+import { useEffect, useLayoutEffect, useRef, useState, type FormEvent } from "react";
+import { gsap } from "gsap";
+import { usePathname } from "next/navigation";
+import { navigation, socialLinks } from "../data/site";
+import styles from "./Header.module.css";
+import { useSiteMotion } from "./MotionSettings";
+
+type Panel = "menu" | "contact" | null;
+
+function SocialLinks() {
+  if (!Object.values(socialLinks).some(Boolean)) return null;
+  return <div className={styles.socials}>
+    {socialLinks.instagram && <>
+    <a href={socialLinks.instagram} aria-label="Instagram" target="_blank" rel="noreferrer">
+      <svg width="27" height="26" viewBox="0 0 27 26" fill="none" aria-hidden="true"><rect x="2" y="2" width="22" height="22" rx="6" stroke="currentColor" strokeWidth="2.3"/><circle cx="13" cy="13" r="5" stroke="currentColor" strokeWidth="2.3"/><circle cx="20" cy="6.5" r="1.5" fill="currentColor"/></svg>
+    </a>
+    </>}
+    {socialLinks.x && <>
+    <a href={socialLinks.x} aria-label="X" target="_blank" rel="noreferrer">
+      <svg width="26" height="25" viewBox="0 0 26 25" fill="none" aria-hidden="true"><path d="M2 1.5h5.5L24 23.5h-5.5L2 1.5Z" stroke="currentColor" strokeWidth="1.5"/><path d="m23 1.5-21 22" stroke="currentColor" strokeWidth="1.5"/></svg>
+    </a>
+    </>}
+    {socialLinks.linkedin && <>
+    <a href={socialLinks.linkedin} aria-label="LinkedIn" target="_blank" rel="noreferrer">
+      <svg width="24" height="25" viewBox="0 0 24 25" fill="currentColor" aria-hidden="true"><circle cx="3" cy="3" r="3"/><path d="M.5 8H5v16H.5zM9 8h4.5v2.2C15 7 23.5 6 23.5 14v10H19V14c0-4-5.5-4-5.5 0v10H9z"/></svg>
+    </a>
+    </>}
+  </div>;
+}
+
+function Hamburger({ open }: { open: boolean }) {
+  return <span className={`${styles.hamburger} ${open ? styles.cross : ""}`} aria-hidden="true"><span/><span/><span/></span>;
+}
+
+function ContactForm({subject}: {subject: string}) {
+  const [status, setStatus] = useState<"idle" | "pending" | "success" | "error">("idle");
+
+  async function submit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setStatus("pending");
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(Object.fromEntries(new FormData(event.currentTarget))),
+      });
+      if (!response.ok) throw new Error("Contact preview validation failed");
+      setStatus("success");
+    } catch { setStatus("error"); }
+  }
+
+  return <form className={styles.form} onSubmit={submit}>
+    {[
+      { name: "name", placeholder: "Full name", autoComplete: "name" },
+      { name: "email", placeholder: "Email", autoComplete: "email", type: "email" },
+      { name: "company", placeholder: "Company name or website", autoComplete: "organization" },
+      { name: "description", placeholder: "What's your idea? How can we help?" },
+      { name: "hearAboutUs", placeholder: "How did you hear about us?" },
+    ].map(({ name, placeholder, autoComplete, type }) => <label key={name} className={styles.field}>
+      <span className={styles.srOnly}>{placeholder}</span>
+      <input name={name} placeholder={placeholder} autoComplete={autoComplete} type={type ?? "text"} required={name === "name" || name === "email" || name === "description"} maxLength={2000} defaultValue={name === "description" ? subject : undefined} />
+    </label>)}
+    <div className={styles.formBottom}>
+      <p>This form is a local preview. Enquiries are not sent or stored.</p>
+      <button type="submit" disabled={status === "pending"}>{status === "pending" ? "Sending…" : "Send"}</button>
+    </div>
+    <p className={styles.formStatus} role="status" aria-live="polite">
+      {status === "success" ? "Thank you. This preview does not send enquiries." : status === "error" ? "Please try again. Your enquiry has not been sent." : ""}
+    </p>
+  </form>;
+}
+
+export default function Header() {
+  const { reduced, toggleMotion } = useSiteMotion();
+  const pathname = usePathname();
+  const [panel, setPanel] = useState<Panel>(null);
+  const [menuClosing, setMenuClosing] = useState(false);
+  const [subject, setSubject] = useState("");
+  function openContact(value = "") { if (closing.current) return; setSubject(value); setPanel("contact"); }
+  useEffect(() => {
+    const open = (event: Event) => openContact((event as CustomEvent<string>).detail || "");
+    const navigate = () => { exitAnimation.current?.kill(); closing.current = false; setMenuClosing(false); setPanel(null); };
+    window.addEventListener("site:contact", open);
+    window.addEventListener("site:navigate", navigate);
+    return () => {window.removeEventListener("site:contact", open);window.removeEventListener("site:navigate", navigate)};
+  }, []);
+  const root = useRef<HTMLElement>(null);
+  const dialog = useRef<HTMLDivElement>(null);
+  const menuButton = useRef<HTMLButtonElement>(null);
+  const previousPanel = useRef<Panel>(null);
+  const exitAnimation = useRef<gsap.core.Timeline | null>(null);
+  const entranceAnimation = useRef<gsap.core.Timeline | null>(null);
+  const closing = useRef(false);
+
+  function closePanel(next: Panel = null) {
+    if (closing.current) return;
+    const element = dialog.current;
+    if (!element || reduced) {
+      setPanel(next);
+      return;
+    }
+    closing.current = true;
+    entranceAnimation.current?.kill();
+    gsap.killTweensOf([element, ...element.querySelectorAll("*")]);
+    const timeline = gsap.timeline({
+      defaults: { ease: "power2.inOut" },
+      onComplete: () => { closing.current = false; setPanel(next); },
+    });
+    exitAnimation.current = timeline;
+    if (panel === "contact") {
+      timeline.to(element.querySelector("[data-contact-content]"), { opacity: 0, duration: 0.18 })
+        .to(element.querySelector("[data-contact-inner]"), { height: window.innerWidth < 768 ? 44 : 60, duration: 0.35 })
+        .to(element.querySelector("[data-contact-inner]"), { width: window.innerWidth < 768 ? 48 : 207, duration: 0.35 });
+      if (!next) timeline.to(element, { opacity: 0, duration: 0.15 });
+    } else {
+      // Otherlife's published menu timeline: text and rules first, then an
+      // opaque panel. Desktop selectors include the hidden mobile nodes;
+      // retain their offsets without mounting a second inaccessible menu.
+      setMenuClosing(true);
+      const mobile = window.innerWidth < 768;
+      const links = element.querySelectorAll("[data-menu-link]");
+      const lines = Array.from(element.querySelectorAll<HTMLElement>("[data-menu-line]")).filter(e => e.getClientRects().length);
+      timeline.to(links, { yPercent: 100, duration: 0.5, stagger: mobile ? 0.03 : 0.04, ease: "power1.out" }, mobile ? 0 : 0.16)
+        .to(lines, { scaleX: 0, duration: 0.5, stagger: mobile ? 0.13 : 0.04, ease: "power1.out" }, mobile ? 0 : 0.2);
+      if (mobile) {
+        timeline.to(element.querySelector("[data-menu-logo]"), { opacity: 0, duration: 0.5, ease: "power1.out" }, 0)
+          .to(element.querySelector("[data-menu-contact]"), { opacity: 0, duration: 0.5, ease: "power1.out" }, 0.55);
+      }
+      let finished = false;
+      const finish = () => {
+        if (finished) return;
+        finished = true;
+        timeline.kill();
+        closing.current = false;
+        setMenuClosing(false);
+        setPanel(next);
+      };
+      timeline.to(element, { x: mobile ? window.innerWidth * 2 : window.innerWidth * 2 - 10, duration: mobile ? 1 : 2.5, ease: "power1.out" }, mobile ? 0.55 : 0.48);
+      timeline.eventCallback("onUpdate", () => {
+        element.dataset.menuExitTime = timeline.time().toFixed(4);
+        // The original keeps tweening outside the viewport; release the modal
+        // as soon as it is invisible so rapid reopen/focus never waits offscreen.
+        if (element.getBoundingClientRect().left >= window.innerWidth) finish();
+      });
+      timeline.eventCallback("onComplete", finish);
+    }
+  }
+
+  useEffect(() => () => { exitAnimation.current?.kill(); entranceAnimation.current?.kill(); }, []);
+
+  useEffect(() => {
+    if (!panel) return;
+    const before = document.activeElement as HTMLElement | null;
+    const main = document.querySelector("main");
+    const savedOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    if (main) main.inert = true;
+    dialog.current?.focus({ preventScroll: true });
+    const handleKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") closePanel();
+      if (event.key !== "Tab") return;
+      const focusable = [...Array.from(panel === "menu" ? root.current?.querySelectorAll<HTMLElement>("[data-menu-controls] button") ?? [] : []), ...Array.from(dialog.current?.querySelectorAll<HTMLElement>('a[href],button:not([disabled]),input:not([disabled])') ?? [])]
+        .filter((element) => element.getClientRects().length > 0 && !element.matches(":disabled"));
+      if (!focusable?.length) return;
+      const first = focusable[0], last = focusable[focusable.length - 1];
+      const outside = !focusable.includes(document.activeElement as HTMLElement);
+      if (event.shiftKey && (document.activeElement === first || outside)) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && (document.activeElement === last || outside)) { event.preventDefault(); first.focus(); }
+    };
+    document.addEventListener("keydown", handleKey);
+    return () => {
+      document.removeEventListener("keydown", handleKey);
+      document.body.style.overflow = savedOverflow;
+      if (main) main.inert = false;
+      if (before?.isConnected && before !== document.body) before.focus({ preventScroll: true });
+      else menuButton.current?.focus({ preventScroll: true });
+    };
+  }, [panel, reduced]);
+
+  useLayoutEffect(() => {
+    exitAnimation.current?.kill();
+    closing.current = false;
+    setMenuClosing(false);
+    const media = gsap.matchMedia();
+    const ctx = gsap.context(() => {
+      if (!reduced) {
+        if (dialog.current) {
+          const entrance = gsap.timeline();
+          entranceAnimation.current = entrance;
+          if (!previousPanel.current) entrance.from(dialog.current, { x: window.innerWidth - dialog.current.getBoundingClientRect().left, duration: 0.65, ease: "power4.out" }, 0);
+          const links = dialog.current.querySelectorAll("[data-menu-link]");
+          if (links.length) entrance.from(links, { yPercent: 110, duration: 0.7, stagger: 0.04, ease: "power2.out" }, 0.1);
+          const inner = dialog.current.querySelector<HTMLElement>("[data-contact-inner]");
+          if (inner) {
+            const width = inner.clientWidth, height = inner.clientHeight;
+            gsap.timeline({ defaults: { ease: "power2.out" } })
+              .fromTo(inner, { width: window.innerWidth < 768 ? 48 : 207, height: window.innerWidth < 768 ? 44 : 60, overflow: "hidden" },
+                { width, duration: 0.5 })
+              .to(inner, { height, duration: 0.5 })
+              .set(inner, { clearProps: "width,height,overflow" });
+            gsap.from("[data-contact-content] input", { opacity: 0, duration: 0.5, stagger: 0.18, delay: 0.6 });
+            gsap.from("[data-contact-content] button, [data-contact-content] p", { opacity: 0, duration: 0.5, delay: 1.2 });
+          }
+        }
+      }
+    }, root);
+    previousPanel.current = panel;
+    return () => { entranceAnimation.current?.kill(); media.revert(); ctx.revert(); };
+  }, [panel, reduced]);
+
+  return <header ref={root} className={styles.header}>
+    <a href="/" className={styles.logo} aria-label="meruem home">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src="/assets/meruem-logo.svg" width="974" height="325" alt="meruem" />
+    </a>
+    {panel !== "contact" && <div className={styles.controls} id="site-menu-controls" data-menu-controls>
+      <button ref={menuButton} className={styles.menuButton} aria-label={panel ? "Close menu" : "Menu"} aria-expanded={!!panel && !menuClosing} aria-controls="navigation-panel" disabled={menuClosing} onClick={() => panel ? closePanel() : setPanel("menu")}><Hamburger open={!!panel && !menuClosing}/></button>
+      <button className={styles.contactButton} disabled={menuClosing} onClick={() => openContact()}>Contact Us</button>
+    </div>}
+    {panel && <div
+      ref={dialog}
+      id="navigation-panel"
+      role="dialog"
+      aria-modal="true"
+      aria-owns={panel === "menu" ? "site-menu-controls" : undefined}
+      aria-label={panel === "contact" ? "Contact us" : "Navigation"}
+      tabIndex={-1}
+      className={`${styles.panel} ${panel === "contact" ? styles.contactPanel : styles.menuPanel}`}
+    >
+      {panel === "menu" ? <>
+        <div className={styles.mobileLogo} data-menu-logo aria-hidden="true"><img src="/assets/meruem-logo.svg" width="100" height="34" alt=""/></div>
+        <nav className={styles.navigation} aria-label="Main navigation">
+          {navigation.map(({ label, href }, index) => <a href={href} key={label} aria-current={pathname === href || (href === "/work" && pathname.startsWith("/work/")) ? "page" : undefined} onClick={pathname === href ? (event) => { event.preventDefault(); closePanel(); } : undefined}>
+            <span className={styles.menuLine} data-menu-line="top" aria-hidden="true"/><span className={styles.navMotion} data-menu-link><span className={styles.navText}><span><small>0{index + 1}</small>{label}</span></span>
+            <span className={styles.navHover} aria-hidden="true"><span><small>0{index + 1}</small>{label}</span></span></span><span className={`${styles.menuLine} ${styles.bottomLine}`} data-menu-line="bottom" aria-hidden="true"/>
+          </a>)}
+        </nav>
+        <button className={styles.mobileContact} data-menu-contact onClick={() => openContact()}>Contact Us</button>
+        <div className={styles.menuBottom}><p>Unconventional Solutions</p><button className={styles.motionToggle} aria-pressed={reduced} onClick={toggleMotion}>Reduce motion</button><SocialLinks/></div>
+      </> : <div className={styles.contactInner} data-contact-inner>
+        <h2>Lets work together.</h2>
+        <button className={styles.closeContact} aria-label="Close contact form" onClick={() => closePanel("menu")}><Hamburger open/></button>
+        <div data-contact-content><ContactForm key={subject} subject={subject}/></div>
+      </div>}
+    </div>}
+  </header>;
+}
