@@ -1,0 +1,28 @@
+.track { position:relative; height:500svh; background:#d7d7d4; }
+.static { height:100svh; }
+.stage { position:sticky; top:0; height:100svh; overflow:hidden; background:#d7d7d4; }
+.static .stage { position:relative; }
+.poster,.canvas { position:absolute; inset:0; display:block; width:100%; height:100%; object-fit:cover; pointer-events:none; }
+.canvas { opacity:0; }
+.stage[data-canvas-ready='true'] .canvas { opacity:1; }
+.stage[data-canvas-ready='true'] .poster { opacity:0; }
+.actions { position:absolute; inset:0; pointer-events:none; visibility:hidden; }
+.stage[data-geometry-ready='true'][data-contact-ready='true'] .actions { visibility:visible; }
+.hotspot { position:absolute; top:65%; height:6%; min-height:44px; border:0; border-radius:6px; background:transparent; color:var(--home-ink); cursor:pointer; pointer-events:auto; padding:0; }
+.hotspot:hover { background:rgb(135 80 247 / .12); }
+.hotspot:focus-visible { outline:2px solid var(--home-accent); outline-offset:3px; background:rgb(135 80 247 / .12); }
+.resume { left:23.5%; width:12.8%; }
+.email { left:47.5%; width:14.2%; }
+.telegram { left:61.8%; width:15.5%; }
+.label,.description { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
+.notice { position:absolute; bottom:20px; left:50%; transform:translateX(-50%); margin:0; width:max-content; max-width:calc(100% - 48px); padding:14px 18px; border-radius:10px; background:var(--home-paper); color:var(--home-ink); font:14px/1.5 Aeonik,Arial,sans-serif; box-shadow:0 4px 30px rgb(0 0 0 / .1); z-index:3; }
+@media(max-width:767px) {
+ .poster { top:8%; height:66%; object-fit:contain; }
+ /* A complete landscape composition and readable touch targets on narrow screens. */
+ .actions { inset:auto 24px max(38px,env(safe-area-inset-bottom)); width:auto!important; height:auto!important; left:24px!important; top:auto!important; display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+ .hotspot { position:static; display:flex; align-items:center; justify-content:center; gap:8px; width:auto; min-height:48px; height:auto; padding:12px 10px; border:1px solid var(--home-ink); border-radius:10px; background:var(--home-paper); font:13px/1.3 Aeonik,Arial,sans-serif; text-align:center; }
+ .resume { grid-column:1/-1; }
+ .hotspot:hover { background:var(--home-accent); color:white; border-color:var(--home-accent); }
+ .label { position:static; width:auto; height:auto; overflow:visible; clip-path:none; white-space:normal; }
+ .notice { bottom:200px; }
+}

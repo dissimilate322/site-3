@@ -58,7 +58,8 @@ for p in sorted(CACHE.glob('work-*.json')):
  case['blocks']=blocks;cases.append(case)
 content={'home':home,'company':company,'careers':careers,'cases':cases}
 (ROOT/'src/data/content.json').write_text(json.dumps(content,ensure_ascii=False,indent=2).replace('Otherlife','meruem'))
-for orientation in ['landscape','portrait']:
+# An owner-supplied scroll sequence takes precedence over the reference hero.
+for orientation in ([] if (ROOT/'src/data/hero-sequence.json').exists() else ['landscape','portrait']):
  for ext in ['mp4','jpg']:
   name='hero-'+orientation+'.'+ext
   assets['https://www.otherlife.xyz/assets/videos/'+name]={'file':name,'kind':'video' if ext=='mp4' else 'image'}

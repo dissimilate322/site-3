@@ -554,39 +554,5 @@
   "https://incredible-wonder-2edce76da7.media.strapiapp.com/a2dddb44346325c444fd2e9bf83356e781ace5bc_1920x1080_96f1c6cb99.png": {
     "file": "61fd8c73fc78534ab5c3.webp",
     "kind": "image"
-  },
-  "https://www.otherlife.xyz/assets/videos/hero-landscape.mp4": {
-    "file": "hero-landscape.mp4",
-    "kind": "video",
-    "encoding": {
-      "resolution": [
-        1920,
-        1080
-      ],
-      "frameRate": "60/1",
-      "quality": "H.264 CRF 18 / slow",
-      "bytes": 11143427
-    }
-  },
-  "https://www.otherlife.xyz/assets/videos/hero-landscape.jpg": {
-    "file": "hero-landscape.jpg",
-    "kind": "image"
-  },
-  "https://www.otherlife.xyz/assets/videos/hero-portrait.mp4": {
-    "file": "hero-portrait.mp4",
-    "kind": "video",
-    "encoding": {
-      "resolution": [
-        1080,
-        1920
-      ],
-      "frameRate": "60/1",
-      "quality": "H.264 CRF 18 / slow",
-      "bytes": 12245821
-    }
-  },
-  "https://www.otherlife.xyz/assets/videos/hero-portrait.jpg": {
-    "file": "hero-portrait.jpg",
-    "kind": "image"
   }
 }

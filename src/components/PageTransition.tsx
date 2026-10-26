@@ -107,8 +107,8 @@ export default function PageTransition({children}:{children:ReactNode}){
   scene.current!.style.visibility='';scene.current!.inert=true;document.body.style.overflow='hidden';
   const header=scene.current!.querySelector('header');if(header)gsap.set(header,{opacity:0});
   const ready=async()=>{
-   const firstVideo=Array.from(scene.current!.querySelectorAll('video')).find(v=>v.getBoundingClientRect().width>0);
-   const firstImage=Array.from(scene.current!.querySelectorAll<HTMLImageElement>('main img')).find(i=>i.getBoundingClientRect().top<innerHeight);
+   const firstVideo=Array.from(scene.current!.querySelectorAll('video')).find(v=>{const r=v.getBoundingClientRect();return r.width>0&&r.bottom>0&&r.top<innerHeight});
+   const firstImage=Array.from(scene.current!.querySelectorAll<HTMLImageElement>('main img')).find(i=>{const r=i.getBoundingClientRect();return r.width>0&&r.bottom>0&&r.top<innerHeight});
    const mediaReady=firstVideo?new Promise<void>(resolve=>{
     if(firstVideo.readyState>=2){resolve();return}
     const finish=()=>{firstVideo.removeEventListener('loadeddata',finish);resolve()};firstVideo.addEventListener('loadeddata',finish,{once:true});setTimeout(finish,1500);

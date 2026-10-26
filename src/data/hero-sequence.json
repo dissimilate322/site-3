@@ -1,0 +1,12 @@
+{
+  "width": 2569,
+  "height": 1440,
+  "fps": 60,
+  "frameCount": 237,
+  "duration": 3.95,
+  "bytes": 22512396,
+  "pattern": "/media/meruem-hero/frames/frame_%04d.webp",
+  "sourceFps": 24,
+  "sourceSha256": "286b7cef6fc9f39498259e766197cba516c1bbccef151c7b1543dfa36931af23",
+  "interpolation": "FFmpeg minterpolate motion-compensated; source first/last frames preserved"
+}

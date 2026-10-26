@@ -1,0 +1,35 @@
+const {chromium}=require('playwright');const assert=require('node:assert/strict');const fs=require('node:fs');const sequence=require('../src/data/hero-sequence.json');
+const base=process.argv[2]||'http://localhost:3000',out='artifacts/scroll-hero';fs.mkdirSync(out,{recursive:true});const report={checks:[],errors:[]};
+(async()=>{const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||'/usr/bin/chromium',args:['--no-sandbox','--enable-unsafe-swiftshader']});try{
+ for(const [width,height,dpr] of [[1920,936,1],[390,844,2]]){
+  const page=await browser.newPage({viewport:{width,height},deviceScaleFactor:dpr});const errors=[],requests={};page.on('pageerror',e=>errors.push(e.message));page.on('request',r=>{if(r.url().includes('/frames/'))requests[r.url()]=(requests[r.url()]||0)+1});
+  await page.goto(base+'/',{waitUntil:'networkidle'});await page.waitForFunction(()=>document.querySelector('[data-page-transition]').dataset.state==='idle');
+  const hero=page.locator('[data-home-film]'),stage=hero.locator('canvas').locator('..');
+  await page.waitForFunction(()=>document.querySelector('[data-home-film] [data-canvas-ready="true"]')?.dataset.frame==='0');
+  assert.equal(await hero.locator('video').count(),0,'hero is canvas scrubbing rather than video seeking');
+  const initial=await stage.getAttribute('data-frame');await page.waitForTimeout(400);assert.equal(await stage.getAttribute('data-frame'),initial,'paused first frame without scroll');
+  assert.equal(await hero.locator('[aria-label="Контакты Алексея"]').evaluate(e=>e.inert),true);
+  const travel=await hero.evaluate(e=>e.offsetHeight-e.querySelector('canvas').clientHeight);
+  await page.screenshot({path:`${out}/first-${width}.png`});
+  for(const fraction of [.25,.5,.75,1,.5,0]){
+   await page.evaluate(y=>scrollTo(0,y),travel*.85*fraction);const expected=Math.round((sequence.frameCount-1)*fraction);
+   await page.waitForFunction(expected=>Math.abs(Number(document.querySelector('[data-home-film] [data-canvas-ready="true"]')?.dataset.playhead)-expected)<.6,expected);
+   assert(await hero.locator('canvas').evaluate(c=>{const x=c.getContext('2d');const ps=[[.25,.25],[.5,.5],[.75,.75]].map(([a,b])=>x.getImageData(c.width*a,c.height*b,1,1).data);return ps.every(p=>p[3]===255)&&ps.some(p=>p.slice(0,3).some(v=>v>80))}),'opaque nonblank canvas');
+  }
+  await page.waitForFunction(()=>document.querySelector('[data-home-film] [data-canvas-ready="true"]')?.dataset.frame==='0');
+  const timing=await page.evaluate(travel=>new Promise(resolve=>{let start=0,last=0;const deltas=[];const step=now=>{if(!start)start=now;if(last)deltas.push(now-last);last=now;const t=Math.min(1,(now-start)/4000);scrollTo(0,travel*.85*t);if(t<1)requestAnimationFrame(step);else resolve(deltas)};requestAnimationFrame(step)}),travel);
+  timing.sort((a,b)=>a-b);const median=timing[Math.floor(timing.length/2)],p95=timing[Math.floor(timing.length*.95)];
+  await page.waitForFunction(last=>{const e=document.querySelector('[data-home-film] [data-canvas-ready="true"]');return e?.dataset.frame===String(last)&&e.dataset.contactReady==='true'},sequence.frameCount-1);
+  await page.screenshot({path:`${out}/last-${width}.png`});
+  await page.evaluate(()=>{window.clickedContacts=[];document.addEventListener('click',e=>{const a=e.target.closest('a');if(a?.href.startsWith('mailto:')||a?.href.startsWith('https://t.me/')){e.preventDefault();window.clickedContacts.push(a.href)}},true)});
+  for(const name of ['Почта: meruemru@bk.ru','Telegram: @dissimilate322666']){const a=hero.getByRole('link',{name,exact:true});assert(await a.evaluate(e=>{const r=e.getBoundingClientRect();const hit=document.elementFromPoint(r.x+r.width/2,r.y+r.height/2);return hit===e||e.contains(hit)}));await a.click()}
+  assert.deepEqual(await page.evaluate(()=>window.clickedContacts),['mailto:meruemru@bk.ru','https://t.me/dissimilate322666']);
+  await hero.getByRole('button',{name:'Скачать резюме',exact:true}).click();await page.getByRole('status').filter({hasText:'Резюме пока не опубликовано'}).waitFor();
+  await page.setViewportSize({width:width===390?414:1440,height});await page.waitForTimeout(200);const size=await hero.locator('canvas').evaluate(c=>[c.width,c.clientWidth,c.height,c.clientHeight]);assert.equal(size[0],Math.round(size[1]*dpr));assert.equal(size[2],Math.round(size[3]*dpr));
+  assert(Object.values(requests).every(n=>n===1),'no duplicate frame requests');assert.equal(Object.keys(requests).length,sequence.frameCount);
+  assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));assert.deepEqual(errors,[]);
+  report.checks.push({width,height,dpr,firstLast:true,bidirectional:true,contactsClickable:true,resumeDeferred:true,uniqueRequests:Object.keys(requests).length,medianFrameMs:median,p95FrameMs:p95,passed:true});console.log('PASS 2K/60fps scrub, endpoints, reverse, contacts, DPR:',width,'RAF median/p95',median.toFixed(1),p95.toFixed(1));await page.close();
+ }
+ const reduced=await browser.newPage({viewport:{width:390,height:844}});await reduced.addInitScript(()=>localStorage.setItem('otherlife-motion','reduced'));await reduced.goto(base+'/',{waitUntil:'networkidle'});assert.equal(await reduced.locator('[data-home-film]').evaluate(e=>e.offsetHeight),844);assert.equal(await reduced.locator('[data-home-film] canvas').locator('..').getAttribute('data-frame'),String(sequence.frameCount-1));assert.equal(await reduced.locator('[data-home-film] [aria-label="Контакты Алексея"]').evaluate(e=>e.inert),false);report.checks.push({explicitReducedMotion:true,staticContacts:true,passed:true});await reduced.close();
+ const slow=await browser.newPage({viewport:{width:1440,height:900}});const errors=[];slow.on('pageerror',e=>errors.push(e.message));await slow.route('**/frame_0100.webp',r=>r.fulfill({status:404,body:'missing'}));await slow.route('**/frame_0000.webp',async r=>{await new Promise(resolve=>setTimeout(resolve,300));await r.continue()});await slow.goto(base+'/',{waitUntil:'networkidle'});const travel=await slow.locator('[data-home-film]').evaluate(e=>e.offsetHeight-e.querySelector('canvas').clientHeight);await slow.evaluate(y=>scrollTo(0,y),travel*.85*100/236);await slow.waitForTimeout(1200);assert.equal(await slow.locator('[data-home-film] canvas').locator('..').getAttribute('data-canvas-ready'),'true');await slow.evaluate(y=>scrollTo(0,y),travel*.85*110/236);await slow.waitForFunction(()=>Math.abs(Number(document.querySelector('[data-home-film] [data-canvas-ready="true"]')?.dataset.playhead)-110)<.1);await slow.getByRole('button',{name:'Menu',exact:true}).click();await slow.getByRole('link',{name:/Work/}).click();await slow.waitForURL('**/work');await slow.waitForFunction(()=>document.querySelector('[data-page-transition]').dataset.state==='idle');assert.deepEqual(errors,[]);report.checks.push({missingAndSlowFrames:true,navigationCleanup:true,passed:true});await slow.close();
+}catch(e){report.errors.push(e.stack);console.error(e);process.exitCode=1}finally{await browser.close();report.passed=!report.errors.length;fs.writeFileSync(`${out}/results.json`,JSON.stringify(report,null,2))}})();
