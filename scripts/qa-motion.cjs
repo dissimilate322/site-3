@@ -18,10 +18,10 @@ async function assertPaperPixel(page,png,x,y){
    await p.goto(base+'/',{waitUntil:'networkidle'});
    const idle=()=>p.waitForFunction(()=>document.documentElement.dataset.motionReady==='true'&&document.querySelector('[data-page-transition]').dataset.state==='idle');await idle();
    assert.equal(await p.locator('html').getAttribute('data-motion'),'full','animations default on even when the OS requests reduced motion');
-   const hero=p.locator('[data-home-film] video:visible');assert.equal(await hero.count(),1);
-   assert((await hero.getAttribute('poster')).includes(width<768?'hero-portrait':'hero-landscape'));
-   await p.waitForFunction(()=>[...document.querySelectorAll('[data-home-film] video')].some(v=>v.clientWidth>0&&!v.paused&&v.currentTime>0));
-   const before=await hero.evaluate(v=>v.currentTime);await p.waitForTimeout(300);assert(await hero.evaluate(v=>v.currentTime)>before,'hero progresses without interaction');
+   const hero=p.locator('[data-home-film]');assert.equal(await hero.count(),1);
+   await p.waitForFunction(()=>document.querySelector('[data-home-film] [data-canvas-ready="true"]'));
+   assert.equal(await hero.locator('canvas').locator('..').getAttribute('data-fps'),'60');
+   assert.equal(await hero.locator('video').count(),0,'opening is a scroll-controlled frame sequence');
    assert.equal(await p.getByRole('button',{name:/^(Play|Pause) (video|film)/i}).count(),0,'no film buttons');
    assert(await p.locator('video').evaluateAll(vs=>vs.every(v=>v.muted&&v.loop&&v.playsInline&&!v.controls)),'all films are inline muted loops without controls');
    await p.screenshot({path:path.join(out,'home-'+width+'.png')});
@@ -60,7 +60,7 @@ async function assertPaperPixel(page,png,x,y){
     }
    }
    await p.evaluate(y=>scrollTo(0,y),tracks[0]+height*.5);await p.waitForTimeout(400);
-   assert(await hero.evaluate(v=>v.paused),'offscreen opening film pauses');
+   assert(await hero.evaluate(e=>e.getBoundingClientRect().bottom<0),'opening sequence leaves the viewport before projects');
    await p.locator('[data-featured-project]').first().getByRole('link',{name:'View Artist Accelerator case study',exact:true}).click({position:{x:width/2,y:height/2}});
    await p.waitForFunction(()=>document.querySelector('[data-page-transition]').dataset.state==='leaving');
    const frozen=p.locator('[data-page-transition] [data-featured-project]').first();const frozenRect=await frozen.boundingBox();assert(frozenRect&&frozenRect.y<height&&frozenRect.y+frozenRect.height>0,'sticky project remains visible in page transition');
@@ -69,7 +69,7 @@ async function assertPaperPixel(page,png,x,y){
    await p.getByRole('button',{name:'Menu',exact:true}).click();await p.getByRole('link',{name:/Company/}).click();await p.waitForURL('**/company');await idle();assert.equal(await p.getByRole('dialog').count(),0);assert.equal(await p.evaluate(()=>document.body.style.overflow),'');
    await p.goBack();await p.waitForFunction(()=>document.querySelector('[data-page-scene] h1')?.textContent==='Artist Accelerator');await idle();assert(p.url().includes('/work/artist-accelerator'));
    await p.getByRole('link',{name:'meruem home'}).click();await p.waitForFunction(()=>document.querySelector('[data-page-transition]').dataset.state==='leaving');await p.emulateMedia({reducedMotion:'reduce'});await p.waitForURL(base+'/');await idle();
-   await p.waitForFunction(()=>[...document.querySelectorAll('[data-home-film] video')].some(v=>v.clientWidth>0&&!v.paused));
+   await p.waitForFunction(()=>document.querySelector('[data-home-film] [data-canvas-ready="true"]'));
    assert.equal(await p.locator('html').getAttribute('data-motion'),'full','OS changes do not silently disable the selected animation mode');
    await p.waitForFunction(()=>document.querySelector('[data-project-canvas]')?.closest('[data-webgl="ready"]'));
    await p.evaluate(()=>scrollTo(0,0));await p.waitForTimeout(150);
@@ -81,13 +81,13 @@ async function assertPaperPixel(page,png,x,y){
    await p.keyboard.press('Escape');await p.getByRole('dialog').waitFor({state:'detached'});
    assert(await p.locator('[data-featured-project]').evaluateAll(es=>es.every(e=>getComputedStyle(e).transform==='none'&&!e.inert)),'reduced motion removes project transforms while preserving access and autoplay');
    assert.equal(await p.locator('[data-project-canvas]').count(),0,'reduced motion removes the WebGL overlay');assert.equal(await p.locator('html').getAttribute('data-smooth-scroll'),null,'reduced motion restores native scrolling');
-   assert.equal(await p.locator('main button').count(),0,'film buttons also absent with reduced motion');
+   assert.equal(await p.getByRole('button',{name:/^(Play|Pause) (video|film)/i}).count(),0,'film controls remain absent with reduced motion');
    await p.getByRole('button',{name:'Menu',exact:true}).click();await p.getByRole('link',{name:/Work/}).click();await p.waitForURL('**/work');await idle();assert.equal(await p.locator('[data-page-scene]').evaluate(e=>e.inert),false);
    await p.reload({waitUntil:'networkidle'});await idle();assert.equal(await p.locator('html').getAttribute('data-motion'),'reduced','explicit preference persists after reload');
    await p.getByRole('button',{name:'Menu',exact:true}).click();await p.getByRole('button',{name:'Reduce motion',exact:true}).click();await p.keyboard.press('Escape');await p.getByRole('dialog').waitFor({state:'detached'});
    assert.equal(await p.locator('html').getAttribute('data-motion'),'full','animations can be restored without changing the OS');
    await p.getByRole('link',{name:'meruem home'}).click();await p.waitForFunction(()=>document.querySelector('[data-page-transition]').dataset.state==='leaving');await p.waitForURL(base+'/');await idle();
-   await p.waitForFunction(()=>document.querySelector('[data-project-canvas]')?.closest('[data-webgl="ready"]'));await p.evaluate(()=>scrollTo(0,document.documentElement.scrollHeight-innerHeight-10));await p.waitForTimeout(150);await p.mouse.wheel(0,200);await p.waitForFunction(()=>scrollY<5);await p.waitForFunction(()=>[...document.querySelectorAll('[data-home-film] video')].some(v=>v.clientWidth>0&&!v.paused));
+   await p.waitForFunction(()=>document.querySelector('[data-project-canvas]')?.closest('[data-webgl="ready"]'));await p.evaluate(()=>scrollTo(0,document.documentElement.scrollHeight-innerHeight-10));await p.waitForTimeout(150);await p.mouse.wheel(0,200);await p.waitForFunction(()=>scrollY<5);await p.waitForFunction(()=>document.querySelector('[data-home-film] [data-canvas-ready="true"]'));
    assert.deepEqual(errors,[]);report.checks.push({width,height,osMotion:preference,defaultMotion:'full',autoplay:true,projectPlanes:4,transitions:'case/menu/back/logo',explicitReducedMotion:true,persistentMotionSetting:true,footerLoop:true,passed:true});
    console.log('PASS scroll, near-white gaps and autoplay',width,height);await p.close();
   }

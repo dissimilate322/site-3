@@ -4,7 +4,7 @@ import {useLayoutEffect, useRef, type ReactNode} from 'react';
 import dynamic from 'next/dynamic';
 import {gsap} from 'gsap';
 import {ScrollTrigger} from 'gsap/ScrollTrigger';
-import Media from './Media';
+import ScrollVideoHero from './ScrollVideoHero';
 import {useSiteMotion} from './MotionSettings';
 import styles from './HomeExperience.module.css';
 
@@ -20,9 +20,6 @@ export default function HomeExperience({children}:{children:ReactNode}) {
   const media=gsap.matchMedia();
   const context=gsap.context(()=>{
    if(!reduced){
-    const hero=root.current!.querySelector<HTMLElement>('[data-home-film]')!;
-    gsap.fromTo(hero,{clipPath:'inset(0px 0px round 0px)'},{clipPath:()=>`inset(0 ${innerWidth<1024?15:42}px round 8px)`,ease:'none',scrollTrigger:{trigger:hero,start:'top top',end:'bottom 60%',scrub:true,invalidateOnRefresh:true}});
-
     root.current!.querySelectorAll<HTMLElement>('[data-word-reveal]').forEach(title=>{
      const lines=title.querySelectorAll('[data-word-line]');
      const timeline=gsap.timeline({scrollTrigger:{trigger:title,start:'top bottom',once:true}});
@@ -54,16 +51,10 @@ export default function HomeExperience({children}:{children:ReactNode}) {
   return()=>{window.removeEventListener('load',refresh);media.revert();context.revert()};
  },[reduced]);
  return <div ref={root} className={styles.experience}>
-  <section className={styles.hero} aria-label="meruem studio film" data-home-film>
-   <div className={styles.landscape}><Media priority asset={{src:'/media/hero-landscape.mp4',kind:'video',width:1920,height:1080,alt:'meruem studio film: a phone among floating rocks'}} poster={{src:'/media/hero-landscape.jpg',kind:'image',width:1920,height:1080,alt:''}} className={styles.film}/></div>
-   <div className={styles.portrait}><Media priority asset={{src:'/media/hero-portrait.mp4',kind:'video',width:1080,height:1920,alt:'meruem studio film: a phone among floating rocks'}} poster={{src:'/media/hero-portrait.jpg',kind:'image',width:720,height:1280,alt:''}} className={styles.film}/></div>
-  </section>
+  <ScrollVideoHero/>
   {children}
   <ProjectSurface root={root}/>
   <span ref={cursor} className={styles.cursor} aria-hidden="true">View case</span>
-  <section className={`${styles.hero} ${styles.footerFilm}`} data-closing-film aria-label="meruem closing film">
-   <div className={styles.landscape}><Media asset={{src:'/media/hero-landscape.mp4',kind:'video',width:1920,height:1080,alt:'meruem closing film'}} poster={{src:'/media/hero-landscape.jpg',kind:'image',width:1920,height:1080,alt:''}} className={styles.film}/></div>
-   <div className={styles.portrait}><Media asset={{src:'/media/hero-portrait.mp4',kind:'video',width:1080,height:1920,alt:'meruem closing film'}} poster={{src:'/media/hero-portrait.jpg',kind:'image',width:720,height:1280,alt:''}} className={styles.film}/></div>
-  </section>
+  <ScrollVideoHero final/>
  </div>;
 }

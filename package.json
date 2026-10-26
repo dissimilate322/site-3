@@ -11,7 +11,8 @@
     "test:pages": "node scripts/qa-pages.cjs",
     "package:wispbyte": "node scripts/package-wispbyte.cjs",
     "test:motion": "node scripts/qa-motion.cjs",
-    "test:menu": "node scripts/qa-menu.cjs"
+    "test:menu": "node scripts/qa-menu.cjs",
+    "test:scroll-hero": "node scripts/qa-scroll-hero.cjs"
   },
   "dependencies": {
     "gsap": "3.15.0",
